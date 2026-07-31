@@ -1,6 +1,6 @@
 # SignalSafe FigJam 作業收斂索引
 
-更新日期：2026-07-31
+更新日期：2026-08-01
 
 本目錄將團隊 FigJam 上的作業畫面，轉寫成可搜尋、可追蹤版本、可供競賽與研究引用的 Markdown 文件。
 
@@ -15,6 +15,17 @@
 | [`ASSIGNMENT_3_IDEATION_AND_FEASIBILITY.md`](ASSIGNMENT_3_IDEATION_AND_FEASIBILITY.md) | 案例分析、創意發想、解法與可行性 | 已完成文字與分支圖片；市場證據仍需持續更新 |
 | [`ASSIGNMENT_4_PROTOTYPE_TESTING.md`](ASSIGNMENT_4_PROTOTYPE_TESTING.md) | 原型測試說明、主持稿、觀察表 | 測試準備已完成；正式測試尚未執行 |
 | [`SCREENSHOT_CAPTURE_MANIFEST.md`](SCREENSHOT_CAPTURE_MANIFEST.md) | 2026-07-31 截圖對照與資料邊界 | 已建立 |
+
+## 官方輔導教材對照
+
+- [`../reference-materials/2026-SFT-semifinal-coaching-materials.md`](../reference-materials/2026-SFT-semifinal-coaching-materials.md)：整理 45 頁複賽輔導教材的頁面索引、作業四最低要求、ANSVA 簡報架構，以及與 SignalSafe 現行測試規劃的差異。
+
+教材最後兩頁的最低繳交要求為：
+
+1. 在場域中完成原型測試並收集至少 2 位目標對象回饋。
+2. 準備複賽簡報初稿。
+
+SignalSafe 採 8–12 位兩輪可用性測試，超過最低人數，但目前尚未實際執行，因此作業四仍不能標示完成。
 
 ## 作業分支圖片
 
@@ -43,3 +54,4 @@
 3. 使用者姓名、匿名代號對照、原始音檔及聯絡資料不得進入公開 Repository。
 4. 作業四目前仍是測試準備；不得把規劃稿寫成已完成測試結果。
 5. 正式競賽引用時，應同步核對 [`docs/SIGNALSAFE_CANONICAL_DOSSIER.md`](../SIGNALSAFE_CANONICAL_DOSSIER.md)。
+6. 官方教材未見完整 PDF 的公開再散布授權；公開 Repository 只保存來源索引、雜湊與重點對照，原始二進位檔須待權利確認後再提交。
