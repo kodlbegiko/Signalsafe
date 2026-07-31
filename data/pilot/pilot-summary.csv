@@ -1,0 +1,4 @@
+participant,identity_group,pre_completed,training_completed,post_completed,notable_pattern,data_limit
+U001,university_year_1,8,8,8,nearly_all_judged_risk;all_actions_abstract_safe,exploratory_only
+U002,university_year_1,8,8,8,began_using_insufficient_and_trusted;two_timer_outliers,exploratory_only
+U003,transition_to_university,8,0,0,all_pre_items_judged_risk,no_post_comparison
