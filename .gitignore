@@ -1,0 +1,11 @@
+# Private research materials
+private/
+raw-audio/
+identity-map*
+contact-list*
+consent-records/
+
+# Local exports
+*.local.json
+*.private.csv
+.DS_Store
