@@ -1,0 +1,1 @@
+incident_id,participant_id,timestamp,app_version,device,browser,network_state,description,data_affected,action_taken,severity,resolved

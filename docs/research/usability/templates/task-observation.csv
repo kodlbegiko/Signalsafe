@@ -1,0 +1,1 @@
+participant_id,round,task_id,task_name,start_time,end_time,duration_seconds,completion_score_0_2,prompt_count,misclick_count,backtrack_count,quote,issue_type,severity,evidence_id,observer_note

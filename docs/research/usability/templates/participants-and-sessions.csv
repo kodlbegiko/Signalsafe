@@ -1,0 +1,13 @@
+participant_id,round,age,study_type,scheduled_date,session_status,consent_confirmed,screen_recording_allowed,app_version,question_bank_version,device,browser,notes
+UT001,R1,,,,未排程,,,,,,,
+UT002,R1,,,,未排程,,,,,,,
+UT003,R1,,,,未排程,,,,,,,
+UT004,R1,,,,未排程,,,,,,,
+UT005,R2,,,,未排程,,,,,,,
+UT006,R2,,,,未排程,,,,,,,
+UT007,R2,,,,未排程,,,,,,,
+UT008,R2,,,,未排程,,,,,,,
+UT009,R2,,,,未排程,,,,,,,
+UT010,R2,,,,未排程,,,,,,,
+UT011,R2,,,,未排程,,,,,,,
+UT012,R2,,,,未排程,,,,,,,
