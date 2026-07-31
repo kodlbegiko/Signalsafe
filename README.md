@@ -35,6 +35,7 @@ SignalSafe 是一套面向 **16–18 歲高中階段學生**的防詐決策訓�
 - [`ROADMAP.md`](ROADMAP.md)：從現在到複賽繳件的執行順序
 - [`docs/SIGNALSAFE_CANONICAL_DOSSIER.md`](docs/SIGNALSAFE_CANONICAL_DOSSIER.md)：現行產品、證據、研究與競賽故事總檔
 - [`docs/MEETING_RECORDS.md`](docs/MEETING_RECORDS.md)：三次導師會議紀錄
+- [`docs/assignments/README.md`](docs/assignments/README.md)：FigJam 作業一至四的收斂版與完成狀態
 - [`privacy/data-handling-policy.md`](privacy/data-handling-policy.md)：公開 Repository 的資料與隱私規則
 - [`data/pilot/pilot-summary.csv`](data/pilot/pilot-summary.csv)：第一輪匿名彙總資料
 
