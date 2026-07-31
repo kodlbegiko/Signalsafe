@@ -16,6 +16,12 @@
 | [`ASSIGNMENT_4_PROTOTYPE_TESTING.md`](ASSIGNMENT_4_PROTOTYPE_TESTING.md) | 原型測試說明、主持稿、觀察表 | 模板已建立；正式測試尚未執行 |
 | [`SCREENSHOT_CAPTURE_MANIFEST.md`](SCREENSHOT_CAPTURE_MANIFEST.md) | 2026-07-31 截圖對照與資料邊界 | 已建立 |
 
+## 作業四正式執行包
+
+已確認採用「作業完成＋競賽證據」層級，並以兩輪 8–12 位目標學生執行。正式招募、同意、主持、觀察、版本凍結與分析模板位於：
+
+- [`../research/usability/README.md`](../research/usability/README.md)
+
 ## 使用原則
 
 1. 截圖是歷程證據，不是現行規格的最高依據。
