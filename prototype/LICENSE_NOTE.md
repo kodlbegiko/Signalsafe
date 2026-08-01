@@ -1,0 +1,1 @@
+Prototype code and synthetic scenarios are project materials. Third-party product names referenced in documentation remain the property of their respective owners. No real scam links, credentials or personal records are included.
