@@ -1,3 +1,4 @@
+import "./compat.mjs";
 import {
   APP_VERSION,
   QUESTION_BANK_VERSION,
