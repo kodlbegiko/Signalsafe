@@ -6,8 +6,10 @@
 
 - App：`0.2.0-usability-r1`
 - 題庫：`2026-08-01-r1`
-- 分支：`product/v0.2-usability-r1`
-- 狀態：候選版本，待 CI、部署與團隊內部試跑後改為正式凍結
+- 開發分支：`product/v0.2-usability-r1`
+- 合併 PR：#28
+- `main` 實作 commit：`5933fee58eeefae737fb8cabd5a70f1f039cbcac`
+- 狀態：**程式候選版本完成；待部署與人工 smoke test 後正式凍結**
 
 ## 固定規格
 
@@ -20,16 +22,40 @@
 - 資料：不登入、不收姓名學校、本機匿名保存
 - 評分：安全行動、macro recall、較可信誤判、高自信錯誤與訊號 F1；速度不加分
 
+## 自動驗證證據
+
+GitHub Actions run：`Prototype checks #1`
+
+- syntax check：PASS
+- scoring tests：PASS
+- 全選高風險校準防呆：PASS
+- 24 題唯一 ID：PASS
+- 前測／訓練／後測各 8 題：PASS
+- 各階段 3／2／3 分布：PASS
+- 模組入口、CSS 與 service worker 資產 wiring：PASS
+
 ## 凍結前 Gate
 
-- [ ] GitHub Actions syntax check 通過
-- [ ] scoring tests 通過
-- [ ] 24 題數量與 3／2／3 分布測試通過
-- [ ] Vercel 部署成功
+- [x] GitHub Actions syntax check 通過
+- [x] scoring tests 通過
+- [x] 24 題數量與 3／2／3 分布測試通過
+- [x] 原型程式碼合併至 `main`
+- [ ] 新版正式／預覽部署成功
 - [ ] 手機與桌面核心流程試跑
 - [ ] JSON／CSV 匯出、JSON 匯入及清除資料試跑
 - [ ] 離線重開試跑
-- [ ] 無 P0 隱私或安全問題
+- [ ] 確認無 P0 隱私或安全問題
+- [ ] 記錄正式測試 URL 與最終 freeze commit
+
+## 正式凍結後不可任意修改
+
+Round 1 開始後，只有以下情況可修改：
+
+1. P0 隱私、安全或危險操作問題。
+2. P1 核心任務阻塞。
+3. Round 1 重複出現且事前規則要求處理的 P2。
+
+任何修改都必須更新版本、commit 與測試紀錄，不得將不同版本資料直接合併。
 
 ## 證據邊界
 
