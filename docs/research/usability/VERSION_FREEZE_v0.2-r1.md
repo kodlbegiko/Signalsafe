@@ -1,27 +1,29 @@
-# SignalSafe v0.2 Usability Round 1 正式凍結紀錄
+# SignalSafe Usability Round 1 版本凍結紀錄
 
 更新日期：2026-08-01
 
-## 凍結結論
+## 現行狀態
 
-狀態：**Round 1 技術凍結完成**
+狀態：**`0.2.1-usability-r1-hotfix1` 凍結候選，等待原出錯裝置完成真實網址 Gate**
 
-此版本可供 UT001–UT004 使用。Round 1 開始後，不得任意修改核心流程、題庫或評分規則。
+`0.2.0-usability-r1` 的正式凍結結論已撤回，原因是真實使用者 Chrome 顯示「SignalSafe 無法啟動」。詳見：
 
-## 固定版本
+- [`INCIDENT_2026-08-01_LIVE_STARTUP.md`](INCIDENT_2026-08-01_LIVE_STARTUP.md)
+- [`ACCEPTANCE_REPORT_v0.2-r1.md`](ACCEPTANCE_REPORT_v0.2-r1.md)
+
+## 固定版本候選
 
 | 項目 | 固定值 |
 |---|---|
-| App | `0.2.0-usability-r1` |
+| App | `0.2.1-usability-r1-hotfix1` |
 | 題庫 | `2026-08-01-r1` |
-| 開發分支 | `product/v0.2-usability-r1` |
-| 合併 PR | #28 |
-| Git implementation commit | `5933fee58eeefae737fb8cabd5a70f1f039cbcac` |
-| Vercel deployment ID | `dpl_6REA4HsmvW5rhSYe5Y1JPLoaZdyA` |
+| 原型核心實作 | PR #28／`5933fee58eeefae737fb8cabd5a70f1f039cbcac` |
+| Hotfix 分支 | `fix/v0.2.1-live-startup-hotfix` |
 | 正式測試網址 | https://signalsafe-v02-usability-r1.vercel.app |
-| 部署原型 SHA-256 | `16092f8aba7191969378c59c370a32d3090ae01ea186139df50bd89e8fd2a279` |
+| 首次驗證網址 | https://signalsafe-v02-usability-r1.vercel.app/?v=021-hotfix1 |
+| Hotfix deployment ID | `dpl_r8gnvR3XZ5rdrikE3KpBMVN94aD6` |
 
-## 固定規格
+## 不變規格
 
 - 目標族群：16–18 歲高中階段學生
 - 首頁主要入口：開始 90 秒快練
@@ -32,63 +34,36 @@
 - 資料：不登入、不收姓名學校、本機匿名保存
 - 評分：安全行動、macro recall、較可信誤判、高自信錯誤與訊號 F1；速度不加分
 
-## 自動驗證證據
+## Hotfix 範圍
 
-GitHub Actions run：`Prototype checks #1`
+本次只修正啟動與相容性：
 
-- syntax check：PASS
-- scoring tests：PASS
-- 全選高風險校準防呆：PASS
-- 24 題唯一 ID：PASS
-- 前測／訓練／後測各 8 題：PASS
-- 各階段 3／2／3 分布：PASS
-- 模組入口、CSS 與 service worker 資產 wiring：PASS
+- 新增瀏覽器 API 相容層
+- `localStorage` 失敗時改用記憶體 fallback
+- 旋轉 Service Worker cache 並改為 network-first
+- App 版本更新
 
-## 部署與互動驗收
+沒有修改：
 
-完整報告：[`ACCEPTANCE_REPORT_v0.2-r1.md`](ACCEPTANCE_REPORT_v0.2-r1.md)
-
-- 技術檢查：71 PASS／0 FAIL
-- Vercel production：READY
-- 根路徑、Service Worker、首尾 payload：HTTP 200
-- 首頁與定位：PASS
-- 90 秒快練三題：PASS
-- 急救模式：PASS
-- 前測／訓練／後測共 24 題：PASS
-- 暫停與恢復：PASS
-- JSON／CSV 匯出：PASS
-- JSON 匯入：PASS
-- 清除本機資料：PASS
-- 390px viewport：PASS
-- 未捕捉 JavaScript 例外：0
-- console error：0
-- P0：0
-- P1：0
+- 題目內容
+- 正確答案
+- 評分權重
+- 四項正式測試任務
+- 目標族群與產品定位
 
 ## Freeze Gate
 
-- [x] GitHub Actions syntax check 通過
-- [x] scoring tests 通過
-- [x] 24 題數量與 3／2／3 分布測試通過
-- [x] 原型程式碼合併至 `main`
-- [x] Vercel production 部署成功
-- [x] 桌面核心流程完成瀏覽器驗收
-- [x] 390px 手機 viewport 無水平溢出，核心 CTA 尺寸通過
-- [x] JSON／CSV 匯出、JSON 匯入及清除資料通過
-- [x] Service Worker 預快取及離線資產完整性通過
-- [x] 確認無 P0 隱私或安全問題
-- [x] 記錄正式測試 URL、Git commit、deployment ID 與 SHA-256
-
-## 實體裝置場務確認
-
-驗收執行環境的 Chromium 受組織 URLBlocklist 管理，因此沒有宣稱已在實體手機完成斷網重開。UT001–UT004 開始前，主持人應以實際使用裝置做一次 3–5 分鐘 spot-check：
-
-1. 開啟正式網址。
-2. 完成一題快練。
-3. 確認字體、捲動與按鈕正常。
-4. 確認場地網路可用。
-
-此項是現場場務確認，不是程式版本阻塞。若 spot-check 發現 P0 或 P1，必須停測、更新版本並建立新凍結紀錄。
+- [x] 原型核心 syntax、評分與題庫測試曾通過
+- [x] 真實使用者回報正式網址啟動失敗並建立事件紀錄
+- [x] Hotfix 已部署到正式 alias
+- [x] 正式 alias 回傳新入口 HTTP 200
+- [x] Hotfix 以相同 payload 在 Chromium 重建首頁成功
+- [ ] Hotfix PR GitHub Actions 通過
+- [ ] 原出錯 Chrome 開啟 cache-busted URL 成功
+- [ ] 頁尾顯示 `0.2.1-usability-r1-hotfix1`
+- [ ] 實際完成一題快練
+- [ ] 重新整理後仍可正常開啟
+- [ ] 正式標記 Round 1 freeze commit
 
 ## 凍結後修改規則
 
@@ -98,8 +73,8 @@ Round 1 開始後，只有以下情況可修改：
 2. P1 核心任務阻塞。
 3. Round 1 重複出現且事前規則要求處理的 P2。
 
-任何修改都必須更新 App 版本、題庫版本、Git commit、deployment ID 與測試紀錄，不得將不同版本資料直接合併。
+任何修改都必須更新 App 版本、Git commit、deployment ID 與測試紀錄。題庫版本只有在題目或答案內容改動時才更新。
 
 ## 證據邊界
 
-此版本只用於可用性測試。技術凍結與可用性測試即使通過，也不能宣稱已提升防詐能力或降低真實受騙率。
+版本凍結只代表可用性測試的技術版本固定，不代表教育成效、長期保留或真實受騙率下降。
