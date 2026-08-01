@@ -1,15 +1,25 @@
-# SignalSafe v0.2 Usability Round 1 版本凍結候選
+# SignalSafe v0.2 Usability Round 1 正式凍結紀錄
 
 更新日期：2026-08-01
 
-## 版本
+## 凍結結論
 
-- App：`0.2.0-usability-r1`
-- 題庫：`2026-08-01-r1`
-- 開發分支：`product/v0.2-usability-r1`
-- 合併 PR：#28
-- `main` 實作 commit：`5933fee58eeefae737fb8cabd5a70f1f039cbcac`
-- 狀態：**程式候選版本完成；待部署與人工 smoke test 後正式凍結**
+狀態：**Round 1 技術凍結完成**
+
+此版本可供 UT001–UT004 使用。Round 1 開始後，不得任意修改核心流程、題庫或評分規則。
+
+## 固定版本
+
+| 項目 | 固定值 |
+|---|---|
+| App | `0.2.0-usability-r1` |
+| 題庫 | `2026-08-01-r1` |
+| 開發分支 | `product/v0.2-usability-r1` |
+| 合併 PR | #28 |
+| Git implementation commit | `5933fee58eeefae737fb8cabd5a70f1f039cbcac` |
+| Vercel deployment ID | `dpl_6REA4HsmvW5rhSYe5Y1JPLoaZdyA` |
+| 正式測試網址 | https://signalsafe-v02-usability-r1.vercel.app |
+| 部署原型 SHA-256 | `16092f8aba7191969378c59c370a32d3090ae01ea186139df50bd89e8fd2a279` |
 
 ## 固定規格
 
@@ -34,20 +44,53 @@ GitHub Actions run：`Prototype checks #1`
 - 各階段 3／2／3 分布：PASS
 - 模組入口、CSS 與 service worker 資產 wiring：PASS
 
-## 凍結前 Gate
+## 部署與互動驗收
+
+完整報告：[`ACCEPTANCE_REPORT_v0.2-r1.md`](ACCEPTANCE_REPORT_v0.2-r1.md)
+
+- 技術檢查：71 PASS／0 FAIL
+- Vercel production：READY
+- 根路徑、Service Worker、首尾 payload：HTTP 200
+- 首頁與定位：PASS
+- 90 秒快練三題：PASS
+- 急救模式：PASS
+- 前測／訓練／後測共 24 題：PASS
+- 暫停與恢復：PASS
+- JSON／CSV 匯出：PASS
+- JSON 匯入：PASS
+- 清除本機資料：PASS
+- 390px viewport：PASS
+- 未捕捉 JavaScript 例外：0
+- console error：0
+- P0：0
+- P1：0
+
+## Freeze Gate
 
 - [x] GitHub Actions syntax check 通過
 - [x] scoring tests 通過
 - [x] 24 題數量與 3／2／3 分布測試通過
 - [x] 原型程式碼合併至 `main`
-- [ ] 新版正式／預覽部署成功
-- [ ] 手機與桌面核心流程試跑
-- [ ] JSON／CSV 匯出、JSON 匯入及清除資料試跑
-- [ ] 離線重開試跑
-- [ ] 確認無 P0 隱私或安全問題
-- [ ] 記錄正式測試 URL 與最終 freeze commit
+- [x] Vercel production 部署成功
+- [x] 桌面核心流程完成瀏覽器驗收
+- [x] 390px 手機 viewport 無水平溢出，核心 CTA 尺寸通過
+- [x] JSON／CSV 匯出、JSON 匯入及清除資料通過
+- [x] Service Worker 預快取及離線資產完整性通過
+- [x] 確認無 P0 隱私或安全問題
+- [x] 記錄正式測試 URL、Git commit、deployment ID 與 SHA-256
 
-## 正式凍結後不可任意修改
+## 實體裝置場務確認
+
+驗收執行環境的 Chromium 受組織 URLBlocklist 管理，因此沒有宣稱已在實體手機完成斷網重開。UT001–UT004 開始前，主持人應以實際使用裝置做一次 3–5 分鐘 spot-check：
+
+1. 開啟正式網址。
+2. 完成一題快練。
+3. 確認字體、捲動與按鈕正常。
+4. 確認場地網路可用。
+
+此項是現場場務確認，不是程式版本阻塞。若 spot-check 發現 P0 或 P1，必須停測、更新版本並建立新凍結紀錄。
+
+## 凍結後修改規則
 
 Round 1 開始後，只有以下情況可修改：
 
@@ -55,8 +98,8 @@ Round 1 開始後，只有以下情況可修改：
 2. P1 核心任務阻塞。
 3. Round 1 重複出現且事前規則要求處理的 P2。
 
-任何修改都必須更新版本、commit 與測試紀錄，不得將不同版本資料直接合併。
+任何修改都必須更新 App 版本、題庫版本、Git commit、deployment ID 與測試紀錄，不得將不同版本資料直接合併。
 
 ## 證據邊界
 
-此版本只用於可用性測試。即使所有技術 Gate 通過，也不能宣稱已提升防詐能力或降低真實受騙率。
+此版本只用於可用性測試。技術凍結與可用性測試即使通過，也不能宣稱已提升防詐能力或降低真實受騙率。
