@@ -1,126 +1,73 @@
-# SignalSafe v0.2 部署與技術驗收報告
+# SignalSafe 部署與技術驗收報告
 
 更新日期：2026-08-01
 
-## 結論
+## 現行結論
 
-- 技術檢查：**71 PASS／0 FAIL**
-- P0 隱私／安全阻塞：**0**
-- P1 核心流程阻塞：**0**
-- 判定：**Round 1 技術凍結通過**
+- `0.2.0-usability-r1` 的正式啟動驗收：**撤回**
+- 原因：真實使用者 Chrome 顯示「SignalSafe 無法啟動」
+- 現行修正版：`0.2.1-usability-r1-hotfix1`
+- 技術狀態：**hotfix 已部署，等待原出錯裝置完成真實網址確認**
 
-本報告證明原型可作為 UT001–UT004 的可用性測試版本；不證明教育成效、長期保留或真實受騙率下降。
+事件詳情：[`INCIDENT_2026-08-01_LIVE_STARTUP.md`](INCIDENT_2026-08-01_LIVE_STARTUP.md)
 
-## 固定版本
+## 為什麼撤回原結論
+
+先前的 71 項檢查證明：
+
+- 核心 UI 與資料流程可在 Chromium 引擎執行。
+- 90 秒快練、完整測驗、急救模式及資料操作在測試環境可運作。
+- 題庫與評分自動測試通過。
+
+但先前沒有直接從正式網址完成真實瀏覽器導航。正式部署另加入兩層動態 payload 重建與解壓啟動，該部署層在真實 Chrome 中失敗。因此：
+
+> **71 PASS 不能再被解讀為正式網址驗收通過。**
+
+## 現行固定值
 
 | 項目 | 固定值 |
 |---|---|
-| App | `0.2.0-usability-r1` |
+| App | `0.2.1-usability-r1-hotfix1` |
 | 題庫 | `2026-08-01-r1` |
-| Git implementation commit | `5933fee58eeefae737fb8cabd5a70f1f039cbcac` |
-| 合併 PR | #28 |
-| Vercel deployment ID | `dpl_6REA4HsmvW5rhSYe5Y1JPLoaZdyA` |
 | 正式網址 | https://signalsafe-v02-usability-r1.vercel.app |
-| 部署原型 SHA-256 | `16092f8aba7191969378c59c370a32d3090ae01ea186139df50bd89e8fd2a279` |
+| 首次驗證網址 | https://signalsafe-v02-usability-r1.vercel.app/?v=021-hotfix1 |
+| Hotfix deployment ID | `dpl_r8gnvR3XZ5rdrikE3KpBMVN94aD6` |
+| 原實作 commit | `5933fee58eeefae737fb8cabd5a70f1f039cbcac` |
 
-## 部署驗證
+## Hotfix 修正內容
 
-Vercel production 狀態為 `READY`，正式 alias 無錯誤。下列資源均回傳 HTTP 200：
+1. 新增瀏覽器相容層：
+   - `Array.prototype.toSorted`
+   - `Array.prototype.toReversed`
+   - `structuredClone`
+   - `crypto.randomUUID`
+2. `localStorage` 無法讀寫時，改用暫時記憶體儲存，不再讓 App 啟動失敗。
+3. Service Worker 更換 cache 名稱並改採 network-first，降低舊入口持續被快取的風險。
+4. App 版本提升為 `0.2.1-usability-r1-hotfix1`。
+5. 題庫、核心流程與評分規則沒有變更。
 
-- `/`
-- `/sw.js`
-- `/payload/00.txt`
-- `/payload/13.txt`
+## 已完成驗證
 
-正式回應包含：
+- Vercel production 狀態：`READY`
+- 正式 alias 回傳 hotfix 入口：HTTP 200
+- hotfix 入口可讀取原固定 payload
+- 以相同 14 段正式 payload 在 Chromium 重建：PASS
+- 首頁顯示「開始 90 秒快練」：PASS
+- 啟動流程未捕捉例外：PASS
+- GitHub 自動測試與題庫分布：待 hotfix PR CI 再確認
 
-- `X-Content-Type-Options: nosniff`
-- `Referrer-Policy: no-referrer`
-- `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+## 真實裝置 Gate
 
-部署 payload 共 14 段，解碼後與固定原型逐位元相同，SHA-256 完全一致。
+在 UT001–UT004 前，必須由實際使用者在原本出錯的 Chrome 完成：
 
-## 自動與互動驗收摘要
+1. 開啟 `?v=021-hotfix1` 網址。
+2. 確認首頁成功顯示。
+3. 確認頁尾版本是 `0.2.1-usability-r1-hotfix1`。
+4. 完成一題 90 秒快練。
+5. 重新整理後確認仍可開啟。
 
-### 首頁與定位
+只有完成上述五項，才能重新標示為 Round 1 正式凍結。
 
-- 首頁成功渲染。
-- 目標族群為 16–18 歲學生。
-- 主 CTA 為「開始 90 秒快練」。
-- 顯示「不是替你猜真假」定位。
-- App 與題庫版本正確。
-- 首頁只有一個 H1；按鈕具有可見文字或 `aria-label`。
+## 證據邊界
 
-### 90 秒快練
-
-- 未完成必要選擇時，提交按鈕保持停用。
-- 三題均可選最安全行動與一個關鍵訊號。
-- 三題均可提交、顯示理由、獨立查證與記憶句。
-- 完成後顯示安全行動、關鍵訊號及中位作答時間。
-- 本機保存一個包含三筆作答的匿名 quick session。
-- 快練儀表板明示日常模式不測真假分類，不偽造完整校準分數。
-
-### 急救模式
-
-- 不提供真實訊息自由輸入欄位。
-- 能針對付款／轉帳要求輸出停止操作建議。
-- 明示 SignalSafe 不判定訊息一定真或假。
-- 提供官方 App、官網、公開客服與 165 等獨立查證路徑。
-
-### 完整能力測驗
-
-- 前測、訓練、後測流程可啟動。
-- 每題需完成安全行動、三分類、關鍵訊號與自信四欄後才能提交。
-- 暫停後首頁顯示繼續入口，恢復位置正確。
-- 完成全部 24 題後保存 assessment session，`activeAssessment` 正確清除。
-- 儀表板顯示三分類校準、較可信誤判率、高自信錯誤與關鍵訊號 F1。
-
-### 資料管理
-
-- JSON 匯出包含正確 App／題庫版本及兩個場次。
-- CSV 匯出包含完整欄位及 27 筆作答資料。
-- 有效 JSON 可經檔案輸入 UI 匯入。
-- 清除資料後所有場次歸零，並重新建立匿名 ID。
-
-### 手機版與可及性
-
-以 390 × 844 viewport 驗證：
-
-- `innerWidth = 390`
-- `scrollWidth = 390`
-- 無水平溢出
-- 主要 CTA 寬 366px、高 54px
-- 主要 CTA 高度超過 44px
-- 首頁僅一個 H1
-- 所有按鈕均有文字或 `aria-label`
-
-### 執行穩定性
-
-- 核心流程未出現未捕捉 JavaScript 例外。
-- 核心流程未出現 console error。
-- 原型不依賴外部雲端 API 或第三方 runtime 資源。
-
-## 離線與測試環境邊界
-
-Service Worker 已確認預快取首頁、`index.html` 及全部 14 段 payload；部署內容可無損重建。
-
-本次執行環境的 Chromium 受組織政策 `URLBlocklist: ["*"]` 管理，無法直接導航到 localhost、file 或 Vercel URL。互動驗收因此使用正式部署 payload 無損重建出的相同 CSS／JavaScript，在 `about:blank` 中執行，沒有修改或規避瀏覽器政策。
-
-因此，本報告可以主張：
-
-- 離線資產與預快取配置已驗證。
-- 核心 UI 與資料流程已在瀏覽器引擎中完整執行。
-
-本報告不主張：
-
-- 已在實體 iPhone 或 Android 切斷網路後重新啟動 PWA。
-
-UT001–UT004 開始前，仍應在實際使用裝置進行一次 3–5 分鐘場務 spot-check。這不是程式開發阻塞，也不得在 spot-check 前臨時修改核心流程或題庫。
-
-## Round 1 使用規則
-
-1. 正式受測網址固定為本報告所列 URL。
-2. App、題庫、Git commit 與部署 SHA 不得任意變更。
-3. Round 1 中只有 P0、P1 或事前規則要求處理的重複 P2 才可修改。
-4. 修改後必須建立新版本及新部署，不得把不同版本資料直接合併。
-5. 本次驗收是技術驗收，不得轉述為教育成效驗證。
+本報告只處理技術啟動與操作問題。即使 hotfix 驗收通過，也不能宣稱教育成效、長期保留或真實受騙率下降。
