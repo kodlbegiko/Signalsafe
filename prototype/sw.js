@@ -2,13 +2,27 @@ const CACHE_NAME = "signalsafe-v0.2.0-r1";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css",
-  "./app.js",
+  "./bootstrap.mjs",
   "./questions.mjs",
   "./scoring.mjs",
   "./storage.mjs",
   "./manifest.webmanifest",
-  "./icon.svg"
+  "./icon.svg",
+  "./styles/01.css",
+  "./styles/02.css",
+  "./app-parts/app-core.js",
+  "./app-parts/app-home.js",
+  "./app-parts/app-quick.js",
+  "./app-parts/app-assessment.js",
+  "./app-parts/app-insights.js",
+  "./app-parts/app-runtime.js",
+  "./question-data/shared.mjs",
+  "./question-data/pre-a.mjs",
+  "./question-data/pre-b.mjs",
+  "./question-data/training-a.mjs",
+  "./question-data/training-b.mjs",
+  "./question-data/post-a.mjs",
+  "./question-data/post-b.mjs"
 ];
 
 self.addEventListener("install", (event) => {
