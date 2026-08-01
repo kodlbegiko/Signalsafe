@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#f7faff"/>
+  <rect x="55" y="45" width="1490" height="810" rx="26" fill="#fff" stroke="#1f5fbf" stroke-width="4"/>
+  <text x="95" y="105" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#0b3b82">作業四｜原型修改前後比較</text>
+  <rect x="1230" y="67" width="250" height="52" rx="26" fill="#fff3cd" stroke="#e0a800"/>
+  <text x="1355" y="102" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#7a5700">待實測填寫</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="95" y="145" width="650" height="480" rx="20" fill="#fff1f2" stroke="#d96b78" stroke-width="2"/>
+    <rect x="855" y="145" width="650" height="480" rx="20" fill="#eefaf1" stroke="#58a96c" stroke-width="2"/>
+    <text x="420" y="195" text-anchor="middle" font-size="30" font-weight="700" fill="#9d2635">修改前｜Round 1 版本</text>
+    <text x="1180" y="195" text-anchor="middle" font-size="30" font-weight="700" fill="#176b32">修改後｜Round 2 版本</text>
+    <rect x="130" y="225" width="580" height="260" rx="12" fill="#fff" stroke="#c9c9c9" stroke-dasharray="10 8"/>
+    <rect x="890" y="225" width="580" height="260" rx="12" fill="#fff" stroke="#c9c9c9" stroke-dasharray="10 8"/>
+    <text x="420" y="360" text-anchor="middle" font-size="26" fill="#999">放入修改前畫面／文字</text>
+    <text x="1180" y="360" text-anchor="middle" font-size="26" fill="#999">放入修改後畫面／文字</text>
+    <text x="130" y="535" font-size="22" font-weight="700" fill="#7f1d1d">發現的問題</text>
+    <text x="130" y="575" font-size="20" fill="#444">＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿</text>
+    <text x="890" y="535" font-size="22" font-weight="700" fill="#166534">修改內容</text>
+    <text x="890" y="575" font-size="20" fill="#444">＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿</text>
+
+    <rect x="95" y="660" width="450" height="125" rx="16" fill="#e7f1ff" stroke="#77a7e8"/>
+    <text x="120" y="705" font-size="22" font-weight="700" fill="#17365d">問題證據</text>
+    <text x="120" y="745" font-size="20" fill="#444">影響人數：＿＿／＿＿　嚴重度：＿＿</text>
+
+    <rect x="575" y="660" width="450" height="125" rx="16" fill="#fff4e5" stroke="#e5a34a"/>
+    <text x="600" y="705" font-size="22" font-weight="700" fill="#98550a">修正假設</text>
+    <text x="600" y="745" font-size="20" fill="#444">預期解決：＿＿＿＿＿＿＿＿＿＿＿＿</text>
+
+    <rect x="1055" y="660" width="450" height="125" rx="16" fill="#eaf8ee" stroke="#70b77e"/>
+    <text x="1080" y="705" font-size="22" font-weight="700" fill="#176b32">Round 2 驗證</text>
+    <text x="1080" y="745" font-size="20" fill="#444">再次出現：＿＿　結果：改善／未改善</text>
+  </g>
+  <text x="800" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#6b7280">每個重大問題各複製一張；不得以預期結果取代真實觀察。</text>
+</svg>

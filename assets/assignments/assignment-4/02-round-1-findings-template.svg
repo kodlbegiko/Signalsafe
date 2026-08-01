@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#f7faff"/>
+  <rect x="55" y="45" width="1490" height="810" rx="26" fill="#ffffff" stroke="#1f5fbf" stroke-width="4"/>
+  <text x="95" y="105" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#0b3b82">作業四｜Round 1 可用性測試發現</text>
+  <rect x="1230" y="67" width="250" height="52" rx="26" fill="#fff3cd" stroke="#e0a800"/>
+  <text x="1355" y="102" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#7a5700">待實測填寫</text>
+
+  <g font-family="Arial, sans-serif">
+    <rect x="95" y="145" width="330" height="130" rx="18" fill="#e7f1ff" stroke="#77a7e8"/>
+    <text x="120" y="185" font-size="24" font-weight="700" fill="#17365d">樣本與版本</text>
+    <text x="120" y="225" font-size="20" fill="#334">受測者：UT001–UT004</text>
+    <text x="120" y="255" font-size="20" fill="#334">App／題庫版本：＿＿＿＿</text>
+
+    <rect x="450" y="145" width="330" height="130" rx="18" fill="#eaf8ee" stroke="#70b77e"/>
+    <text x="475" y="185" font-size="24" font-weight="700" fill="#176b32">任務完成</text>
+    <text x="475" y="225" font-size="20" fill="#334">獨立完成率：＿＿％</text>
+    <text x="475" y="255" font-size="20" fill="#334">總完成率：＿＿％</text>
+
+    <rect x="805" y="145" width="330" height="130" rx="18" fill="#fff4e5" stroke="#e5a34a"/>
+    <text x="830" y="185" font-size="24" font-weight="700" fill="#98550a">時間與提示</text>
+    <text x="830" y="225" font-size="20" fill="#334">快練中位秒數：＿＿</text>
+    <text x="830" y="255" font-size="20" fill="#334">平均提示次數：＿＿</text>
+
+    <rect x="1160" y="145" width="330" height="130" rx="18" fill="#fdebed" stroke="#d26c78"/>
+    <text x="1185" y="185" font-size="24" font-weight="700" fill="#9d2635">問題數</text>
+    <text x="1185" y="225" font-size="20" fill="#334">P0：＿＿　P1：＿＿</text>
+    <text x="1185" y="255" font-size="20" fill="#334">P2：＿＿　P3：＿＿</text>
+
+    <text x="95" y="330" font-size="28" font-weight="700" fill="#0b3b82">四項任務觀察</text>
+    <rect x="95" y="355" width="1395" height="250" rx="16" fill="#f9fbfe" stroke="#9cb8d8"/>
+    <line x1="380" y1="355" x2="380" y2="605" stroke="#9cb8d8"/>
+    <line x1="720" y1="355" x2="720" y2="605" stroke="#9cb8d8"/>
+    <line x1="1060" y1="355" x2="1060" y2="605" stroke="#9cb8d8"/>
+    <text x="235" y="395" text-anchor="middle" font-size="23" font-weight="700" fill="#17365d">任務 1｜90 秒快練</text>
+    <text x="550" y="395" text-anchor="middle" font-size="23" font-weight="700" fill="#17365d">任務 2｜回饋與查證</text>
+    <text x="890" y="395" text-anchor="middle" font-size="23" font-weight="700" fill="#17365d">任務 3｜個人盲點</text>
+    <text x="1275" y="395" text-anchor="middle" font-size="23" font-weight="700" fill="#17365d">任務 4｜急救模式</text>
+    <text x="120" y="445" font-size="19" fill="#555">完成率：＿＿％</text><text x="120" y="480" font-size="19" fill="#555">主要問題：＿＿＿＿</text><text x="120" y="515" font-size="19" fill="#555">代表原話：＿＿＿＿</text>
+    <text x="405" y="445" font-size="19" fill="#555">完成率：＿＿％</text><text x="405" y="480" font-size="19" fill="#555">主要問題：＿＿＿＿</text><text x="405" y="515" font-size="19" fill="#555">代表原話：＿＿＿＿</text>
+    <text x="745" y="445" font-size="19" fill="#555">完成率：＿＿％</text><text x="745" y="480" font-size="19" fill="#555">主要問題：＿＿＿＿</text><text x="745" y="515" font-size="19" fill="#555">代表原話：＿＿＿＿</text>
+    <text x="1085" y="445" font-size="19" fill="#555">完成率：＿＿％</text><text x="1085" y="480" font-size="19" fill="#555">主要問題：＿＿＿＿</text><text x="1085" y="515" font-size="19" fill="#555">代表原話：＿＿＿＿</text>
+
+    <text x="95" y="660" font-size="28" font-weight="700" fill="#0b3b82">Round 2 前必修</text>
+    <rect x="95" y="685" width="1395" height="125" rx="16" fill="#fffdf4" stroke="#d8b64d"/>
+    <text x="125" y="730" font-size="21" fill="#444">1. P0／P1：＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿</text>
+    <text x="125" y="770" font-size="21" fill="#444">2. 重複出現的 P2：＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿</text>
+  </g>
+  <text x="800" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#6b7280">本圖為空白結果模板，不代表測試已執行或教育成效成立。</text>
+</svg>
