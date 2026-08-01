@@ -1,0 +1,14 @@
+{
+  "name": "SignalSafe 防詐決策訓練",
+  "short_name": "SignalSafe",
+  "description": "給 16–18 歲學生的防詐決策訓練。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7faff",
+  "theme_color": "#0f5bd7",
+  "lang": "zh-Hant-TW",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
