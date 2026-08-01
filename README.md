@@ -20,19 +20,30 @@ SignalSafe 是一套面向 **16–18 歲高中階段學生**的防詐決策訓�
 | 資料原則 | 匿名、本機優先、姓名對照與作答資料分離 |
 | 驗證順序 | 8–12 人可用性測試 → 20–40 人初步成效驗證 → 第 7 天延遲後測 |
 
-## 新版原型
+## Round 1 正式原型
 
-新版原型已納入 `main`：
+- 正式網址：https://signalsafe-v02-usability-r1.vercel.app
+- App：`0.2.0-usability-r1`
+- 題庫：`2026-08-01-r1`
+- Git implementation commit：`5933fee58eeefae737fb8cabd5a70f1f039cbcac`
+- Vercel deployment：`dpl_6REA4HsmvW5rhSYe5Y1JPLoaZdyA`
+- 部署原型 SHA-256：`16092f8aba7191969378c59c370a32d3090ae01ea186139df50bd89e8fd2a279`
+- 技術驗收：**71 PASS／0 FAIL**
 
-- [`prototype/`](prototype/)：`0.2.0-usability-r1`
-- 題庫版本：`2026-08-01-r1`
+完整證據：[`docs/research/usability/ACCEPTANCE_REPORT_v0.2-r1.md`](docs/research/usability/ACCEPTANCE_REPORT_v0.2-r1.md)
+
+### 核心功能
+
+- 90 秒快練：3 題，只選最安全行動與一個最重要訊號
+- 完整能力測驗：前測 8 題、訓練 8 題、後測 8 題
 - 24 題合成情境：每階段 3 題明顯風險、2 題資訊不足、3 題目前較可信
-- 90 秒快練、完整前測／訓練／後測、急救模式、盲點儀表板
+- 急救模式：只提供停手與獨立查證，不要求真實訊息、不作真假裁決
+- 儀表板：安全行動、macro recall、較可信誤判、高自信錯誤、訊號 F1 與盲點
 - JSON／CSV 匯出、JSON 匯入、清除本機資料
-- PWA manifest、service worker 與離線快取
+- 本機匿名保存、PWA 與離線資產快取
 - 不需登入、不使用雲端 API
 
-本機執行：
+### 本機執行
 
 ```bash
 python3 -m http.server 4173 -d prototype
@@ -40,14 +51,14 @@ python3 -m http.server 4173 -d prototype
 
 再開啟 `http://localhost:4173`。
 
-自動檢查：
+### 自動檢查
 
 ```bash
 npm run check
 npm test
 ```
 
-PR #28 的 syntax check 與全部自動測試已通過。正式 UT001–UT004 測試仍需完成部署與桌面／手機 smoke test，才能將候選版本改為正式凍結。
+PR #28 的 syntax check、評分測試、題庫分布及資產 wiring tests 均已通過。
 
 ## Repository 導覽
 
@@ -69,27 +80,33 @@ PR #28 的 syntax check 與全部自動測試已通過。正式 UT001–UT004 �
 ### 測試與教材
 
 - [`docs/research/usability/README.md`](docs/research/usability/README.md)：8–12 人兩輪可用性測試執行包
-- [`docs/research/usability/VERSION_FREEZE_v0.2-r1.md`](docs/research/usability/VERSION_FREEZE_v0.2-r1.md)：版本凍結候選與 Gate
+- [`docs/research/usability/VERSION_FREEZE_v0.2-r1.md`](docs/research/usability/VERSION_FREEZE_v0.2-r1.md)：Round 1 正式凍結紀錄
+- [`docs/research/usability/ACCEPTANCE_REPORT_v0.2-r1.md`](docs/research/usability/ACCEPTANCE_REPORT_v0.2-r1.md)：部署與技術驗收
 - [`docs/reference-materials/2026-SFT-semifinal-coaching-materials.md`](docs/reference-materials/2026-SFT-semifinal-coaching-materials.md)：輔導教材索引與要求對照
 - [`privacy/data-handling-policy.md`](privacy/data-handling-policy.md)：公開資料與隱私規則
 
 ## 舊版部署
 
-- Historical prototype: https://signalsafe-pwa.vercel.app/
+- Historical prototype：https://signalsafe-pwa.vercel.app/
 
 舊 Vercel 版本只作為歷史原型與修改前對照，不得用於正式 16–18 歲可用性測試。
 
 ## 目前尚未完成
 
-- 新版公開部署與正式版本凍結
-- UT001–UT004 第一輪測試
+- UT001–UT004 第一輪可用性測試
 - Round 1 修正與 UT005–UT012 第二輪測試
 - 修改前後真實證據
 - 20–40 人初步成效驗證及第 7 天後測
 
+## 驗收邊界
+
+新版已完成正式部署與瀏覽器技術驗收。受管驗收環境無法直接導航外部 URL，因此互動驗收使用正式部署 payload 無損重建出的相同 CSS／JavaScript；離線部分完成 Service Worker 預快取與資產完整性驗證，但不宣稱已在實體手機切斷網路後重開。
+
+UT001–UT004 前仍應在實際使用裝置進行一次 3–5 分鐘場務 spot-check；不得因此臨時更改核心流程或題庫。
+
 ## 證據邊界
 
-原型完成與自動測試通過只代表技術候選版本成立，不能宣稱已降低真實受騙率、90 秒是最佳長度、適合所有高中生或教育成效可長期保留。
+原型完成與技術驗收通過，不能被解讀為已降低真實受騙率、90 秒是最佳長度、適合所有高中生或教育成效可長期保留。
 
 ## 公開資料政策
 
