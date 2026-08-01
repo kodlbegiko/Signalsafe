@@ -4,7 +4,7 @@
 
 ## 目前階段
 
-SignalSafe 已完成 16–18 歲新版原型的程式實作、自動檢查與 GitHub 合併，正式從「等待重建原型」進入「部署、smoke test 與 Round 1 版本凍結」階段。
+SignalSafe 已完成 16–18 歲新版原型的程式實作、自動檢查、GitHub 合併、Vercel production 部署與技術驗收。專案已從「部署與 smoke test」進入 **Round 1 真實目標族群可用性測試**階段。
 
 ## 完成度概覽
 
@@ -16,11 +16,22 @@ SignalSafe 已完成 16–18 歲新版原型的程式實作、自動檢查與 Gi
 | 作業二 | 內容與 2 張圖片完成 | Persona、洞察、POV、HMW 仍屬探索性 |
 | 作業三 | 可直接完成部分已完成 | 三案來源卡、15 點子、方案、六構面、故事版及 4 張圖片 |
 | 作業四準備 | 已完成 | 測試包、主持觀察、結果模板及簡報初稿 |
-| 新版原型 | **程式實作完成** | `0.2.0-usability-r1` 已合併至 main |
-| 自動 QA | **通過** | syntax check、評分、題庫分布及資產 wiring tests 通過 |
-| 公開部署 | 尚未完成 | 舊 Vercel 版本僅作歷史對照 |
-| Round 1 實測 | 尚未開始 | 需完成部署與裝置 smoke test 後凍結 |
+| 新版原型 | **完成** | `0.2.0-usability-r1` 已合併至 main |
+| 自動 QA | **通過** | syntax、評分、題庫分布及資產 wiring tests 通過 |
+| Production 部署 | **完成** | https://signalsafe-v02-usability-r1.vercel.app |
+| 技術驗收 | **通過** | 71 PASS／0 FAIL；P0=0、P1=0 |
+| Round 1 實測 | 尚未開始 | 下一步為 UT001–UT004 |
 | 教育成效 | 尚未證明 | 可用性測試也不能直接證明教育成效 |
+
+## 固定版本
+
+- App：`0.2.0-usability-r1`
+- 題庫：`2026-08-01-r1`
+- Git implementation commit：`5933fee58eeefae737fb8cabd5a70f1f039cbcac`
+- Vercel deployment：`dpl_6REA4HsmvW5rhSYe5Y1JPLoaZdyA`
+- 正式網址：https://signalsafe-v02-usability-r1.vercel.app
+- 部署原型 SHA-256：`16092f8aba7191969378c59c370a32d3090ae01ea186139df50bd89e8fd2a279`
+- 驗收報告：[`docs/research/usability/ACCEPTANCE_REPORT_v0.2-r1.md`](docs/research/usability/ACCEPTANCE_REPORT_v0.2-r1.md)
 
 ## 新版原型已完成
 
@@ -31,41 +42,56 @@ SignalSafe 已完成 16–18 歲新版原型的程式實作、自動檢查與 Gi
 - 急救模式：停止高風險操作並改走獨立查證
 - 儀表板：安全行動、macro recall、較可信誤判、高自信錯誤、訊號 F1 與盲點
 - 本機匿名保存、JSON／CSV 匯出、JSON 匯入與清除資料
-- PWA manifest、service worker 與離線資產快取
+- PWA 及離線資產預快取
 - 全部選高風險不能取得高校準分
 
 ## 已驗證
 
-PR #28 GitHub Actions：
+### GitHub Actions
 
 - `npm run check`：PASS
 - `npm test`：PASS
-- scoring tests：6 項通過
-- 題庫：24 個唯一 ID，每階段 3／2／3 分布通過
+- scoring tests：通過
+- 題庫：24 個唯一 ID，各階段 3／2／3 分布通過
 - 模組入口、CSS 與 service worker wiring：通過
 
-## 現在的核心阻塞
+### Production 與互動驗收
 
-> **不是開發功能，而是完成新版公開部署、桌面／手機 smoke test 與資料操作驗證，之後才能正式凍結 UT001–UT004 使用版本。**
+- Vercel 狀態：`READY`
+- 根路徑、Service Worker、首尾 payload：HTTP 200
+- 首頁、90 秒快練、急救、完整 24 題測驗：PASS
+- 暫停與恢復：PASS
+- JSON／CSV 匯出、JSON 匯入、清除資料：PASS
+- 390px viewport：無水平溢出，主要 CTA 高 54px
+- 未捕捉 JavaScript 例外：0
+- console error：0
+- 部署 payload 可無損重建固定原型
 
-## P0｜正式凍結前
+## 現在的核心工作
 
-1. 部署 `main/prototype` 到正式測試網址。
-2. 桌面完成首頁、快練、完整測驗、急救與資料管理 smoke test。
-3. 手機 390px 寬度確認無水平溢出與核心按鈕可操作。
-4. 驗證 JSON／CSV 匯出、JSON 匯入與清除資料。
-5. 驗證首次載入後可離線重開。
-6. 將部署 URL、正式 Git commit 與檢查結果寫回版本凍結紀錄。
+> **不再是開發或部署，而是執行 UT001–UT004 Round 1，收集真實使用者阻塞與理解證據。**
+
+## Round 1 前場務確認
+
+正式受測前，只需在實際使用的手機完成一次 3–5 分鐘 spot-check：
+
+1. 開啟正式網址。
+2. 完成一題快練。
+3. 確認按鈕、字體與捲動正常。
+4. 切換網路後確認沒有明顯載入問題。
+5. 不因此修改題庫、文案或核心流程。
+
+此為現場裝置確認，不是程式開發阻塞。
 
 ## P1｜真實場域作業四
 
 1. Round 1：UT001–UT004。
 2. 集中修正 P0、P1 與重複 P2。
-3. 凍結 Round 2 版本。
+3. 建立修改前後證據並凍結 Round 2 版本。
 4. Round 2：UT005–UT012。
 5. 回填三張結果模板與匿名觀察紀錄。
 6. 更新複賽簡報的測試結果與修改前後頁面。
 
 ## 證據邊界
 
-目前可以說新版技術原型與自動測試已完成；不能說已完成目標族群可用性驗證、提升防詐能力或降低真實受騙率。
+目前可以說新版原型、正式部署與技術驗收已完成；不能說已完成目標族群可用性驗證、提升防詐能力或降低真實受騙率。
