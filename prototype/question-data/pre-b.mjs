@@ -24,10 +24,10 @@ export default [
     explanation: "訊息引導你回到原有官方系統，而不是點陌生連結或回信傳送敏感文件。", consequence: "正確核對可避免錯失補件，也降低敏感資料寄錯對象的風險。", memoryTip: "敏感文件回到原官方系統處理。", officialVerification: "自行輸入學校校務系統網址或開啟原 App。", difficulty: 1
   },
   {
-    id: "pre-07", phase: "pre", category: "遊戲福利", platformStyle: "social", senderLabel: "玩家福利站", title: "免費領限定角色，只到今晚", message: "輸入遊戲帳號、密碼與生日完成驗證，就能立即領取限定角色。官方不會再公告第二次。", correctJudgment: "risk",
-    signalOptions: [signal("credential", "要求遊戲帳號與密碼", "action"),signal("scarcity", "限定且不再公告", "tactic"),signal("unofficial", "來源不是遊戲官方管道", "source"),signal("reward", "提供限定角色", "money")], correctSignalIds: ["credential", "scarcity", "unofficial"], primarySignalId: "credential",
-    actionOptions: [action("claim", "輸入帳密領取角色", "unsafe"),action("official-game", "自行開啟遊戲或官方網站查看活動公告", "safe"),action("test-alt", "先用朋友帳號測試", "unsafe"),action("comment", "在貼文留言詢問是不是真的", "neutral")], correctActionIds: ["official-game"],
-    explanation: "非官方來源要求帳密，是直接的帳號接管風險。福利是否存在應由遊戲內公告或官方網站核對。", consequence: "帳號、虛寶與綁定付款方式可能被盜用。", memoryTip: "福利回遊戲內看，帳密不交給活動頁。", officialVerification: "開啟遊戲內公告、官方網站或官方社群已驗證帳號。", difficulty: 1
+    id: "pre-07", phase: "pre", category: "遊戲福利", platformStyle: "chat", senderLabel: "遊戲系統公告", title: "登入簽到送限定角色", message: "活動規則已放在遊戲內公告。請從遊戲首頁的『活動』按鈕進入，不需重新輸入帳號、密碼或付款。", correctJudgment: "trusted",
+    signalOptions: [signal("in-game", "可從遊戲內既有入口查看", "source"),signal("no-credential", "不要求重新輸入帳密", "action"),signal("no-payment", "不要求付款或轉帳", "money"),signal("reward", "提供限定角色", "tactic")], correctSignalIds: ["in-game", "no-credential", "no-payment"], primarySignalId: "in-game",
+    actionOptions: [action("in-game-check", "自行開啟遊戲，從活動頁核對規則", "safe"),action("reply-password", "回覆帳密請客服代領", "unsafe"),action("ignore-all", "所有遊戲福利都直接忽略", "neutral"),action("share-account", "把帳號借給朋友先測試", "unsafe")], correctActionIds: ["in-game-check"],
+    explanation: "福利活動可以是正常通知。關鍵是使用遊戲內既有入口、不重新索取帳密，也不要求付款。", consequence: "從遊戲內自行核對可安全參與，也避免因過度警戒錯失正常活動。", memoryTip: "遊戲福利回遊戲內看，不從陌生頁登入。", officialVerification: "自行開啟遊戲內活動頁或官方網站公告。", difficulty: 1
   },
   {
     id: "pre-08", phase: "pre", category: "票券交易", platformStyle: "chat", senderLabel: "社團網友", title: "原價讓票，可面交", message: "我臨時不能去，可以在捷運站面交。票券來源與座位照片可先提供，但希望你先付 200 元保留金。", correctJudgment: "insufficient",
