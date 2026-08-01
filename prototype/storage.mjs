@@ -1,6 +1,35 @@
 import { APP_VERSION, QUESTION_BANK_VERSION } from "./questions.mjs";
 
 const STORAGE_KEY = "signalsafe:v0.2";
+const memoryStorage = new Map();
+
+function getStorageItem(key) {
+  try {
+    return window.localStorage.getItem(key);
+  } catch (error) {
+    console.warn("SignalSafe localStorage unavailable; using temporary memory storage", error);
+    return memoryStorage.has(key) ? memoryStorage.get(key) : null;
+  }
+}
+
+function setStorageItem(key, value) {
+  const text = String(value);
+  try {
+    window.localStorage.setItem(key, text);
+  } catch (error) {
+    console.warn("SignalSafe localStorage write unavailable; using temporary memory storage", error);
+    memoryStorage.set(key, text);
+  }
+}
+
+function removeStorageItem(key) {
+  try {
+    window.localStorage.removeItem(key);
+  } catch (error) {
+    console.warn("SignalSafe localStorage removal unavailable; clearing temporary memory storage", error);
+    memoryStorage.delete(key);
+  }
+}
 
 function freshState() {
   return {
@@ -17,7 +46,7 @@ function freshState() {
 
 export function loadState() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = getStorageItem(STORAGE_KEY);
     if (!raw) {
       const state = freshState();
       saveState(state);
@@ -44,12 +73,12 @@ export function loadState() {
 
 export function saveState(state) {
   const next = { ...state, updatedAt: new Date().toISOString() };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+  setStorageItem(STORAGE_KEY, JSON.stringify(next));
   return next;
 }
 
 export function clearState() {
-  localStorage.removeItem(STORAGE_KEY);
+  removeStorageItem(STORAGE_KEY);
   const state = freshState();
   saveState(state);
   return state;
