@@ -7,6 +7,7 @@ import path from "node:path";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const required = [
   "index.html",
+  "compat.mjs",
   "bootstrap.mjs",
   "questions.mjs",
   "scoring.mjs",
@@ -37,9 +38,22 @@ test("index uses modular bootstrap and styles", async () => {
   assert.doesNotMatch(html, /href="\.\/styles\.css"/);
 });
 
+test("bootstrap loads the compatibility layer", async () => {
+  const bootstrap = await readFile(path.join(root, "bootstrap.mjs"), "utf8");
+  assert.match(bootstrap, /import "\.\/compat\.mjs"/);
+});
+
+test("storage has a non-fatal localStorage fallback", async () => {
+  const storage = await readFile(path.join(root, "storage.mjs"), "utf8");
+  assert.match(storage, /memoryStorage/);
+  assert.match(storage, /getStorageItem/);
+  assert.match(storage, /setStorageItem/);
+  assert.doesNotMatch(storage, /const raw = localStorage\.getItem/);
+});
+
 test("service worker precaches the modular entry files", async () => {
   const worker = await readFile(path.join(root, "sw.js"), "utf8");
-  for (const asset of ["bootstrap.mjs", "styles/01.css", "styles/02.css", "app-parts/app-runtime.js"]) {
+  for (const asset of ["compat.mjs", "bootstrap.mjs", "styles/01.css", "styles/02.css", "app-parts/app-runtime.js"]) {
     assert.ok(worker.includes(asset), `${asset} should be precached`);
   }
 });
