@@ -1,1 +1,0 @@
-The implementation branch is ready to open for review once GitHub Actions is triggered. No additional product features should be added before review; remaining work is verification, deployment and freeze evidence.
