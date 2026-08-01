@@ -5,7 +5,7 @@ import TRAINING_B from "./question-data/training-b.mjs";
 import POST_A from "./question-data/post-a.mjs";
 import POST_B from "./question-data/post-b.mjs";
 
-export const APP_VERSION = "0.2.0-usability-r1";
+export const APP_VERSION = "0.2.1-usability-r1-hotfix1";
 export const QUESTION_BANK_VERSION = "2026-08-01-r1";
 
 const QUESTIONS = [...PRE_A, ...PRE_B, ...TRAINING_A, ...TRAINING_B, ...POST_A, ...POST_B];
