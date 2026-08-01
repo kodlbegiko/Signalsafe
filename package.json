@@ -5,6 +5,6 @@
   "type": "module",
   "scripts": {
     "test": "node --test prototype/tests/*.test.mjs",
-    "check": "node --check prototype/app.js && node --check prototype/questions.mjs && node --check prototype/scoring.mjs && node --check prototype/storage.mjs"
+    "check": "node --check prototype/bootstrap.mjs && node --check prototype/questions.mjs && node --check prototype/scoring.mjs && node --check prototype/storage.mjs && for file in prototype/app-parts/*.js prototype/question-data/*.mjs; do node --check \"$file\"; done"
   }
 }
