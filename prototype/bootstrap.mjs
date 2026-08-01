@@ -45,7 +45,7 @@ const parts = [
 for (const src of parts) {
   await new Promise((resolve, reject) => {
     const script = document.createElement("script");
-    script.src = src;
+    script.src = new URL(src, import.meta.url).href;
     script.onload = resolve;
     script.onerror = () => reject(new Error(`無法載入 ${src}`));
     document.head.append(script);
