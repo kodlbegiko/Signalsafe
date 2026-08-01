@@ -1,0 +1,15 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/prototype/index.html" },
+    { "source": "/app.js", "destination": "/prototype/app.js" },
+    { "source": "/styles.css", "destination": "/prototype/styles.css" },
+    { "source": "/questions.mjs", "destination": "/prototype/questions.mjs" },
+    { "source": "/scoring.mjs", "destination": "/prototype/scoring.mjs" },
+    { "source": "/storage.mjs", "destination": "/prototype/storage.mjs" },
+    { "source": "/sw.js", "destination": "/prototype/sw.js" },
+    { "source": "/manifest.webmanifest", "destination": "/prototype/manifest.webmanifest" },
+    { "source": "/icon.svg", "destination": "/prototype/icon.svg" }
+  ]
+}
