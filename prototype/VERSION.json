@@ -1,7 +1,7 @@
 {
-  "appVersion": "0.2.1-usability-r1-hotfix1",
+  "appVersion": "0.2.2-usability-r1-hotfix2",
   "questionBankVersion": "2026-08-01-r1",
   "targetAudience": "16–18 歲高中階段學生",
-  "status": "round-1-hotfix-candidate",
+  "status": "round-1-direct-static-candidate",
   "evidenceBoundary": "可用性測試原型，不代表教育成效成立"
 }
