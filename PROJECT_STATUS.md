@@ -4,14 +4,15 @@
 
 ## Executive status
 
-> **BLOCKED — DO NOT START HUMAN TESTING**
+> **TECHNICAL BROWSER FREEZE COMPLETE**
 
-`0.2.4-usability-r1-hotfix4` 已完成 main CI、static Accessibility QA、24 題 AI-assisted semantic review 與 Production HTTP/MIME 結構驗證，但正式 Round 1 仍未凍結。
+> **HUMAN QUESTION-BANK REVIEW REQUIRED BEFORE SCORED HUMAN TESTING**
 
-目前有兩個不同性質的 blocker：
+`0.2.4-usability-r1-hotfix4` 已完成 main CI、static Accessibility QA、fresh Production Chromium Desktop/Mobile L4、download/import/clear、keyboard/focus，以及 Service Worker offline 驗收。Round 1 scored testing 仍未開始，因題庫需人工領域審查。
 
-1. **題庫 P1 semantic validity**：`train-04`、`train-08`、`post-08` 的 `risk`／`insufficient` 邊界需人工反詐／教育審查者定案。
-2. **Production real-browser Gate**：本環境沒有可執行 JavaScript 的真實 Chrome／Chromium，因此 Desktop/Mobile、完整互動、persistence、console、實際 focus/overflow 與 Service Worker offline 尚未取得 L4 證據。
+剩餘 blocker 只屬人類／領域審查：`train-04`、`train-08`、`post-08` 的 `risk`／`insufficient` 邊界需人工反詐／教育審查者定案。這不是 engineering P0/P1。
+
+先前 Production `text/plain`/raw-HTML P0 和 external jsDelivr architecture 已由 first-party Vercel static deployment `dpl_ioSgKN2uAvTEujYujsCi959FXRwd` 修正；完整 audit trail 保留於 `docs/research/usability/PRODUCTION_BROWSER_ACCEPTANCE_2026-08-09.md`。
 
 ## 現行候選
 

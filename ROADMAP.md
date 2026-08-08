@@ -47,12 +47,13 @@
 - [x] 歷史 `71 PASS` 證據邊界修正
 - [x] 2026-08-01 startup incident 保留
 - [ ] Question Bank semantic P1 全數 resolved
-- [ ] Desktop 真實 Production browser Gate
-- [ ] Mobile 真實 Production browser Gate
-- [ ] 核心互動／refresh／persistence／console Gate
-- [ ] real keyboard/focus/hitbox/overflow Gate
-- [ ] Service Worker install → reload → offline Gate
-- [ ] 正式標記 `Round 1 FROZEN`
+- [x] Desktop 真實 Production Chromium Gate
+- [x] Mobile 真實 Production Chromium Gate
+- [x] 核心互動／refresh／persistence／console Gate
+- [x] real keyboard/focus/hitbox/overflow Gate
+- [x] Service Worker install → reload → offline Gate
+- [x] `TECHNICAL BROWSER FREEZE COMPLETE`（2026-08-09 07:48 Asia/Taipei）
+- [ ] Human question-bank review 後才可標記 `Round 1 FROZEN`
 
 > 上述 P0/P1 未完成前：**BLOCKED — DO NOT START HUMAN TESTING**。
 

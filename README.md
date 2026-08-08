@@ -19,21 +19,20 @@ SignalSafe 是一套面向 **16–18 歲高中階段學生**的防詐決策訓�
 | 資料原則 | 不登入、不收姓名／學校／聯絡方式；本機匿名優先 |
 | 教育成效 | 尚未證明；可用性測試不能等同教育成效 |
 
-## Round 1 pre-freeze candidate
+## Technical browser freeze
 
 - App：`0.2.4-usability-r1-hotfix4`
 - Question Bank：`2026-08-01-r1`
-- Runtime source SHA：`3cecb0d3b0eea53ff65839e4241cd5043e1aee7a`
+- Main source SHA：`c5e72268e2e0aee28b1d343588ef333101c14dbb`
 - Production：https://signalsafe-v02-usability-r1.vercel.app
-- Production deployment：`dpl_F7Euc7qTtUvqKKPaM6f5iwq6m5mP`
+- Production deployment：`dpl_ioSgKN2uAvTEujYujsCi959FXRwd` (`READY`)
 - Main technical CI：Actions run #26 — `success`
 - Runtime test artifact：33/33 PASS
-- 狀態：**BLOCKED — DO NOT START HUMAN TESTING**
+- 狀態：**TECHNICAL BROWSER FREEZE COMPLETE**
 
-目前有兩類正式 blocker：
+Round 1 scored testing 仍是 **NOT STARTED**。唯一剩餘前置是 `train-04`、`train-08`、`post-08` 的人工題庫 domain review；這不屬 engineering blocker。
 
-1. **題庫 P1 語意效度**：`train-04`、`train-08`、`post-08` 的 `risk`／`insufficient` 邊界尚未由人工領域審查者定案。
-2. **Production real-browser Gate**：Desktop／Mobile、完整互動、refresh/persistence、console、真實 focus traversal 與 Service Worker offline 尚未取得 L4 證據。
+Production 現由 Vercel first-party static files 提供。2026-08-09 fresh Playwright Chromium 已驗證 Desktop/Mobile、Quick、Assessment smoke、Emergency、Dashboard/Data、normal persistence、keyboard/focus、JSON/CSV downloads、exact Export→Clear→Import、Service Worker 和 offline reload。完整歷史與 evidence 見 [`PRODUCTION_BROWSER_ACCEPTANCE_2026-08-09.md`](docs/research/usability/PRODUCTION_BROWSER_ACCEPTANCE_2026-08-09.md)。
 
 HTTP 200、Vercel `READY`、CI 或 source inspection 都不能替代真實瀏覽器 Gate。
 

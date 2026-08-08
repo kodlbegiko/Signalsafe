@@ -1,5 +1,7 @@
 # SignalSafe Pre-Usability Freeze Audit — 2026-08-08
 
+> 2026-08-09 post-deployment addendum: this document remains the historical L1/L2 pre-freeze baseline. Deployment `dpl_ioSgKN2uAvTEujYujsCi959FXRwd` subsequently replaced the external rewrite with first-party Vercel static files, and fresh Playwright Chromium L4 acceptance passed. Technical Browser Freeze is complete; human question-bank review remains pending. See `PRODUCTION_BROWSER_ACCEPTANCE_2026-08-09.md` for the incident-to-fix audit trail.
+
 > Final static/semantic QA execution updated on 2026-08-09 (Asia/Taipei).
 
 ## Executive verdict

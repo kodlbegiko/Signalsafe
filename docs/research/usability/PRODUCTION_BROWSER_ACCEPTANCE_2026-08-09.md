@@ -123,7 +123,7 @@ After production deployment, retest in fresh Playwright Chromium: document MIME,
 2. The current production P0 prevents browser-freeze completion.
 3. Human question-bank domain review remains required for `train-04`, `train-08`, and `post-08` and is not changed here.
 
-## Final Test Matrix
+## Pre-deployment Test Matrix (historical)
 
 | Gate | Desktop | Mobile | Evidence | Status |
 | ---- | ------- | ------ | -------- | ------ |
@@ -138,8 +138,42 @@ After production deployment, retest in fresh Playwright Chromium: document MIME,
 | Console/network | FAIL | FAIL | Chromium document MIME failure | FAIL |
 | Service Worker/offline | BLOCKED | BLOCKED | P0 prevents executable Chromium page | BLOCKED |
 
+## Post-deployment Revalidation
+
+At 07:39 Asia/Taipei, deployment `dpl_ioSgKN2uAvTEujYujsCi959FXRwd` became `READY` and was aliased to `https://signalsafe-v02-usability-r1.vercel.app`. It contains source `c5e72268e2e0aee28b1d343588ef333101c14dbb`, including the first-party static serving fix in `64b2469`.
+
+Fresh Playwright Chromium 151 evidence:
+
+- `/prototype/` returned 200 `text/html; charset=utf-8`; `bootstrap.mjs` returned `application/javascript; charset=utf-8`; `styles/01.css` returned `text/css; charset=utf-8`.
+- No `x-jsd-version` or other jsDelivr-upstream header was present. All entry, module and question-data requests returned 200; console had zero errors and warnings.
+- Desktop targeted regression completed Home, Quick 3/3, Dashboard/data and an Assessment smoke. Existing full 24-question, training-feedback and pause/resume L4 evidence remains valid supporting evidence.
+- Mobile `390x844` completed Home, Quick 3/3, Dashboard, Assessment smoke, Emergency and Data Management. Home, Assessment, Emergency and Data pages each measured `scrollWidth = clientWidth = 390`; visible core controls met 44px in at least one dimension. The hidden native file input is intentionally `1x1` and its visible label is the touch target.
+- Real downloads were captured and read: JSON parsed with all required top-level fields and one three-response session; CSV was UTF-8 with the expected header and three rows. Neither export contained direct PII, `undefined` or `[object Object]`.
+- The exact L4 data chain passed: generated Quick session -> downloaded JSON -> confirmed Clear to zero sessions -> imported that exact downloaded file -> restored anonymous ID, one session and Dashboard.
+- Real Playwright keyboard API exercised Tab order, Enter and Space across Home, Quick, Assessment, Emergency, Data/Import and Clear confirmation. Focus remained on the rerendered selected buttons and the import input was keyboard-focusable.
+- Fresh Service Worker registration was present, active and controlling the page at `/prototype/sw.js`. After reload, real offline mode reloaded Home from cache and Quick remained enabled; `navigator.onLine` was false and the offline event rendered `目前離線`.
+
+Blocked localStorage fallback remains L2-only. Axe and screen-reader testing remain non-blocking accessibility follow-up; neither is represented as a complete compliance claim.
+
+## Final Test Matrix
+
+| Gate | Desktop | Mobile | Evidence | Status |
+| ---- | ------- | ------ | -------- | ------ |
+| First-party render/MIME | PASS | PASS | Fresh Chromium 151 headers and visible render | PASS |
+| Quick | PASS | PASS | 3/3 live interactions | PASS |
+| Assessment | PASS | PASS smoke | Full prior L4 plus fresh smoke | PASS |
+| Pause/resume/persistence | PASS | NOT APPLICABLE | Existing L4 evidence | PASS |
+| Emergency/Dashboard/Data | PASS | PASS | Fresh regression | PASS |
+| JSON/CSV/export-import-clear | PASS | PASS | Real downloads and exact restore chain | PASS |
+| Keyboard/focus | PASS | PASS | Real Playwright keyboard API | PASS |
+| Overflow/touch | PASS | PASS | Geometry and scroll metrics | PASS |
+| Console/network | PASS | PASS | No runtime errors; all core assets 200 | PASS |
+| Service Worker/offline | PASS | PASS | Registration, control, reload and offline render | PASS |
+
 ## Final Verdict
 
-**BLOCKED — ENGINEERING P0/P1 REMAIN**
+**TECHNICAL BROWSER FREEZE COMPLETE**
 
-No technical freeze timestamp is recorded. `TECHNICAL BROWSER FREEZE COMPLETE` is not satisfied. After engineering gates pass, human question-bank review is still required before scored human testing.
+Technical freeze timestamp: **2026-08-09 07:48 Asia/Taipei**.
+
+**HUMAN QUESTION-BANK REVIEW REQUIRED BEFORE SCORED HUMAN TESTING.** The historical `text/plain` P0, old deployment and jsDelivr architecture are retained above as audit evidence; they are closed only for the new first-party deployment after this revalidation.
