@@ -41,7 +41,7 @@ test("production index is same-origin and service-worker assets exist", () => {
   }
 });
 
-test("runtime and question bank contain no forbidden complete-safety verdict", () => {
+test("runtime and question bank contain no positive complete-safety verdict", () => {
   const files = [
     "prototype/index.html",
     "prototype/questions.mjs",
@@ -49,8 +49,11 @@ test("runtime and question bank contain no forbidden complete-safety verdict", (
     ...fs.readdirSync(path.join(prototypeDir, "app-parts")).map((name) => `prototype/app-parts/${name}`),
     ...fs.readdirSync(path.join(prototypeDir, "question-data")).map((name) => `prototype/question-data/${name}`),
   ];
+  const allowedDisclaimers = ["不等於完全安全", "不代表完全安全", "不是完全安全", "不表示完全安全"];
   for (const file of files) {
-    assert.ok(!read(file).includes("完全安全"), `${file} contains forbidden wording`);
+    let content = read(file);
+    for (const disclaimer of allowedDisclaimers) content = content.replaceAll(disclaimer, "");
+    assert.ok(!content.includes("完全安全"), `${file} contains a positive complete-safety verdict`);
   }
 });
 
