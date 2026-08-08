@@ -1,0 +1,12 @@
+{
+  "participantId": "UT002",
+  "status": "not_started",
+  "appVersion": "0.2.3-usability-r1-hotfix3",
+  "questionBankVersion": "2026-08-01-r1",
+  "deviceClass": null,
+  "browser": null,
+  "session": null,
+  "observerSummary": null,
+  "questionnaire": null,
+  "issues": []
+}

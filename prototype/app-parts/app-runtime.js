@@ -21,7 +21,7 @@ function handleAction(actionName){switch(actionName){
  case "start-assessment":startAssessment(false);break;
  case "restart-assessment":if(confirm("要刪除未完成進度並重新開始嗎？"))startAssessment(true);break;
  case "resume-assessment":startAssessment(false);break;
- case "pause-assessment":state=saveState(state);currentFlow=null;setRoute("home");toast("進度已保存在這台裝置");break;
+ case "pause-assessment":state=saveState(state);currentFlow=null;setRoute("home");toast(state.storageMode==="memory"?"目前為暫時記憶模式；重新整理或關閉頁面可能遺失進度":"進度已保存在這台裝置");break;
  case "submit-assessment":submitAssessmentQuestion();break;
  case "next-assessment":advanceAssessmentQuestion();break;
  case "continue-phase":continueAssessmentPhase();break;

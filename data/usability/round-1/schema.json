@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SignalSafe Round 1 Anonymous Session",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["participantId", "status", "appVersion", "questionBankVersion", "session"],
+  "properties": {
+    "participantId": { "type": "string", "pattern": "^UT00[1-4]$" },
+    "status": { "enum": ["not_started", "completed", "withdrawn", "technical_abort"] },
+    "appVersion": { "type": "string" },
+    "questionBankVersion": { "type": "string" },
+    "deviceClass": { "type": ["string", "null"] },
+    "browser": { "type": ["string", "null"] },
+    "session": { "type": ["object", "null"] },
+    "observerSummary": { "type": ["object", "null"] },
+    "questionnaire": { "type": ["object", "null"] },
+    "issues": { "type": "array", "items": { "type": "object" } }
+  },
+  "description": "禁止加入姓名、學校、班級、電話、Email、社群帳號、原始聲音、可識別影像或姓名-ID 對照。"
+}
