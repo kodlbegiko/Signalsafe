@@ -1,64 +1,94 @@
 # SignalSafe 部署與技術驗收報告
 
-更新日期：2026-08-08
+更新日期：2026-08-09
 
 ## 現行結論
 
 **BLOCKED — DO NOT START HUMAN TESTING**
 
-現行候選為 `0.2.3-usability-r1-hotfix3`，Question Bank `2026-08-01-r1`。GitHub 自動 QA、題庫分布、anti-gaming、匿名匯出 schema、Service Worker 資產與 Production HTTP 結構均已驗證，但本執行環境沒有可執行 JavaScript 的真實 Chrome／Chromium，因此無法完成 Round 1 前必要的 Production browser navigation 與互動 Gate。
+現行候選為 `0.2.4-usability-r1-hotfix4`，Question Bank `2026-08-01-r1`。工程與 static Accessibility QA 已收斂到 L1/L2，但仍有 3 個題庫 semantic P1，加上未完成的 Production real-browser Gate。
 
 ## 現行固定值
 
 | 項目 | 值 |
 |---|---|
-| App candidate | `0.2.3-usability-r1-hotfix3` |
+| App candidate | `0.2.4-usability-r1-hotfix4` |
 | Question Bank | `2026-08-01-r1` |
-| Runtime Git SHA | `fd8655b18c807221feea23cd8754a665e9298414` |
+| Runtime Git SHA | `3cecb0d3b0eea53ff65839e4241cd5043e1aee7a` |
 | Production URL | https://signalsafe-v02-usability-r1.vercel.app |
-| Production deployment | `dpl_ES53zV4bght2rBx4rCSJhyCTCCFN` |
-| Main CI | Actions run #18 — success |
-| Static artifact | `signalsafe-static-prototype` / `9023289006` |
-| Artifact SHA-256 | `d0645eebf408a0138296df8f04f336e5041b49cca57f7ef6871317d481f4d5d7` |
+| Production deployment | `dpl_F7Euc7qTtUvqKKPaM6f5iwq6m5mP` |
+| Main technical CI | Actions run #26 — success |
+| Runtime tests | 33/33 PASS |
+| Static artifact | `signalsafe-static-prototype` / `9024665427` |
+| Artifact SHA-256 | `895ae43f8aa3e55bb32e4dd6efc334725eba3d94bf1110cb235c9b15f52b009e` |
 
 ## Automated QA
 
 - `npm run check`：PASS
-- `npm test`：PASS
+- runtime `npm test`：33/33 PASS
 - 24 題：Pre／Training／Post 各 8 題
 - 每階段：Risk 3／Insufficient 2／Trusted 3
 - 24 個 question ID 唯一
-- Anti-gaming：PASS；全選 Risk／全選訊號／安全行動全錯／最高自信不能取得高分
+- Anti-gaming：PASS
 - JSON export required top-level fields：PASS
 - CSV direct-PII header audit：PASS
 - Service Worker asset references：PASS
-- `完全安全` 正向裁決防護：PASS；允許「不等於完全安全」等明確反向警語
+- static Accessibility guardrails：PASS
+- question semantic-integrity guardrails：PASS
+
+上述自動測試只能證明 deterministic invariants，不代表人工 semantic validity 或 real-browser usability。
+
+## Question Bank semantic review
+
+修正後 item-level count：**11 PASS / 10 WARN / 3 FAIL**。
+
+3 個 P1 FAIL：`train-04`、`train-08`、`post-08`。它們都涉及 `risk` 與 `insufficient` 的 operational boundary；目前沒有自動修改 key。若人工審查決定改 classification 或 construct，必須評估 Question Bank 升版。
 
 ## Production HTTP / artifact reality check
 
-Production deployment 為 `READY`，正式 alias 回 HTTP 200。`VERSION.json`、`bootstrap.mjs`、`sw.js` 可由正式 Production 路徑取得，版本與 CI source 一致；HTML 使用相對資產路徑，不再使用先前的 payload → decompress → eval client reconstruction。
+Production deployment `dpl_F7Euc7qTtUvqKKPaM6f5iwq6m5mP` 為 `READY`。正式 alias 已確認：
 
-目前 Vercel 以 rewrite 對應固定 Git SHA 的 jsDelivr 靜態資產，因此首次網路載入仍依賴外部 CDN。這不是完整 self-contained deployment，且本次沒有真實 Service Worker/offline browser 證據。
+- `/prototype/`：HTTP 200、`text/html; charset=utf-8`
+- `bootstrap.mjs`：HTTP 200、`application/javascript`
+- `styles/01.css`：HTTP 200、`text/css`
+- `VERSION.json`：hotfix4 / `2026-08-01-r1`
+- `sw.js`：`signalsafe-v0.2.4-r1-hotfix4`
+- upstream immutable pin：`3cecb0d...`
+
+本輪曾發現第一個 hotfix4 Production deployment 把正確 HTML body 回成 `Content-Type: text/plain`。此 P0 已由 PR #38 的 Vercel response headers 修正並重新部署。
+
+Production 仍透過 Vercel rewrite 使用 jsDelivr immutable upstream，首次載入依賴外部 CDN，因此不是 fully self-contained deployment。
 
 ## 尚未通過的 Freeze Gate
 
-- Desktop 真實 Production navigation
-- Mobile 真實 Production navigation
-- 90 秒快練 3 題正式 UI
-- Pre → Training → Post 24 題正式 UI
-- Pause / resume
-- Emergency UI
-- Dashboard UI
-- JSON／CSV download、JSON import、clear data 的瀏覽器互動
-- Refresh / persistence / blocked-localStorage 實機行為
-- Service Worker install → reload → offline
-- Console / uncaught runtime exception
-- Keyboard／focus／overflow／44px target 的實際 viewport 稽核
+### Human domain review
 
-上述任一項在 Freeze 前都不能用程式碼審查或 HTTP 200 取代。
+- `risk` vs `insufficient` operational rule
+- `train-04`／`train-08`／`post-08` P1 resolution
+- `pre-04`／`pre-08` boundary review
+- per-item source/rewrite basis
+- human reviewer/status
+
+### Real browser
+
+- Desktop 1440×900 Production navigation
+- Mobile 390×844 Production navigation
+- Quick Mode 3 題
+- Pre → Training → Post 24 題
+- pause / resume
+- Emergency / Dashboard
+- JSON／CSV download、JSON import、clear data
+- refresh / persistence / blocked-storage behavior
+- Service Worker install → reload → offline
+- console / uncaught runtime exception
+- real keyboard/focus / actual hitboxes / overflow
+
+上述不得用程式碼審查、HTTP 200 或 CI 取代。
 
 ## Evidence correction
 
-先前 `71 PASS / 0 FAIL` 只代表 core/browser-engine QA，**不得解讀為 Production navigation PASS**。2026-08-01 真實 Chrome 啟動失敗事件保留於 `INCIDENT_2026-08-01_LIVE_STARTUP.md`，不得刪除或改寫成沒有發生。
+- 歷史 `71 PASS / 0 FAIL` 只代表 core/browser-engine QA，不代表 Production navigation PASS。
+- 2026-08-01 真實 Chrome 啟動失敗事件保留於 `INCIDENT_2026-08-01_LIVE_STARTUP.md`。
+- 本輪語意 review 早期摘要 `19 PASS / 2 WARN / 3 FAIL` 是計數錯誤；依 24 個 item verdict 正確統計為 **11 / 10 / 3**。
 
 完整本輪稽核見 `PRE_USABILITY_FREEZE_AUDIT_2026-08-08.md`。
