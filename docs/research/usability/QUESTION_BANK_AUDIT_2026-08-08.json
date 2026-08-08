@@ -1,0 +1,28 @@
+{
+  "generatedAt": "2026-08-08T14:53:09.108Z",
+  "source": {
+    "gitSha": "fd8655b18c807221feea23cd8754a665e9298414",
+    "appVersion": "0.2.3-usability-r1-hotfix3",
+    "questionBankVersion": "2026-08-01-r1"
+  },
+  "totals": {
+    "questions": 24,
+    "uniqueIds": 24
+  },
+  "distribution": {
+    "pre": { "risk": 3, "insufficient": 2, "trusted": 3 },
+    "training": { "risk": 3, "insufficient": 2, "trusted": 3 },
+    "post": { "risk": 3, "insufficient": 2, "trusted": 3 }
+  },
+  "automatedChecks": {
+    "requiredFields": true,
+    "validReferences": true,
+    "noLiveHttpUrls": true,
+    "noExplicitAnswerLeakMarkers": true,
+    "noPositiveCompleteSafetyVerdict": true,
+    "balancedPhaseDistribution": true
+  },
+  "errors": [],
+  "automatedStatus": "pass",
+  "manualSemanticReview": "pending — automated checks do not replace human review of realism, ambiguity, difficulty, or pedagogical quality"
+}
