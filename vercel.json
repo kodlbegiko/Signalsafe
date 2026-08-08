@@ -3,25 +3,5 @@
   "cleanUrls": true,
   "redirects": [
     { "source": "/", "destination": "/prototype/", "permanent": false }
-  ],
-  "rewrites": [
-    { "source": "/prototype/", "destination": "https://cdn.jsdelivr.net/gh/kodlbegiko/Signalsafe@3cecb0d3b0eea53ff65839e4241cd5043e1aee7a/prototype/index.html" },
-    { "source": "/prototype/:path*", "destination": "https://cdn.jsdelivr.net/gh/kodlbegiko/Signalsafe@3cecb0d3b0eea53ff65839e4241cd5043e1aee7a/prototype/:path*" }
-  ],
-  "headers": [
-    {
-      "source": "/prototype/",
-      "headers": [
-        { "key": "Content-Type", "value": "text/html; charset=utf-8" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
-      ]
-    },
-    {
-      "source": "/prototype/index.html",
-      "headers": [
-        { "key": "Content-Type", "value": "text/html; charset=utf-8" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
-      ]
-    }
   ]
 }
