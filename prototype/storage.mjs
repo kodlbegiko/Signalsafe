@@ -2,11 +2,15 @@ import { APP_VERSION, QUESTION_BANK_VERSION } from "./questions.mjs";
 
 const STORAGE_KEY = "signalsafe:v0.2";
 const memoryStorage = new Map();
+let storageMode = "persistent";
 
 function getStorageItem(key) {
   try {
-    return window.localStorage.getItem(key);
+    const value = window.localStorage.getItem(key);
+    storageMode = "persistent";
+    return value;
   } catch (error) {
+    storageMode = "memory";
     console.warn("SignalSafe localStorage unavailable; using temporary memory storage", error);
     return memoryStorage.has(key) ? memoryStorage.get(key) : null;
   }
@@ -16,7 +20,9 @@ function setStorageItem(key, value) {
   const text = String(value);
   try {
     window.localStorage.setItem(key, text);
+    storageMode = "persistent";
   } catch (error) {
+    storageMode = "memory";
     console.warn("SignalSafe localStorage write unavailable; using temporary memory storage", error);
     memoryStorage.set(key, text);
   }
@@ -25,7 +31,9 @@ function setStorageItem(key, value) {
 function removeStorageItem(key) {
   try {
     window.localStorage.removeItem(key);
+    storageMode = "persistent";
   } catch (error) {
+    storageMode = "memory";
     console.warn("SignalSafe localStorage removal unavailable; clearing temporary memory storage", error);
     memoryStorage.delete(key);
   }
@@ -37,6 +45,7 @@ function freshState() {
     appVersion: APP_VERSION,
     questionBankVersion: QUESTION_BANK_VERSION,
     anonymousUserId: crypto.randomUUID(),
+    storageMode,
     settings: { reducedMotion: false },
     activeAssessment: null,
     sessions: [],
@@ -49,8 +58,7 @@ export function loadState() {
     const raw = getStorageItem(STORAGE_KEY);
     if (!raw) {
       const state = freshState();
-      saveState(state);
-      return state;
+      return saveState(state);
     }
     const parsed = JSON.parse(raw);
     if (!parsed || typeof parsed !== "object" || !Array.isArray(parsed.sessions)) {
@@ -61,37 +69,54 @@ export function loadState() {
       ...parsed,
       appVersion: APP_VERSION,
       questionBankVersion: QUESTION_BANK_VERSION,
+      storageMode,
       updatedAt: new Date().toISOString(),
     };
   } catch (error) {
     console.warn("SignalSafe local state reset", error);
     const state = freshState();
-    saveState(state);
-    return state;
+    return saveState(state);
   }
 }
 
 export function saveState(state) {
-  const next = { ...state, updatedAt: new Date().toISOString() };
+  const next = {
+    ...state,
+    appVersion: APP_VERSION,
+    questionBankVersion: QUESTION_BANK_VERSION,
+    storageMode,
+    updatedAt: new Date().toISOString(),
+  };
   setStorageItem(STORAGE_KEY, JSON.stringify(next));
-  return next;
+  return { ...next, storageMode };
 }
 
 export function clearState() {
   removeStorageItem(STORAGE_KEY);
   const state = freshState();
-  saveState(state);
-  return state;
+  return saveState(state);
 }
 
 export function exportState(state) {
+  const sessions = Array.isArray(state?.sessions) ? state.sessions : [];
+  const anonymousUserId = String(state?.anonymousUserId ?? "");
   return JSON.stringify(
     {
       exportedAt: new Date().toISOString(),
       schemaVersion: 1,
       appVersion: APP_VERSION,
       questionBankVersion: QUESTION_BANK_VERSION,
-      data: state,
+      anonymousUserId,
+      sessions,
+      storageMode: state?.storageMode ?? storageMode,
+      data: {
+        ...state,
+        appVersion: APP_VERSION,
+        questionBankVersion: QUESTION_BANK_VERSION,
+        anonymousUserId,
+        sessions,
+        storageMode: state?.storageMode ?? storageMode,
+      },
     },
     null,
     2,
@@ -112,10 +137,10 @@ export function importState(text) {
     ...candidate,
     appVersion: APP_VERSION,
     questionBankVersion: QUESTION_BANK_VERSION,
+    storageMode,
     activeAssessment: null,
   };
-  saveState(normalized);
-  return normalized;
+  return saveState(normalized);
 }
 
 export function sessionsToCsv(sessions) {
