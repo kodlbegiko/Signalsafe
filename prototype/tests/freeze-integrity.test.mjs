@@ -19,7 +19,7 @@ test("app and question-bank versions are consistent", () => {
   assert.equal(VERSION.appVersion, APP_VERSION);
   assert.equal(VERSION.questionBankVersion, QUESTION_BANK_VERSION);
   assert.equal(PACKAGE.version, APP_VERSION.split("-")[0]);
-  assert.equal(APP_VERSION, "0.2.3-usability-r1-hotfix3");
+  assert.equal(APP_VERSION, "0.2.4-usability-r1-hotfix4");
   assert.equal(QUESTION_BANK_VERSION, "2026-08-01-r1");
 });
 
@@ -31,7 +31,7 @@ test("production index is same-origin and service-worker assets exist", () => {
   assert.match(index, /\.\/styles\/02\.css/);
 
   const sw = read("prototype/sw.js");
-  assert.match(sw, /signalsafe-v0\.2\.3-r1-hotfix3/);
+  assert.match(sw, /signalsafe-v0\.2\.4-r1-hotfix4/);
   const refs = [...sw.matchAll(/"(\.\/[^\"]*)"/g)].map((match) => match[1]);
   assert.ok(refs.length >= 20);
   for (const ref of refs) {
