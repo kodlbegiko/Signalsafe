@@ -32,9 +32,9 @@
     <line x1="720" y1="355" x2="720" y2="605" stroke="#9cb8d8"/>
     <line x1="1060" y1="355" x2="1060" y2="605" stroke="#9cb8d8"/>
     <text x="235" y="395" text-anchor="middle" font-size="23" font-weight="700" fill="#17365d">任務 1｜90 秒快練</text>
-    <text x="550" y="395" text-anchor="middle" font-size="23" font-weight="700" fill="#17365d">任務 2｜回饋與查證</text>
-    <text x="890" y="395" text-anchor="middle" font-size="23" font-weight="700" fill="#17365d">任務 3｜個人盲點</text>
-    <text x="1275" y="395" text-anchor="middle" font-size="23" font-weight="700" fill="#17365d">任務 4｜急救模式</text>
+    <text x="550" y="395" text-anchor="middle" font-size="23" font-weight="700" fill="#17365d">任務 2｜完整能力測驗</text>
+    <text x="890" y="395" text-anchor="middle" font-size="23" font-weight="700" fill="#17365d">任務 3｜急救模式</text>
+    <text x="1275" y="395" text-anchor="middle" font-size="23" font-weight="700" fill="#17365d">任務 4｜資料操作</text>
     <text x="120" y="445" font-size="19" fill="#555">完成率：＿＿％</text><text x="120" y="480" font-size="19" fill="#555">主要問題：＿＿＿＿</text><text x="120" y="515" font-size="19" fill="#555">代表原話：＿＿＿＿</text>
     <text x="405" y="445" font-size="19" fill="#555">完成率：＿＿％</text><text x="405" y="480" font-size="19" fill="#555">主要問題：＿＿＿＿</text><text x="405" y="515" font-size="19" fill="#555">代表原話：＿＿＿＿</text>
     <text x="745" y="445" font-size="19" fill="#555">完成率：＿＿％</text><text x="745" y="480" font-size="19" fill="#555">主要問題：＿＿＿＿</text><text x="745" y="515" font-size="19" fill="#555">代表原話：＿＿＿＿</text>
