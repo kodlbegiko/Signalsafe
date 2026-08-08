@@ -1,73 +1,64 @@
 # SignalSafe 部署與技術驗收報告
 
-更新日期：2026-08-01
+更新日期：2026-08-08
 
 ## 現行結論
 
-- `0.2.0-usability-r1` 的正式啟動驗收：**撤回**
-- 原因：真實使用者 Chrome 顯示「SignalSafe 無法啟動」
-- 現行修正版：`0.2.1-usability-r1-hotfix1`
-- 技術狀態：**hotfix 已部署，等待原出錯裝置完成真實網址確認**
+**BLOCKED — DO NOT START HUMAN TESTING**
 
-事件詳情：[`INCIDENT_2026-08-01_LIVE_STARTUP.md`](INCIDENT_2026-08-01_LIVE_STARTUP.md)
-
-## 為什麼撤回原結論
-
-先前的 71 項檢查證明：
-
-- 核心 UI 與資料流程可在 Chromium 引擎執行。
-- 90 秒快練、完整測驗、急救模式及資料操作在測試環境可運作。
-- 題庫與評分自動測試通過。
-
-但先前沒有直接從正式網址完成真實瀏覽器導航。正式部署另加入兩層動態 payload 重建與解壓啟動，該部署層在真實 Chrome 中失敗。因此：
-
-> **71 PASS 不能再被解讀為正式網址驗收通過。**
+現行候選為 `0.2.3-usability-r1-hotfix3`，Question Bank `2026-08-01-r1`。GitHub 自動 QA、題庫分布、anti-gaming、匿名匯出 schema、Service Worker 資產與 Production HTTP 結構均已驗證，但本執行環境沒有可執行 JavaScript 的真實 Chrome／Chromium，因此無法完成 Round 1 前必要的 Production browser navigation 與互動 Gate。
 
 ## 現行固定值
 
-| 項目 | 固定值 |
+| 項目 | 值 |
 |---|---|
-| App | `0.2.1-usability-r1-hotfix1` |
-| 題庫 | `2026-08-01-r1` |
-| 正式網址 | https://signalsafe-v02-usability-r1.vercel.app |
-| 首次驗證網址 | https://signalsafe-v02-usability-r1.vercel.app/?v=021-hotfix1 |
-| Hotfix deployment ID | `dpl_r8gnvR3XZ5rdrikE3KpBMVN94aD6` |
-| 原實作 commit | `5933fee58eeefae737fb8cabd5a70f1f039cbcac` |
+| App candidate | `0.2.3-usability-r1-hotfix3` |
+| Question Bank | `2026-08-01-r1` |
+| Runtime Git SHA | `fd8655b18c807221feea23cd8754a665e9298414` |
+| Production URL | https://signalsafe-v02-usability-r1.vercel.app |
+| Production deployment | `dpl_ES53zV4bght2rBx4rCSJhyCTCCFN` |
+| Main CI | Actions run #18 — success |
+| Static artifact | `signalsafe-static-prototype` / `9023289006` |
+| Artifact SHA-256 | `d0645eebf408a0138296df8f04f336e5041b49cca57f7ef6871317d481f4d5d7` |
 
-## Hotfix 修正內容
+## Automated QA
 
-1. 新增瀏覽器相容層：
-   - `Array.prototype.toSorted`
-   - `Array.prototype.toReversed`
-   - `structuredClone`
-   - `crypto.randomUUID`
-2. `localStorage` 無法讀寫時，改用暫時記憶體儲存，不再讓 App 啟動失敗。
-3. Service Worker 更換 cache 名稱並改採 network-first，降低舊入口持續被快取的風險。
-4. App 版本提升為 `0.2.1-usability-r1-hotfix1`。
-5. 題庫、核心流程與評分規則沒有變更。
+- `npm run check`：PASS
+- `npm test`：PASS
+- 24 題：Pre／Training／Post 各 8 題
+- 每階段：Risk 3／Insufficient 2／Trusted 3
+- 24 個 question ID 唯一
+- Anti-gaming：PASS；全選 Risk／全選訊號／安全行動全錯／最高自信不能取得高分
+- JSON export required top-level fields：PASS
+- CSV direct-PII header audit：PASS
+- Service Worker asset references：PASS
+- `完全安全` 正向裁決防護：PASS；允許「不等於完全安全」等明確反向警語
 
-## 已完成驗證
+## Production HTTP / artifact reality check
 
-- Vercel production 狀態：`READY`
-- 正式 alias 回傳 hotfix 入口：HTTP 200
-- hotfix 入口可讀取原固定 payload
-- 以相同 14 段正式 payload 在 Chromium 重建：PASS
-- 首頁顯示「開始 90 秒快練」：PASS
-- 啟動流程未捕捉例外：PASS
-- GitHub 自動測試與題庫分布：待 hotfix PR CI 再確認
+Production deployment 為 `READY`，正式 alias 回 HTTP 200。`VERSION.json`、`bootstrap.mjs`、`sw.js` 可由正式 Production 路徑取得，版本與 CI source 一致；HTML 使用相對資產路徑，不再使用先前的 payload → decompress → eval client reconstruction。
 
-## 真實裝置 Gate
+目前 Vercel 以 rewrite 對應固定 Git SHA 的 jsDelivr 靜態資產，因此首次網路載入仍依賴外部 CDN。這不是完整 self-contained deployment，且本次沒有真實 Service Worker/offline browser 證據。
 
-在 UT001–UT004 前，必須由實際使用者在原本出錯的 Chrome 完成：
+## 尚未通過的 Freeze Gate
 
-1. 開啟 `?v=021-hotfix1` 網址。
-2. 確認首頁成功顯示。
-3. 確認頁尾版本是 `0.2.1-usability-r1-hotfix1`。
-4. 完成一題 90 秒快練。
-5. 重新整理後確認仍可開啟。
+- Desktop 真實 Production navigation
+- Mobile 真實 Production navigation
+- 90 秒快練 3 題正式 UI
+- Pre → Training → Post 24 題正式 UI
+- Pause / resume
+- Emergency UI
+- Dashboard UI
+- JSON／CSV download、JSON import、clear data 的瀏覽器互動
+- Refresh / persistence / blocked-localStorage 實機行為
+- Service Worker install → reload → offline
+- Console / uncaught runtime exception
+- Keyboard／focus／overflow／44px target 的實際 viewport 稽核
 
-只有完成上述五項，才能重新標示為 Round 1 正式凍結。
+上述任一項在 Freeze 前都不能用程式碼審查或 HTTP 200 取代。
 
-## 證據邊界
+## Evidence correction
 
-本報告只處理技術啟動與操作問題。即使 hotfix 驗收通過，也不能宣稱教育成效、長期保留或真實受騙率下降。
+先前 `71 PASS / 0 FAIL` 只代表 core/browser-engine QA，**不得解讀為 Production navigation PASS**。2026-08-01 真實 Chrome 啟動失敗事件保留於 `INCIDENT_2026-08-01_LIVE_STARTUP.md`，不得刪除或改寫成沒有發生。
+
+完整本輪稽核見 `PRE_USABILITY_FREEZE_AUDIT_2026-08-08.md`。
