@@ -4,7 +4,7 @@
     { "source": "/", "destination": "/prototype/", "permanent": false }
   ],
   "rewrites": [
-    { "source": "/prototype/", "destination": "https://cdn.jsdelivr.net/gh/kodlbegiko/Signalsafe@fd8655b18c807221feea23cd8754a665e9298414/prototype/index.html" },
-    { "source": "/prototype/:path*", "destination": "https://cdn.jsdelivr.net/gh/kodlbegiko/Signalsafe@fd8655b18c807221feea23cd8754a665e9298414/prototype/:path*" }
+    { "source": "/prototype/", "destination": "https://cdn.jsdelivr.net/gh/kodlbegiko/Signalsafe@3cecb0d3b0eea53ff65839e4241cd5043e1aee7a/prototype/index.html" },
+    { "source": "/prototype/:path*", "destination": "https://cdn.jsdelivr.net/gh/kodlbegiko/Signalsafe@3cecb0d3b0eea53ff65839e4241cd5043e1aee7a/prototype/:path*" }
   ]
 }
