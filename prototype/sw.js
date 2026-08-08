@@ -1,4 +1,4 @@
-const CACHE_NAME = "signalsafe-v0.2.3-r1-hotfix3";
+const CACHE_NAME = "signalsafe-v0.2.4-r1-hotfix4";
 const ASSETS = [
   "./",
   "./index.html",
