@@ -1,6 +1,6 @@
 # SignalSafe 複賽簡報初稿｜ANSVA
 
-更新日期：2026-08-08
+更新日期：2026-08-09
 
 > 只填入目前已有證據的內容。Round 1／2 完成率、快練中位時間、P0–P3、修改前後與使用者原話維持「待實測」。
 
@@ -133,31 +133,39 @@ Pre 8 → Training 8 → Post 8。
 
 ## 第 14 頁｜目前已做到什麼
 
-### 已完成且有工程證據
+### 已完成且有工程／靜態證據
 
-- App candidate：`0.2.3-usability-r1-hotfix3`
+- App candidate：`0.2.4-usability-r1-hotfix4`
 - Question Bank：`2026-08-01-r1`
+- Runtime source：`3cecb0d3b0eea53ff65839e4241cd5043e1aee7a`
 - 24 題、三階段 balanced 3/2/3
 - 90 秒快練、完整 assessment、急救、dashboard、data management 程式實作
-- main GitHub Actions run #18：PASS
-- anti-gaming／version／asset／export／PII 自動 gate：PASS
-- Production deployment：`dpl_ES53zV4bght2rBx4rCSJhyCTCCFN`，HTTP READY／200
+- runtime test artifact：33/33 PASS
+- main GitHub Actions run #26：PASS
+- anti-gaming／version／asset／export／PII／static Accessibility guardrails：PASS
+- Production deployment：`dpl_F7Euc7qTtUvqKKPaM6f5iwq6m5mP`，READY
+- Production HTML／JS／CSS MIME 與 VERSION/SW HTTP 結構已驗證
+- 24 題 AI-assisted semantic review 已完成；修正後統計 11 PASS／10 WARN／3 FAIL
 - UT001–UT004 匿名資料模板與 test-day checklist 已完成
 
-### 仍未取得證據
+### 目前明確 blocker
 
-- Production 真實 Chrome Desktop／Mobile 全流程
-- Service Worker offline 真實行為
-- 正式 Round 1 可用性
-- 教育成效與第 7 天保留
+- 題庫 P1：`train-04`、`train-08`、`post-08` 的 `risk`／`insufficient` 邊界需要人工反詐／教育審查
+- per-item source/rewrite basis 與人工 reviewer/status 尚未完成
+- Production 真實 Chrome Desktop／Mobile 全流程尚未完成
+- Service Worker offline 真實行為尚未完成
+- 正式 Round 1 可用性尚未開始
+- 教育成效與第 7 天保留尚無證據
 
-因此目前狀態不是 FROZEN，而是：**BLOCKED — DO NOT START HUMAN TESTING**，直到 real-browser Gate 完成。
+因此目前狀態不是 FROZEN，而是：**BLOCKED — DO NOT START HUMAN TESTING**。
 
 ## 第 15 頁｜正式可用性測試設計
 
 Round 1：UT001–UT004，找阻塞與歧義 → 集中修正 P0/P1／重複 P2 → 凍結 Round 2 → UT005–UT012。
 
 不錄臉、不收學校班級，預設不錄原始聲音；只保留匿名必要資料。
+
+前提：在招募 Round 1 前，先完成題庫 P1 人工審查與 Production real-browser Freeze Gate。
 
 ## 第 16 頁｜Round 1 結果
 
@@ -183,12 +191,13 @@ Round 1：UT001–UT004，找阻塞與歧義 → 集中修正 P0/P1／重複 P2 
 
 ## 第 18 頁｜下一步
 
-1. 完成正式 Production 的真實 Chrome／Chromium Freeze Gate
-2. Gate 全 PASS 後正式標記 Round 1 FROZEN
-3. UT001–UT004
-4. 修正並完成 UT005–UT012
-5. 回填真實 before／after、問題分級與匿名原話
-6. 再進入 20–40 人初步成效驗證與第 7 天後測
+1. 完成題庫 `risk`／`insufficient` taxonomy 人工審查並解決 3 個 P1
+2. 完成正式 Production 的真實 Chrome／Chromium Freeze Gate
+3. 兩類 Gate 全 PASS 後正式標記 Round 1 FROZEN
+4. UT001–UT004
+5. 修正並完成 UT005–UT012
+6. 回填真實 before／after、問題分級與匿名原話
+7. 再進入 20–40 人初步成效驗證與第 7 天後測
 
 ## 第 19 頁｜合作需求
 
@@ -210,8 +219,10 @@ Round 1：UT001–UT004，找阻塞與歧義 → 集中修正 P0/P1／重複 P2 
 1. 權威來源與來源卡
 2. 探索訪談限制
 3. `QUESTION_BANK_AUDIT_2026-08-08.json`
-4. `PRE_USABILITY_FREEZE_AUDIT_2026-08-08.md`
-5. 可用性測試同意與匿名流程
-6. 評分模型與 anti-gaming test
-7. 2026-08-01 Production startup incident
-8. Demo 備援與版本資訊
+4. `QUESTION_BANK_SEMANTIC_REVIEW_2026-08-08.md`
+5. `STATIC_UI_ACCESSIBILITY_AUDIT_2026-08-08.md`
+6. `PRE_USABILITY_FREEZE_AUDIT_2026-08-08.md`
+7. 可用性測試同意與匿名流程
+8. 評分模型與 anti-gaming test
+9. 2026-08-01 Production startup incident
+10. Demo 備援與版本資訊

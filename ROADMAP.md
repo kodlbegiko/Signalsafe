@@ -1,6 +1,6 @@
 # SignalSafe Roadmap
 
-更新日期：2026-08-08
+更新日期：2026-08-09
 
 ## Phase 0：Repository 收斂
 
@@ -19,31 +19,42 @@
 - [x] 急救模式固定為停手＋獨立查證
 - [x] 匯出包含研究必要欄位與版本
 - [x] memory fallback 明確標示為暫時保存
+- [x] hotfix4 static Accessibility 修正與 guardrails
 
 ## Phase 2：題庫與研究準備
 
 - [x] 24 題題庫與 Pre／Training／Post 3/2/3 平衡
 - [x] 題庫 machine-readable 自動稽核
+- [x] 24 題 AI-assisted semantic review
+- [x] Pre/Post pairing 與 estimated difficulty review
 - [x] Anti-gaming 測試
 - [x] 匿名 UT001–UT004 資料 schema／模板
 - [x] Round 1 test-day checklist
-- [ ] 人工題庫語意／難度／教育品質審核完成
+- [ ] 定義 `risk`／`insufficient` operational boundary
+- [ ] 解決 `train-04`／`train-08`／`post-08` 三個 P1
+- [ ] 完成人工反詐／教育審查與 reviewer/status
+- [ ] 補 per-item source/rewrite basis
 - [ ] 正式受測同意程序依實際場域確認
 
 ## Phase 2.5：Pre-usability Freeze Gate
 
-- [x] `0.2.3-usability-r1-hotfix3` main CI PASS
+- [x] `0.2.4-usability-r1-hotfix4` runtime tests 33/33 PASS
+- [x] main CI PASS
 - [x] Production deployment READY
-- [x] Production HTTP 與版本資產核對
+- [x] Production HTML／JS／CSS／VERSION／SW HTTP/MIME 核對
+- [x] Production HTML `text/plain` P0 已修為 `text/html; charset=utf-8`
+- [x] immutable runtime source pin = `3cecb0d...`
 - [x] 歷史 `71 PASS` 證據邊界修正
 - [x] 2026-08-01 startup incident 保留
+- [ ] Question Bank semantic P1 全數 resolved
 - [ ] Desktop 真實 Production browser Gate
 - [ ] Mobile 真實 Production browser Gate
 - [ ] 核心互動／refresh／persistence／console Gate
-- [ ] Service Worker offline Gate
+- [ ] real keyboard/focus/hitbox/overflow Gate
+- [ ] Service Worker install → reload → offline Gate
 - [ ] 正式標記 `Round 1 FROZEN`
 
-> 上述未完成前：**BLOCKED — DO NOT START HUMAN TESTING**。
+> 上述 P0/P1 未完成前：**BLOCKED — DO NOT START HUMAN TESTING**。
 
 ## Phase 3：正式可用性測試
 

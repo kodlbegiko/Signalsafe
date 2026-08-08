@@ -1,68 +1,177 @@
 # SignalSafe Pre-Usability Freeze Audit — 2026-08-08
 
+> Final static/semantic QA execution updated on 2026-08-09 (Asia/Taipei).
+
 ## Executive verdict
 
 **BLOCKED — DO NOT START HUMAN TESTING**
 
-工程與研究準備已大幅收斂，但本次執行環境沒有可執行 JavaScript 的真實 Chrome／Chromium 瀏覽器，因此不能完成正式 Production URL 的 Desktop／Mobile navigation、互動流程、refresh/persistence、Service Worker/offline 與 console/runtime exception Gate。依既定 Freeze 規則，這些 P1 Gate 未取得證據前不得開始 UT001–UT004。
+The remaining blockers are now explicit and evidence-separated:
 
-## 固定候選
+1. **P1 question-bank semantic validity:** `train-04`, `train-08`, and `post-08` are keyed `insufficient` despite containing direct high-risk requests. A human anti-fraud/pedagogy decision is required before scored human testing.
+2. **Real Production browser gates:** this execution environment still has no usable JavaScript Chrome/Chromium, so Desktop/Mobile interaction, persistence, console, real focus traversal and Service Worker offline behavior have not been proven.
 
-| 項目 | 值 |
+Static/runtime QA was materially strengthened in this mission, and a Production HTML MIME-type P0 found during HTTP verification was fixed before closeout. None of that is being used to fabricate L3/L4 browser evidence.
+
+## Current candidate
+
+| Item | Value |
 |---|---|
-| App | `0.2.3-usability-r1-hotfix3` |
+| App | `0.2.4-usability-r1-hotfix4` |
 | Question Bank | `2026-08-01-r1` |
-| Runtime source SHA | `fd8655b18c807221feea23cd8754a665e9298414` |
-| Production deployment | `dpl_ES53zV4bght2rBx4rCSJhyCTCCFN` |
+| Runtime source SHA | `3cecb0d3b0eea53ff65839e4241cd5043e1aee7a` |
+| Production config main SHA before final docs sync | `a74b714f5933c6004cc81801e27429b934cb18ad` |
+| Production deployment | `dpl_F7Euc7qTtUvqKKPaM6f5iwq6m5mP` |
 | Production URL | `https://signalsafe-v02-usability-r1.vercel.app` |
-| Main CI | Actions run #18 — `success` |
-| CI static artifact | `signalsafe-static-prototype`, artifact `9023289006` |
-| Artifact SHA-256 | `d0645eebf408a0138296df8f04f336e5041b49cca57f7ef6871317d481f4d5d7` |
+| Main CI | Actions run #26 — `success` |
+| Runtime test artifact | Actions run #22 `prototype-test-output` — 33/33 PASS |
+| Latest static artifact | `signalsafe-static-prototype`, artifact `9024665427` |
+| Static artifact SHA-256 | `895ae43f8aa3e55bb32e4dd6efc334725eba3d94bf1110cb235c9b15f52b009e` |
+| Round 1 | UT001–UT004 remain `not_started` |
 
-## 已證明
+## Evidence levels
 
-- `main` 的 `npm run check` 與 `npm test` 通過。
-- 24 題題庫：Pre／Training／Post 各 8 題；每階段 Risk 3／Insufficient 2／Trusted 3；24 個 ID 唯一。
-- Anti-gaming 自動測試：全選 Risk、全選訊號、安全行動全錯、最高自信時，安全行動正確率為 0、macro recall 不高於 1/3、Trusted false-positive rate 為 1、high-confidence error rate 至少 0.625，overall score 低於 0.5。
-- JSON 匯出頂層包含 `appVersion`、`questionBankVersion`、`anonymousUserId`、`sessions`；舊 `data` 結構仍保留相容性。
-- CSV 欄位不含姓名、學校、班級、電話、Email 或社群帳號等直接識別欄位。
-- `localStorage` 無法使用時不會因例外直接 crash，且 UI 會標示為暫時記憶模式，不再宣稱已永久保存。
-- Service Worker cache 已更新為 `signalsafe-v0.2.3-r1-hotfix3`，CI 會檢查預快取資產存在。
-- Production deployment `READY`；正式 alias 回 HTTP 200。
-- Production `VERSION.json`、`bootstrap.mjs`、`sw.js` 可讀，版本皆指向 `0.2.3-usability-r1-hotfix3`／`2026-08-01-r1`。
-- Production HTML 使用相對資產路徑，不再直接把 jsDelivr URL 寫進 HTML。
+- **L1** — source/docs/content inspection.
+- **L2** — deterministic automated tests / CI / immutable artifact evidence.
+- **L3** — local real-browser execution. **Not obtained in this mission.**
+- **L4** — Production real-browser execution. **Not obtained in this mission.**
 
-## 仍未證明／阻塞
+HTTP 200, MIME-type verification, source inspection and CI are not treated as substitutes for L3/L4.
 
-| Gate | 狀態 | 原因 |
+## Automated QA — L2
+
+The hotfix4 runtime test artifact records **33 tests / 33 pass / 0 fail**. Coverage includes:
+
+- static focus treatment and 44px compact-control targets;
+- keyboard-focusable file import;
+- ARIA selection/progress/status guardrails;
+- focus-token restoration source guardrail;
+- reduced-motion rule;
+- audited WCAG contrast pairs;
+- modular entry assets;
+- localStorage nonfatal memory fallback;
+- Service Worker asset references;
+- App/QB version consistency;
+- no positive “完全安全” verdict;
+- anti-gaming adversarial strategy;
+- JSON top-level research export fields;
+- CSV direct-identity header guardrail;
+- 24-question phase/balance/ID checks;
+- safe-action and signal-reference semantic invariants;
+- trusted-item independent verification guardrail;
+- scoring and calibration metrics.
+
+Main Actions run #26 subsequently passed after the Production MIME configuration fix.
+
+## Question-bank semantic QA — L1
+
+Full review: `QUESTION_BANK_SEMANTIC_REVIEW_2026-08-08.md`.
+
+Corrected item-level count:
+
+- **11 PASS**
+- **10 WARN**
+- **3 FAIL**
+- P0: **0**
+- P1: **3** (`train-04`, `train-08`, `post-08`)
+
+The earlier summary `19 PASS / 2 WARN / 3 FAIL` was a documentation counting error and has been corrected. The 24 per-item verdicts now reconcile exactly.
+
+### P1 semantic blockers
+
+- `train-04`: domain mismatch + same-day NT$3,000 deposit, but key is `insufficient`.
+- `train-08`: short URL + address re-entry + payment, but key is `insufficient`.
+- `post-08`: unverified recruiter + unknown installer, but key is `insufficient`.
+
+No key was silently changed. Resolving these may alter scoring/construct validity and likely requires Question Bank version review.
+
+Boundary WARNs `pre-04` and `pre-08` should be reviewed under the same operational rule distinguishing **有明顯風險** from **資訊不足**. Per-item source/rewrite basis and named human reviewer status also remain incomplete, so Issue #4 stays open.
+
+## Static UI / accessibility QA — L1/L2
+
+Full review: `STATIC_UI_ACCESSIBILITY_AUDIT_2026-08-08.md`.
+
+### Fixed in hotfix4
+
+- icon button 42×42 → 44×44;
+- compact text/back controls gain 44px minimum height;
+- focus ring strengthened to solid 3px blue;
+- JSON import input remains keyboard-focusable instead of `display:none`;
+- dynamic selections expose `aria-pressed`;
+- selection rerenders preserve a focus token;
+- Quick/Assessment/dashboard progress exposes progressbar semantics;
+- toast exposes status/alert live-region semantics;
+- orange/green audited text colors brought above 4.5:1 on their soft backgrounds;
+- memory-mode copy now warns that refresh/close can lose data;
+- offline label no longer overclaims “offline usable”;
+- decorative hero phone mockup is hidden from the accessibility tree.
+
+No source-level static UI/accessibility P0/P1 remains known after these fixes. Actual keyboard traversal, focus order, touch hitboxes, assistive-technology behavior and viewport overflow still require real browser evidence.
+
+## Production HTTP verification — not browser interaction
+
+Production deployment `dpl_F7Euc7qTtUvqKKPaM6f5iwq6m5mP` is `READY` and owns the public alias.
+
+Verified through the Production origin:
+
+- `/prototype/` → HTTP 200, correct hotfix4 HTML body, now `Content-Type: text/html; charset=utf-8`;
+- `/prototype/bootstrap.mjs` → HTTP 200, `application/javascript`;
+- `/prototype/styles/01.css` → HTTP 200, `text/css`;
+- `/prototype/VERSION.json` → App `0.2.4-usability-r1-hotfix4`, QB `2026-08-01-r1`;
+- `/prototype/sw.js` → cache `signalsafe-v0.2.4-r1-hotfix4`;
+- upstream response metadata pins runtime to Git commit `3cecb0d3b0eea53ff65839e4241cd5043e1aee7a`.
+
+### Production P0 found and fixed during this mission
+
+The first hotfix4 deployment returned the correct HTML body as `Content-Type: text/plain`. That is a deployment-level blocker because a browser may display source text rather than render the application. PR #38 added explicit HTML response headers, main CI passed, Production was redeployed, and the public alias now returns `text/html; charset=utf-8`.
+
+This is HTTP evidence only; it is not a claim that JavaScript executed successfully in a real browser.
+
+## Deployment architecture limitation
+
+The browser-visible HTML uses relative same-origin asset paths, and the old client `payload → decompress → eval` reconstruction is gone. However, Vercel still rewrites to an immutable jsDelivr upstream pinned to Git SHA `3cecb0d...`.
+
+Therefore:
+
+- first-load availability still depends on the external CDN;
+- the deployment is not fully self-contained;
+- Service Worker first-install/reload/offline behavior is not proven;
+- offline must remain blocked until real browser testing.
+
+## Freeze gates still not proven
+
+| Gate | Status | Evidence boundary |
 |---|---|---|
-| Desktop 1440×900 真實 browser navigation | BLOCKED | 本執行環境無可用 JS browser |
-| Mobile 390×844 真實 browser navigation | BLOCKED | 同上 |
-| 90 秒快練 Production UI 3 題 | BLOCKED | 必須在正式 UI 真跑 |
-| Pre → Training → Post 24 題 | BLOCKED | 必須在正式 UI 真跑 |
-| Pause / resume | BLOCKED | 必須驗證瀏覽器狀態 |
-| Emergency UI | BLOCKED | 程式碼可稽核，但未真實互動 |
-| Dashboard UI | BLOCKED | 計算單元測試 PASS，但未真實渲染 |
-| Export / import / clear UI | BLOCKED | 函式與 schema QA PASS，但未真實瀏覽器操作 |
-| Refresh / persistence | BLOCKED | `localStorage` 行為需真實瀏覽器驗證 |
-| Service Worker / offline | BLOCKED | SW 與資產存在，但未完成 install → reload → offline 測試 |
-| Console / uncaught runtime exception | BLOCKED | 無真實 browser console |
-| Accessibility / 44px target / overflow | BLOCKED | CSS 可稽核，但需實際 viewport 與鍵盤檢查 |
-| Manual question-bank semantic review | PENDING | 自動 QA 不能取代人工語意、難度與教育品質審查 |
+| Desktop 1440×900 Production navigation | **REAL BROWSER REQUIRED** | No L4 browser |
+| Mobile 390×844 Production navigation | **REAL BROWSER REQUIRED** | No L4 browser |
+| 90-second Quick Mode 3-question flow | **REAL BROWSER REQUIRED** | Source/tests cannot replace interaction |
+| Pre → Training → Post 24-question flow | **REAL BROWSER REQUIRED** | Same |
+| Pause / resume | **REAL BROWSER REQUIRED** | Browser storage/state required |
+| Emergency UI | **REAL BROWSER REQUIRED** | Source safety PASS only |
+| Dashboard UI | **REAL BROWSER REQUIRED** | Metric tests PASS only |
+| Export / import / clear UI | **REAL BROWSER REQUIRED** | Schema/source tests PASS only |
+| Refresh / persistence / blocked-storage behavior | **REAL BROWSER REQUIRED** | Real localStorage behavior required |
+| Console / uncaught runtime exception | **REAL BROWSER REQUIRED** | No browser console |
+| Service Worker install → reload → offline | **REAL BROWSER REQUIRED** | Static SW architecture only |
+| Real keyboard/focus traversal | **REAL BROWSER REQUIRED** | Static a11y guardrails only |
+| Actual 44px hitboxes / 390px overflow | **REAL BROWSER REQUIRED** | Static CSS only |
+| Human question-bank taxonomy sign-off | **HUMAN REVIEW REQUIRED** | AI review is not expert sign-off |
 
-## Deployment architecture
+## Historical evidence correction
 
-Production 現在由 Vercel 同源 URL 對應到固定 Git SHA `fd8655b...` 的靜態檔；前端 HTML 與資產引用皆為相對路徑。這消除了先前 `payload → decompress → eval` 的 client runtime reconstruction，也避免 HTML 直接載入外部 CDN URL。
+- Historical `71 PASS / 0 FAIL` means core/browser-engine QA only, not Production navigation PASS.
+- The 2026-08-01 real-Chrome startup failure incident remains preserved and must not be rewritten away.
+- Old `0.2.0`, `0.2.1-hotfix1` and `0.2.3-hotfix3` evidence remains historical; `0.2.4-hotfix4` is only the current **pre-freeze candidate**.
+- No freeze timestamp is recorded because the version is not frozen.
 
-但 Vercel rewrite 的上游仍是 jsDelivr，因此**首次網路載入仍依賴外部 CDN**。這不是完整 self-contained deployment。Service Worker 理論上可在首次成功載入後快取核心資產，但本次沒有真實 browser/offline 證據，故 offline 不得標示 PASS。
+## Required next gates
 
-## 歷史證據修正
+Before UT001–UT004:
 
-- `71 PASS / 0 FAIL` 只代表當時的 core/browser-engine QA，不能再寫成 Production navigation PASS。
-- 2026-08-01 真實 Chrome 正式啟動失敗事故保留，不刪除、不改寫。
-- `0.2.0` 與 `0.2.1-hotfix1` 的舊版本仍作為歷史事故與修正證據。
-- 本輪 `0.2.3-hotfix3` 只代表新的 pre-freeze candidate，不代表 Round 1 已凍結。
+1. Human anti-fraud/pedagogy reviewer resolves the `risk` vs `insufficient` rule and the 3 P1 items; update QB version if warranted.
+2. In a normal Chrome/Chromium browser, directly test the public Production URL for Desktop/Mobile, Quick, full assessment, pause/resume, Emergency, dashboard, export/import/clear, reload persistence, console, Service Worker offline, keyboard/focus and overflow.
+3. Only if no P0/P1 remains may `round-1-pre-freeze-candidate` become `Round 1 FROZEN` and human usability testing start.
 
-## 解除 blocker 的唯一下一個 Gate
+## Final freeze status
 
-使用一般 Chrome／Chromium 直接開正式 URL，至少完成：首頁、頁尾版本、3 題快練、refresh、完整 assessment、pause/resume、急救、資料匯出/匯入/清除、Desktop/Mobile responsive、console、Service Worker offline。全部無 P0/P1 後，才可把 `round-1-pre-freeze-candidate` 改成 `Round 1 FROZEN` 並開始 UT001–UT004。
+**BLOCKED — DO NOT START HUMAN TESTING**
