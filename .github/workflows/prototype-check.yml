@@ -36,3 +36,12 @@ jobs:
           name: prototype-test-output
           path: test-output.txt
           if-no-files-found: error
+      - name: Upload validated static prototype artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: signalsafe-static-prototype
+          path: |
+            prototype/
+            vercel.json
+          if-no-files-found: error
