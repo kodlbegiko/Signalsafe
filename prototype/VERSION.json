@@ -1,8 +1,9 @@
 {
-  "appVersion": "0.3.0-usability-r2-candidate",
+  "appVersion": "0.3.1-research-entry-consent",
   "questionBankVersion": "2026-08-10-v2-candidate",
   "studyVersion": "signalsafe-study-2026-08-r1",
+  "consentVersion": "signalsafe-consent-2026-08-10-v1",
   "targetAudience": "16–18 歲高中階段學生",
   "status": "research-ready-candidate",
-  "evidenceBoundary": "v0.3 工程候選版；不回溯修改 v0.2 Technical Freeze，且不代表教育成效成立或真人領域審查完成"
+  "evidenceBoundary": "v0.3.1 工程候選版；新增首頁研究入口與版本化研究參與確認，不回溯修改 v0.2 Technical Freeze，且不代表教育成效、IRB/倫理審查、監護人同意或真人領域審查已完成"
 }
