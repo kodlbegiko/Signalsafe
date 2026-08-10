@@ -1,0 +1,11 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { getQuestions, getQuickBank, pickQuickQuestions } from "../questions.mjs";
+const normalize=text=>String(text).toLowerCase().replace(/[\s\p{P}\p{S}]+/gu,"");
+const bigrams=text=>{const value=normalize(text),grams=new Set();for(let i=0;i<value.length-1;i++)grams.add(value.slice(i,i+2));return grams;};
+const jaccard=(a,b)=>{const A=bigrams(a),B=bigrams(b);if(!A.size&&!B.size)return 1;let hit=0;for(const item of A)if(B.has(item))hit++;return hit/(A.size+B.size-hit);};
+test("quick bank is independent from formal IDs",()=>{const formal=getQuestions(),quick=getQuickBank(),ids=new Set(formal.map(q=>q.id));assert.ok(quick.length>=9);for(const q of quick)assert.ok(!ids.has(q.id),q.id);});
+test("quick bank metadata and surfaces are unique",()=>{const quick=getQuickBank();assert.equal(new Set(quick.map(q=>q.surfaceScenario)).size,quick.length);for(const q of quick){assert.ok(q.constructId);assert.ok(q.surfaceScenario);assert.equal(q.phase,"quick");}});
+test("quick bank includes all three judgment classes",()=>assert.deepEqual(new Set(getQuickBank().map(q=>q.correctJudgment)),new Set(["risk","insufficient","trusted"])));
+test("every quick sample has all three classes",()=>{for(const seed of [1,2,3,17,99,20260810]){const sample=pickQuickQuestions(seed);assert.equal(sample.length,3);assert.deepEqual(new Set(sample.map(q=>q.correctJudgment)),new Set(["risk","insufficient","trusted"]));}});
+test("semantic duplication guard rejects formal clones",()=>{for(const q of getQuickBank())for(const f of getQuestions()){assert.notEqual(normalize(q.message),normalize(f.message),`${q.id} exactly clones ${f.id}`);assert.ok(jaccard(q.message,f.message)<0.78,`${q.id} too similar to ${f.id}`);assert.notEqual(normalize(q.actionOptions.map(x=>x.label).join("|")),normalize(f.actionOptions.map(x=>x.label).join("|")),`${q.id} clones options from ${f.id}`);}});
