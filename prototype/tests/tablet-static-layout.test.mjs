@@ -1,0 +1,10 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+const here=path.dirname(fileURLToPath(import.meta.url));const css=fs.readFileSync(path.resolve(here,"../styles/03-v03.css"),"utf8");const index=fs.readFileSync(path.resolve(here,"../index.html"),"utf8");
+test("v0.3 tablet layer is loaded",()=>assert.match(index,/styles\/03-v03\.css/));
+test("dynamic viewport and safe area are present",()=>{assert.match(css,/100dvh/);assert.match(css,/safe-area-inset-top/);assert.match(css,/safe-area-inset-bottom/);});
+test("content-based tablet breakpoints cover portrait and landscape",()=>{assert.match(css,/min-width:600px/);assert.match(css,/max-width:899px/);assert.match(css,/min-width:900px/);assert.match(css,/max-width:1199px/);assert.match(css,/\.question-layout\{grid-template-columns:1fr/);assert.match(css,/40%/);assert.match(css,/60%/);});
+test("tablet controls retain 44px minimum touch target",()=>assert.match(css,/min-height:44px/));

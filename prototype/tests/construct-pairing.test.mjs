@@ -1,0 +1,5 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { getPairingTable, getQuestionById, getQuestionsByPhase } from "../questions.mjs";
+test("pre/post have eight explicit parallel construct pairs",()=>{const pairs=getPairingTable();assert.equal(pairs.length,8);assert.equal(getQuestionsByPhase("pre").length,8);assert.equal(getQuestionsByPhase("post").length,8);for(const pair of pairs){const pre=getQuestionById(pair.preQuestionId),post=getQuestionById(pair.postQuestionId);assert.equal(pre.phase,"pre");assert.equal(post.phase,"post");assert.equal(pre.constructId,pair.constructId);assert.equal(post.constructId,pair.constructId);assert.notEqual(pre.surfaceScenario,post.surfaceScenario);assert.notEqual(pre.message,post.message);}});
+test("all formal questions carry construct and surface metadata",()=>{for(const phase of ["pre","training","post"])for(const q of getQuestionsByPhase(phase)){assert.ok(q.constructId,`${q.id} constructId`);assert.ok(q.surfaceScenario,`${q.id} surfaceScenario`);assert.ok(q.formVersion,`${q.id} formVersion`);}});

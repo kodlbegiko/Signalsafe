@@ -1,7 +1,8 @@
 {
-  "appVersion": "0.2.4-usability-r1-hotfix4",
-  "questionBankVersion": "2026-08-01-r1",
+  "appVersion": "0.3.0-usability-r2-candidate",
+  "questionBankVersion": "2026-08-10-v2-candidate",
+  "studyVersion": "signalsafe-study-2026-08-r1",
   "targetAudience": "16–18 歲高中階段學生",
-  "status": "round-1-pre-freeze-candidate",
-  "evidenceBoundary": "可用性測試原型，不代表教育成效成立"
+  "status": "research-ready-candidate",
+  "evidenceBoundary": "v0.3 工程候選版；不回溯修改 v0.2 Technical Freeze，且不代表教育成效成立或真人領域審查完成"
 }
