@@ -6,7 +6,7 @@ import POST_A from "./question-data/post-a.mjs";
 import POST_B from "./question-data/post-b.mjs";
 import QUICK_BANK from "./question-data/quick.mjs";
 
-export const APP_VERSION = "0.3.0-usability-r2-candidate";
+export const APP_VERSION = "0.3.1-research-entry-consent";
 export const QUESTION_BANK_VERSION = "2026-08-10-v2-candidate";
 export const STUDY_VERSION = "signalsafe-study-2026-08-r1";
 
