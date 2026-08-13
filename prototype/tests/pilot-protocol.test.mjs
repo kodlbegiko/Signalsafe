@@ -34,7 +34,7 @@ test("homepage layer links the pilot guide and exposes eligibility without repla
 
 test("version boundaries keep question bank, study, consent and pilot protocol fixed while app advances", () => {
   const version = JSON.parse(fs.readFileSync(new URL("../VERSION.json", import.meta.url), "utf8"));
-  assert.equal(version.appVersion, "0.3.3-market-feasibility");
+  assert.equal(version.appVersion, "0.3.4-research-export-fix");
   assert.equal(version.questionBankVersion, "2026-08-10-v2-candidate");
   assert.equal(version.studyVersion, "signalsafe-study-2026-08-r1");
   assert.equal(version.consentVersion, "signalsafe-consent-2026-08-10-v1");

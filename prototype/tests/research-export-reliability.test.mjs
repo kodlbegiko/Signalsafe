@@ -61,10 +61,10 @@ test("research export self-validates 24 responses with 8/8/8 phases",()=>{
   assert.equal(parsed.pilotProtocolVersion,"signalsafe-pilot-2026-08-13-v1");
 });
 
-test("research export rejects incomplete response sets",()=>{
+test("production completeness validator rejects incomplete response sets",()=>{
   const value=session();
   value.responses.pop();
-  assert.throws(()=>buildResearchExport(value),/24 responses/);
+  assert.throws(()=>validateResearchExportJson(buildResearchExport(value)),/24 responses/);
 });
 
 test("research privacy guard fails closed on forbidden identity keys",()=>{
