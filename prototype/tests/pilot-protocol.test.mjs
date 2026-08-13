@@ -32,13 +32,14 @@ test("homepage layer links the pilot guide and exposes eligibility without repla
   assert.ok(prior.includes("/prototype/?mode=research"));
 });
 
-test("version boundaries keep question bank, study and consent fixed while app/pilot advance", () => {
+test("version boundaries keep question bank, study, consent and pilot protocol fixed while app advances", () => {
   const version = JSON.parse(fs.readFileSync(new URL("../VERSION.json", import.meta.url), "utf8"));
-  assert.equal(version.appVersion, "0.3.2-pilot-protocol");
+  assert.equal(version.appVersion, "0.3.3-market-feasibility");
   assert.equal(version.questionBankVersion, "2026-08-10-v2-candidate");
   assert.equal(version.studyVersion, "signalsafe-study-2026-08-r1");
   assert.equal(version.consentVersion, "signalsafe-consent-2026-08-10-v1");
   assert.equal(version.pilotProtocolVersion, PILOT_PROTOCOL_VERSION);
+  assert.equal(version.marketFeasibilityVersion, "signalsafe-market-feasibility-2026-08-13-v1");
 });
 
 test("bootstrap and service worker ship pilot assets", () => {
