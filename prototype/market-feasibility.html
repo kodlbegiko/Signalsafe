@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SignalSafe｜市場可行性評估</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;color:#172033;background:#f7f9fc}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1500px;margin:auto;padding:28px}.head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:22px}.head h1{margin:0 0 8px;font-size:30px}.head p{margin:0;max-width:840px;line-height:1.7;color:#526174}.tag{background:#e8f1ff;color:#0f5bd7;padding:8px 12px;border-radius:999px;font-weight:700;white-space:nowrap}.notice{padding:14px 16px;background:#fff7db;border:1px solid #ecd991;border-radius:14px;margin-bottom:20px;line-height:1.6}.grid{display:grid;grid-template-columns:repeat(6,minmax(210px,1fr));gap:12px;overflow-x:auto}.col{min-width:210px}.title{background:#319be8;color:white;padding:18px 14px;border-radius:12px 12px 0 0;min-height:92px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:21px;font-weight:800}.cell{padding:18px;border-radius:0 0 12px 12px;min-height:310px}.current{background:#cde8fb}.upgraded{background:#d7f3db;margin-top:12px;border-radius:12px;min-height:310px}.label{display:inline-block;font-size:12px;font-weight:800;padding:5px 8px;border-radius:999px;background:white;margin-bottom:10px}.cell ul{padding-left:20px;margin:0}.cell li{margin:0 0 12px;line-height:1.55}.model{margin-top:24px;background:white;border-radius:16px;padding:20px}.model h2{margin-top:0}.model-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.model-card{background:#f1f6ff;border-radius:12px;padding:16px}.loop{font-weight:800;color:#0f5bd7;font-size:20px}.links{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}.links a{color:#0f5bd7;font-weight:700;text-decoration:none}@media(max-width:800px){.wrap{padding:18px}.head{display:block}.tag{display:inline-block;margin-top:12px}.model-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header class="head"><div><h1>評估創意構想的市場可行性</h1><p>用六項構面檢視 SignalSafe 現況與升級方向。藍色區塊是目前方案的真實狀態與缺口，綠色區塊是下一階段要驗證與實作的升級方案。</p></div><span class="tag" id="version"></span></header>
+  <div class="notice"><strong>證據邊界：</strong>本頁的商業模式與合作方式是下一階段假設，不代表學校、政府或企業已承諾採購，也不代表教育成效已被正式證實。</div>
+  <section class="grid" id="grid" aria-label="市場可行性六構面"></section>
+  <section class="model"><h2>升級後的整體策略</h2><div class="model-grid"><div class="model-card"><strong>學生端</strong><p>核心訓練維持低門檻或免費，優先累積真實使用與研究證據。</p></div><div class="model-card"><strong>學校端 B2B2C</strong><p>未來驗證課程導入、教師資源與匿名群體能力洞察的授權需求。</p></div><div class="model-card"><strong>政府／企業合作</strong><p>探索政府、金融、電信與 CSR 計畫支援校園導入的可能性。</p></div></div><p class="loop">Threat → Training → Measurement → Update</p><div class="links"><a href="/prototype/">回 SignalSafe</a><a href="/prototype/test-guide.html">原型測試說明</a></div></section>
+</main>
+<script type="module">
+import { MARKET_FEASIBILITY_VERSION, MARKET_FEASIBILITY_DIMENSIONS } from './market-feasibility.mjs';
+document.querySelector('#version').textContent=MARKET_FEASIBILITY_VERSION;
+document.querySelector('#grid').innerHTML=MARKET_FEASIBILITY_DIMENSIONS.map(d=>`<article class="col"><div class="title">${d.title}</div><div class="cell current"><span class="label">目前方案</span><ul>${d.current.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="cell upgraded"><span class="label">升級後方案</span><ul>${d.upgraded.map(x=>`<li>${x}</li>`).join('')}</ul></div></article>`).join('');
+</script>
+</body>
+</html>
