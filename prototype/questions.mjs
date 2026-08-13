@@ -38,15 +38,37 @@ const META = {
 };
 
 function annotate(question) {
-  const meta=META[question.id];
-  if(!meta) throw new Error(`Missing research metadata for ${question.id}`);
-  return {...question,...meta};
+  const meta = META[question.id];
+  if (!meta) throw new Error(`Missing construct metadata for ${question.id}`);
+  return { ...question, ...meta };
 }
-const ALL=[...PRE_A,...TRAINING_A,...POST_A].map(annotate);
-export function getQuestions(){return ALL.map(q=>structuredClone(q));}
-export function getQuestionsByPhase(phase){return ALL.filter(q=>q.phase===phase).map(q=>structuredClone(q));}
-export function getQuestionById(id){const q=ALL.find(item=>item.id===id);return q?structuredClone(q):null;}
-export function getQuickBank(){return QUICK_BANK.map(q=>structuredClone(q));}
-export function getPairingTable(){return Object.entries(META).filter(([id])=>id.startsWith("pre-")).map(([preId,meta])=>{const post=Object.entries(META).find(([id,m])=>id.startsWith("post-")&&m.pairId===meta.pairId);return{pairId:meta.pairId,constructId:meta.constructId,preId,preSurfaceScenario:meta.surfaceScenario,postId:post[0],postSurfaceScenario:post[1].surfaceScenario};});}
-function seededRandom(seed){let state=(Number(seed)||0)>>>0||0x9e3779b9;return()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296;};}
-export function pickQuickQuestions(seed=Date.now()){const rand=seededRandom(seed),groups=["risk","insufficient","trusted"].map(j=>QUICK_BANK.filter(q=>q.correctJudgment===j));return groups.map(group=>structuredClone(group[Math.floor(rand()*group.length)]));}
+const PRE = [...PRE_A, ...PRE_B].map(annotate);
+const TRAINING = [...TRAINING_A, ...TRAINING_B].map(annotate);
+const POST = [...POST_A, ...POST_B].map(annotate);
+const FORMAL_QUESTIONS = [...PRE, ...TRAINING, ...POST];
+const QUICK_QUESTIONS = QUICK_BANK.map((question) => ({ ...question }));
+
+export const PAIRING_TABLE = [
+  { pairId:"pair-01", constructId:"credential-protection", preQuestionId:"pre-01", postQuestionId:"post-03" },
+  { pairId:"pair-02", constructId:"official-channel", preQuestionId:"pre-02", postQuestionId:"post-02" },
+  { pairId:"pair-03", constructId:"payment-stop", preQuestionId:"pre-03", postQuestionId:"post-01" },
+  { pairId:"pair-04", constructId:"independent-verification", preQuestionId:"pre-04", postQuestionId:"post-08" },
+  { pairId:"pair-05", constructId:"sensitive-data-protection", preQuestionId:"pre-05", postQuestionId:"post-04" },
+  { pairId:"pair-06", constructId:"official-workflow", preQuestionId:"pre-06", postQuestionId:"post-07" },
+  { pairId:"pair-07", constructId:"known-platform-verification", preQuestionId:"pre-07", postQuestionId:"post-05" },
+  { pairId:"pair-08", constructId:"mixed-signal-verification", preQuestionId:"pre-08", postQuestionId:"post-06" },
+];
+
+function clone(value) { return typeof structuredClone === "function" ? structuredClone(value) : JSON.parse(JSON.stringify(value)); }
+export function getQuestions() { return FORMAL_QUESTIONS.map(clone); }
+export function getQuickBank() { return QUICK_QUESTIONS.map(clone); }
+export function getQuestionsByPhase(phase) { return FORMAL_QUESTIONS.filter((question) => question.phase === phase).map(clone); }
+export function getQuestionById(id) { const found = [...FORMAL_QUESTIONS, ...QUICK_QUESTIONS].find((question) => question.id === id); return found ? clone(found) : null; }
+export function getPairingTable() { return PAIRING_TABLE.map(clone); }
+function seededRandom(seed) { let state = Number(seed) >>> 0; return () => { state = (state * 1664525 + 1013904223) >>> 0; return state / 4294967296; }; }
+function shuffle(items, seed) { const random = seededRandom(seed || Date.now()); const output = [...items]; for (let index = output.length - 1; index > 0; index -= 1) { const swap = Math.floor(random() * (index + 1)); [output[index], output[swap]] = [output[swap], output[index]]; } return output; }
+export function pickQuickQuestions(seed = Date.now()) {
+  const shuffled = shuffle(QUICK_QUESTIONS, Number(seed) || Date.now());
+  const picks = ["risk", "insufficient", "trusted"].map((judgment) => shuffled.find((question) => question.correctJudgment === judgment)).filter(Boolean);
+  return (picks.length === 3 ? picks : shuffled.slice(0, 3)).map(clone);
+}
