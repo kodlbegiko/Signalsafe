@@ -1,10 +1,10 @@
 {
   "name": "signalsafe-local-prototype",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "type": "module",
   "scripts": {
     "test": "node --test prototype/tests/*.test.mjs",
-    "check": "node --check prototype/compat.mjs && node --check prototype/bootstrap.mjs && node --check prototype/questions.mjs && node --check prototype/research.mjs && node --check prototype/research-consent.mjs && node --check prototype/research-consent-state.mjs && node --check prototype/scoring.mjs && node --check prototype/storage.mjs && for file in prototype/app-parts/*.js prototype/question-data/*.mjs; do node --check \"$file\"; done"
+    "check": "node --check prototype/compat.mjs && node --check prototype/bootstrap.mjs && node --check prototype/questions.mjs && node --check prototype/research.mjs && node --check prototype/research-consent.mjs && node --check prototype/research-consent-state.mjs && node --check prototype/pilot-protocol.mjs && node --check prototype/scoring.mjs && node --check prototype/storage.mjs && for file in prototype/app-parts/*.js prototype/question-data/*.mjs; do node --check \"$file\"; done"
   }
 }
