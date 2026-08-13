@@ -1,11 +1,12 @@
 {
-  "appVersion": "0.3.2-pilot-protocol",
+  "appVersion": "0.3.3-market-feasibility",
   "questionBankVersion": "2026-08-10-v2-candidate",
   "studyVersion": "signalsafe-study-2026-08-r1",
   "consentVersion": "signalsafe-consent-2026-08-10-v1",
   "pilotProtocolVersion": "signalsafe-pilot-2026-08-13-v1",
+  "marketFeasibilityVersion": "signalsafe-market-feasibility-2026-08-13-v1",
   "testingPhase": "pilot",
   "targetAudience": "16–18 歲高中階段學生",
-  "status": "pilot-ready-candidate",
-  "evidenceBoundary": "v0.3.2 將原型測試情境、任務、場域、招募條件與主持人提示規則版本化；題庫、Study 與 Consent 未變更，且不代表教育成效、IRB/倫理審查、監護人同意、實體 iPad 或真人領域審查已完成"
+  "status": "pilot-ready-market-hypothesis",
+  "evidenceBoundary": "v0.3.3 將六構面市場可行性評估、混合式商業模式假設、可持續更新循環與團隊資源缺口版本化；題庫、Study、Consent 與 Pilot protocol 未變更。商業模式與合作方式仍待 Pilot、採購者訪談與真實合作證據驗證，不代表教育成效、採購承諾、IRB/倫理審查、監護人同意、實體 iPad 或真人領域審查已完成"
 }
