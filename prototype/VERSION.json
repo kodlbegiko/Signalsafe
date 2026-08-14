@@ -1,12 +1,13 @@
 {
-  "appVersion": "0.3.4-research-export-fix",
+  "appVersion": "2.0.0-intent-safety-research",
   "questionBankVersion": "2026-08-10-v2-candidate",
   "studyVersion": "signalsafe-study-2026-08-r1",
   "consentVersion": "signalsafe-consent-2026-08-10-v1",
   "pilotProtocolVersion": "signalsafe-pilot-2026-08-13-v1",
+  "v2ProtocolVersion": "signalsafe-v2-usability-2026-08-14",
   "marketFeasibilityVersion": "signalsafe-market-feasibility-2026-08-13-v1",
-  "testingPhase": "pilot",
+  "testingPhase": "v2-implementation-candidate",
   "targetAudience": "16–18 歲高中階段學生",
-  "status": "pilot-ready-research-export-hotfix",
-  "evidenceBoundary": "v0.3.4 只修復 Research JSON 匯出可靠性、schema 自我驗證、錯誤可觀察性與備援匯出；題庫、Study、Consent、Pilot protocol 與市場可行性策略未變更。此版本不代表教育成效、IRB/倫理審查、監護人同意、實體 iPad、VoiceOver 或真人領域審查已完成"
+  "status": "v2-intent-safety-research-candidate",
+  "evidenceBoundary": "V2 更新產品資訊架構、首頁 CTA、事件當下安全流程、一般訓練回饋、能力頁與隱形研究基礎設施；保留既有正式題庫、Consent、研究匯出與 v0.3.x 研究證據。此版本不代表教育成效、IRB/倫理審查、監護人同意、實體裝置、VoiceOver 或真人領域審查已完成。"
 }
