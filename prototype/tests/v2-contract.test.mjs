@@ -27,6 +27,13 @@ test('consumer V2 exposes emergency and training intent, not a research-mode hom
   assert.match(source, /SignalSafe 不會告訴你「100% 安全」/);
 });
 
+test('V2 runtime assets are included in the offline cache manifest', async () => {
+  const sw = await read('../sw.js');
+  for (const asset of ['./study-v2.mjs','./research-control.html','./styles/07-v2.css','./app-parts/app-v2.js']) {
+    assert.ok(sw.includes(`"${asset}"`), `missing V2 service-worker asset: ${asset}`);
+  }
+});
+
 test('usability tasks are independent records rather than a sequential unlock chain', () => {
   assert.equal(V2_RESEARCH_TASKS.length, 8);
   assert.deepEqual(V2_TASK_STATUSES, ['PASS','PARTIAL','FAIL','NOT_ATTEMPTED']);
