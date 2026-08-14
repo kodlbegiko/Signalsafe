@@ -1,4 +1,4 @@
-export const SIGNALSAFE_V2_VERSION = "2.0.0-intent-safety-research";
+export const SIGNALSAFE_V2_VERSION = "2.0.1-context-home-ux";
 export const SIGNALSAFE_V2_PROTOCOL_VERSION = "signalsafe-v2-usability-2026-08-14";
 
 export const V2_STUDY_ASSIGNMENTS = Object.freeze({

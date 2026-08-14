@@ -1,0 +1,66 @@
+/* SignalSafe V2.0.1 — context persistence + homepage intent separation */
+.v201-intent-stack { display: grid; gap: 30px; margin-top: 8px; }
+.v201-safety-zone, .v201-training-zone { margin: 0; }
+.v201-zone-label { margin: 0 0 6px !important; font-size: 12px !important; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.v201-safety-zone .v201-zone-label { color: var(--v2-safety-dark); }
+.v201-training-zone .v201-zone-label { color: #9bb8da; }
+.v201-zone-copy h2 { margin-top: 0; }
+.v201-training-zone { grid-template-columns: minmax(0,1fr) auto; grid-template-areas: "copy actions" "resume resume"; row-gap: 20px; }
+.v201-training-zone > .v201-zone-copy { grid-area: copy; }
+.v201-training-zone > .v201-training-actions { grid-area: actions; }
+.v201-resume-training { grid-area: resume; display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.16); }
+.v201-resume-training > div { display: grid; gap: 4px; }
+.v201-resume-training span { color: #9bb8da; font-size: 12px; font-weight: 760; }
+.v201-resume-training strong { color: #fff; font-size: 15px; }
+.v201-resume-training .text-button { color: #fff; justify-self: end; }
+.v201-home + .v201-intent-stack { margin-top: 0; }
+
+.v201-research-question { position: relative; }
+.v201-assessment-scenario { scroll-margin-top: 110px; outline: none; }
+.v201-assessment-scenario:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+.v201-scenario-sticky { position: sticky; top: max(10px, env(safe-area-inset-top)); z-index: 55; min-height: 72px; display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 14px; padding: 11px 13px; border: 1px solid #c8d6e5; border-radius: 15px; background: rgba(255,255,255,.97); box-shadow: 0 12px 32px rgba(13,37,65,.13); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.v201-scenario-sticky[hidden] { display: none !important; }
+.v201-scenario-sticky__copy { min-width: 0; display: grid; gap: 2px; }
+.v201-scenario-sticky__copy > span { color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.v201-scenario-sticky__copy > strong, .v201-scenario-sticky__copy > small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.v201-scenario-sticky__copy > strong { color: var(--ink); font-size: 14px; }
+.v201-scenario-sticky__copy > small { color: var(--muted); font-size: 12px; }
+.v201-scenario-sticky__open { min-height: 44px; border: 1px solid #bfd0e4; border-radius: 11px; background: #fff; color: var(--blue-dark); padding: 0 12px; font-weight: 760; }
+.v201-scenario-sticky__open:hover { background: var(--blue-soft); }
+.v201-scenario-sticky__open:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.v201-context-reminder { margin: -4px 0 0; padding: 10px 12px; border-radius: 12px; background: var(--soft); color: var(--muted); font-size: 13px; line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .v201-intent-stack { gap: 28px; }
+  .v201-training-zone { grid-template-columns: 1fr; grid-template-areas: "copy" "actions" "resume"; }
+  .v201-training-actions { justify-content: flex-start; }
+  .v201-resume-training { grid-template-columns: 1fr auto; }
+}
+
+@media (max-width: 620px) {
+  .v201-intent-stack { gap: 26px; }
+  .v201-safety-zone, .v201-training-zone { border-radius: 20px; }
+  .v201-training-actions { display: grid; grid-template-columns: 1fr; width: 100%; }
+  .v201-training-actions .button { width: 100%; }
+  .v201-resume-training { grid-template-columns: 1fr; gap: 10px; }
+  .v201-resume-training .text-button { justify-self: start; }
+  .v201-scenario-sticky { top: max(8px, env(safe-area-inset-top)); min-height: 68px; grid-template-columns: minmax(0,1fr) auto; gap: 8px; padding: 9px 10px; border-radius: 13px; }
+  .v201-scenario-sticky__copy > small { max-width: 100%; }
+  .v201-scenario-sticky__open { min-height: 44px; padding-inline: 10px; font-size: 13px; }
+  .v201-assessment-scenario { scroll-margin-top: 92px; }
+}
+
+@media (max-width: 390px) {
+  .v201-scenario-sticky { grid-template-columns: minmax(0,1fr) auto; }
+  .v201-scenario-sticky__copy > small { display: none; }
+  .v201-scenario-sticky__copy > strong { font-size: 13px; }
+  .v201-scenario-sticky__open { padding-inline: 9px; }
+}
+
+@media (min-width: 901px) {
+  .v201-home { padding-bottom: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v201-scenario-sticky { backdrop-filter: none; -webkit-backdrop-filter: none; }
+}

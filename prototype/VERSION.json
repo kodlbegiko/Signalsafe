@@ -1,14 +1,14 @@
 {
   "appVersion": "0.3.4-research-export-fix",
-  "productVersion": "2.0.0-intent-safety-research",
+  "productVersion": "2.0.1-context-home-ux",
   "questionBankVersion": "2026-08-10-v2-candidate",
   "studyVersion": "signalsafe-study-2026-08-r1",
   "consentVersion": "signalsafe-consent-2026-08-10-v1",
   "pilotProtocolVersion": "signalsafe-pilot-2026-08-13-v1",
   "v2ProtocolVersion": "signalsafe-v2-usability-2026-08-14",
   "marketFeasibilityVersion": "signalsafe-market-feasibility-2026-08-13-v1",
-  "testingPhase": "v2-implementation-candidate",
+  "testingPhase": "v2.0.1-ux-iteration-candidate",
   "targetAudience": "16–18 歲高中階段學生",
-  "status": "v2-intent-safety-research-candidate",
-  "evidenceBoundary": "正式研究 appVersion、題庫、Study、Consent、Pilot protocol 與既有研究匯出維持凍結；productVersion 2.0.0 只代表 V2 產品資訊架構、首頁 CTA、事件當下安全流程、一般訓練回饋、能力頁與隱形 usability research infrastructure。此版本不代表教育成效、IRB/倫理審查、監護人同意、實體裝置、VoiceOver 或真人領域審查已完成。"
+  "status": "v2.0.1-context-home-ux-candidate",
+  "evidenceBoundary": "正式研究 appVersion、題庫、Study、Consent、Pilot protocol 與既有研究匯出維持凍結；productVersion 2.0.1 只新增完整能力訓練的 progressive sticky scenario context、首頁 Safety/Training intent separation、Resume placement、相關 usability events 與 responsive/accessibility refinement。未改變 response schema、question IDs、pairing、correct answers、scoring semantics、confidence values 或正式研究版本。此版本不代表教育成效、IRB/倫理審查、監護人同意、實體裝置、VoiceOver 或真人領域審查已完成。"
 }
