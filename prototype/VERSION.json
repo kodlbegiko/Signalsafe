@@ -1,5 +1,6 @@
 {
-  "appVersion": "2.0.0-intent-safety-research",
+  "appVersion": "0.3.4-research-export-fix",
+  "productVersion": "2.0.0-intent-safety-research",
   "questionBankVersion": "2026-08-10-v2-candidate",
   "studyVersion": "signalsafe-study-2026-08-r1",
   "consentVersion": "signalsafe-consent-2026-08-10-v1",
@@ -9,5 +10,5 @@
   "testingPhase": "v2-implementation-candidate",
   "targetAudience": "16–18 歲高中階段學生",
   "status": "v2-intent-safety-research-candidate",
-  "evidenceBoundary": "V2 更新產品資訊架構、首頁 CTA、事件當下安全流程、一般訓練回饋、能力頁與隱形研究基礎設施；保留既有正式題庫、Consent、研究匯出與 v0.3.x 研究證據。此版本不代表教育成效、IRB/倫理審查、監護人同意、實體裝置、VoiceOver 或真人領域審查已完成。"
+  "evidenceBoundary": "正式研究 appVersion、題庫、Study、Consent、Pilot protocol 與既有研究匯出維持凍結；productVersion 2.0.0 只代表 V2 產品資訊架構、首頁 CTA、事件當下安全流程、一般訓練回饋、能力頁與隱形 usability research infrastructure。此版本不代表教育成效、IRB/倫理審查、監護人同意、實體裝置、VoiceOver 或真人領域審查已完成。"
 }
