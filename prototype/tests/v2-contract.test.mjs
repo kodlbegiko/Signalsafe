@@ -88,8 +88,8 @@ test('moderator control surfaces scenario script, participant wording, lifecycle
 
 test('test guide uses dual scenarios and does not send participants into Research Mode', async () => {
   const guide = await read('../test-guide.html');
-  assert.match(guide, /Scenario A｜老師要求進行防詐訓練/);
-  assert.match(guide, /Scenario B｜收到疑似帳號異常通知/);
+  assert.match(guide, /B\. 情境一：老師要求進行防詐訓練/);
+  assert.match(guide, /C\. 情境二：收到疑似帳號異常通知/);
   assert.match(guide, /T01/);
   assert.match(guide, /T08/);
   assert.match(guide, /前一 Task FAIL 不得阻塞下一 Task/);
