@@ -1,7 +1,33 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "redirects": [
-    { "source": "/", "destination": "/prototype/", "permanent": false }
+  "rewrites": [
+    { "source": "/", "destination": "/prototype/index.html" },
+    { "source": "/VERSION.json", "destination": "/prototype/VERSION.json" },
+    { "source": "/manifest.webmanifest", "destination": "/prototype/manifest.webmanifest" },
+    { "source": "/icon.svg", "destination": "/prototype/icon.svg" },
+    { "source": "/sw.js", "destination": "/prototype/sw.js" },
+    { "source": "/test-guide.html", "destination": "/prototype/test-guide.html" },
+    { "source": "/research-control.html", "destination": "/prototype/research-control.html" },
+    { "source": "/market-feasibility.html", "destination": "/prototype/market-feasibility.html" },
+    { "source": "/bootstrap.mjs", "destination": "/prototype/bootstrap.mjs" },
+    { "source": "/compat.mjs", "destination": "/prototype/compat.mjs" },
+    { "source": "/questions.mjs", "destination": "/prototype/questions.mjs" },
+    { "source": "/scoring.mjs", "destination": "/prototype/scoring.mjs" },
+    { "source": "/storage.mjs", "destination": "/prototype/storage.mjs" },
+    { "source": "/research.mjs", "destination": "/prototype/research.mjs" },
+    { "source": "/research-consent.mjs", "destination": "/prototype/research-consent.mjs" },
+    { "source": "/research-consent-state.mjs", "destination": "/prototype/research-consent-state.mjs" },
+    { "source": "/pilot-protocol.mjs", "destination": "/prototype/pilot-protocol.mjs" },
+    { "source": "/market-feasibility.mjs", "destination": "/prototype/market-feasibility.mjs" },
+    { "source": "/study-v2.mjs", "destination": "/prototype/study-v2.mjs" },
+    { "source": "/study-fixtures.mjs", "destination": "/prototype/study-fixtures.mjs" },
+    { "source": "/styles/:path*", "destination": "/prototype/styles/:path*" },
+    { "source": "/app-parts/:path*", "destination": "/prototype/app-parts/:path*" },
+    { "source": "/question-data/:path*", "destination": "/prototype/question-data/:path*" }
+  ],
+  "headers": [
+    { "source": "/sw.js", "headers": [{ "key": "Service-Worker-Allowed", "value": "/" }, { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] },
+    { "source": "/VERSION.json", "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] }
   ]
 }
