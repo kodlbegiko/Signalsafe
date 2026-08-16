@@ -1,14 +1,16 @@
 {
   "appVersion": "0.3.4-research-export-fix",
-  "productVersion": "2.0.1-context-home-ux",
+  "productVersion": "2.1.0",
   "questionBankVersion": "2026-08-10-v2-candidate",
   "studyVersion": "signalsafe-study-2026-08-r1",
   "consentVersion": "signalsafe-consent-2026-08-10-v1",
   "pilotProtocolVersion": "signalsafe-pilot-2026-08-13-v1",
   "v2ProtocolVersion": "signalsafe-v2-usability-2026-08-16",
-  "marketFeasibilityVersion": "signalsafe-market-feasibility-2026-08-13-v1",
-  "testingPhase": "v2.0.1-dual-scenario-usability-protocol",
+  "researchEventSchemaVersion": "signalsafe-research-events-v1",
+  "studyFixtureVersion": "signalsafe-study-fixtures-v1",
+  "pwaCacheVersion": "signalsafe-product-2.1.0",
+  "testingPhase": "v2.1-production-integrity-safety-measurement",
   "targetAudience": "16–18 歲高中階段學生",
-  "status": "v2.0.1-context-home-ux-candidate",
-  "evidenceBoundary": "正式研究 appVersion、題庫、Study、Consent、Pilot protocol 與既有研究匯出維持凍結；productVersion 2.0.1 不變。本次只更新 usability protocol：以『老師要求進行防詐訓練』與『收到疑似帳號異常通知』兩個情境承載 T01–T08，並明確要求任務彼此獨立、必要時使用 reset／seeded state／deep link 建立起始條件。未改變 response schema、question IDs、pairing、correct answers、scoring semantics、confidence values 或正式研究版本。"
+  "status": "v2.1-production-integrity-candidate",
+  "evidenceBoundary": "正式研究 appVersion 0.3.4-research-export-fix、題庫 2026-08-10-v2-candidate、Study、Consent、Pilot protocol、response schema、question IDs、pairing、correct answers、scoring semantics 與 confidence values 維持凍結。V2.1 只調整產品部署、PWA cache、consumer UX、安全 recovery、measurement semantics、session-scoped usability context、synthetic fixtures、research event/control infrastructure 與 accessibility。"
 }
