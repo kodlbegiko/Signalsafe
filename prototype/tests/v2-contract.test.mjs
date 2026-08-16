@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { V2_RESEARCH_TASKS, V2_TASK_STATUSES, buildV2StudyLink } from '../study-v2.mjs';
+import { V2_RESEARCH_SCENARIOS, V2_RESEARCH_TASKS, V2_TASK_STATUSES, buildV2StudyLink, SIGNALSAFE_V2_PROTOCOL_VERSION } from '../study-v2.mjs';
 
 const read = (path) => readFile(new URL(path, import.meta.url), 'utf8');
 
@@ -34,11 +34,33 @@ test('V2 runtime assets are included in the offline cache manifest', async () =>
   }
 });
 
+test('usability protocol defines exactly two intent-based scenarios', () => {
+  assert.equal(SIGNALSAFE_V2_PROTOCOL_VERSION, 'signalsafe-v2-usability-2026-08-16');
+  assert.equal(V2_RESEARCH_SCENARIOS.length, 2);
+  assert.deepEqual(V2_RESEARCH_SCENARIOS.map((scenario) => scenario.id), ['school-training','real-suspicious-event']);
+  assert.equal(V2_RESEARCH_SCENARIOS[0].intent, 'training');
+  assert.equal(V2_RESEARCH_SCENARIOS[1].intent, 'safety');
+  assert.match(V2_RESEARCH_SCENARIOS[0].prompt, /老師只把 SignalSafe 網站交給你/);
+  assert.match(V2_RESEARCH_SCENARIOS[1].prompt, /異常登入/);
+});
+
 test('usability tasks are independent records rather than a sequential unlock chain', () => {
   assert.equal(V2_RESEARCH_TASKS.length, 8);
   assert.deepEqual(V2_TASK_STATUSES, ['PASS','PARTIAL','FAIL','NOT_ATTEMPTED']);
   assert.equal(new Set(V2_RESEARCH_TASKS.map((task) => task.id)).size, 8);
   assert.ok(V2_RESEARCH_TASKS.every((task) => typeof task.startRoute === 'string'));
+  assert.ok(V2_RESEARCH_TASKS.every((task) => task.independent === true));
+  assert.ok(V2_RESEARCH_TASKS.every((task) => typeof task.participantPrompt === 'string' && task.participantPrompt.length > 0));
+  assert.ok(V2_RESEARCH_TASKS.every((task) => typeof task.setup === 'string' && task.setup.length > 0));
+});
+
+test('T03 and T04 explicitly use seeded states so earlier task failure cannot block them', () => {
+  const t03 = V2_RESEARCH_TASKS.find((task) => task.id === 'T03');
+  const t04 = V2_RESEARCH_TASKS.find((task) => task.id === 'T04');
+  assert.equal(t03?.setup, 'seeded-learning-history');
+  assert.equal(t04?.setup, 'seeded-weakness-state');
+  assert.equal(t03?.startRoute, 'dashboard');
+  assert.equal(t04?.startRoute, 'dashboard');
 });
 
 test('study deep links carry anonymous research context without changing visible IA labels', () => {
@@ -46,9 +68,22 @@ test('study deep links carry anonymous research context without changing visible
   assert.equal(link, '/prototype/?study=SST-V2&participant=U001&task=T05&route=home');
 });
 
-test('moderator control remains a separate surface', async () => {
+test('moderator control surfaces scenario script, participant wording and setup state', async () => {
   const control = await read('../research-control.html');
   assert.match(control, /主持人專用/);
   assert.match(control, /Independent Tasks/);
+  assert.match(control, /participantPrompt/);
+  assert.match(control, /t\.setup/);
   assert.match(control, /NOT_ATTEMPTED/);
+});
+
+test('test guide uses dual scenarios and does not send participants into Research Mode', async () => {
+  const guide = await read('../test-guide.html');
+  assert.match(guide, /情境一：老師要求進行防詐訓練/);
+  assert.match(guide, /情境二：收到疑似帳號異常通知/);
+  assert.match(guide, /T01/);
+  assert.match(guide, /T08/);
+  assert.match(guide, /前一任務 FAIL 不代表下一任務不能測/);
+  assert.doesNotMatch(guide, /\?mode=research/);
+  assert.doesNotMatch(guide, /從首頁自行找到 Research Mode/);
 });

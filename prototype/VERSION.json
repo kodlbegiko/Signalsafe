@@ -5,10 +5,10 @@
   "studyVersion": "signalsafe-study-2026-08-r1",
   "consentVersion": "signalsafe-consent-2026-08-10-v1",
   "pilotProtocolVersion": "signalsafe-pilot-2026-08-13-v1",
-  "v2ProtocolVersion": "signalsafe-v2-usability-2026-08-14",
+  "v2ProtocolVersion": "signalsafe-v2-usability-2026-08-16",
   "marketFeasibilityVersion": "signalsafe-market-feasibility-2026-08-13-v1",
-  "testingPhase": "v2.0.1-ux-iteration-candidate",
+  "testingPhase": "v2.0.1-dual-scenario-usability-protocol",
   "targetAudience": "16–18 歲高中階段學生",
   "status": "v2.0.1-context-home-ux-candidate",
-  "evidenceBoundary": "正式研究 appVersion、題庫、Study、Consent、Pilot protocol 與既有研究匯出維持凍結；productVersion 2.0.1 只新增完整能力訓練的 progressive sticky scenario context、首頁 Safety/Training intent separation、Resume placement、相關 usability events 與 responsive/accessibility refinement。未改變 response schema、question IDs、pairing、correct answers、scoring semantics、confidence values 或正式研究版本。此版本不代表教育成效、IRB/倫理審查、監護人同意、實體裝置、VoiceOver 或真人領域審查已完成。"
+  "evidenceBoundary": "正式研究 appVersion、題庫、Study、Consent、Pilot protocol 與既有研究匯出維持凍結；productVersion 2.0.1 不變。本次只更新 usability protocol：以『老師要求進行防詐訓練』與『收到疑似帳號異常通知』兩個情境承載 T01–T08，並明確要求任務彼此獨立、必要時使用 reset／seeded state／deep link 建立起始條件。未改變 response schema、question IDs、pairing、correct answers、scoring semantics、confidence values 或正式研究版本。"
 }

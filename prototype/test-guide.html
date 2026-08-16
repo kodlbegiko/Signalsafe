@@ -3,26 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>SignalSafe｜原型測試說明</title>
+<title>SignalSafe｜原型測試說明（雙情境版）</title>
 <style>
-:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172033;background:#f5f8fc}*{box-sizing:border-box}body{margin:0}main{width:min(900px,calc(100% - 32px));margin:0 auto;padding:36px 0 64px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}.top a,.cta{min-height:44px;display:inline-flex;align-items:center;padding:10px 16px;border-radius:12px;text-decoration:none;font-weight:700}.top a{color:#0f5bd7;background:#fff;border:1px solid #d7e1ef}.cta{color:#fff;background:#0f5bd7}.hero,.card{background:#fff;border:1px solid #dce5f1;border-radius:20px;box-shadow:0 12px 30px rgba(23,32,51,.06)}.hero{padding:28px;margin-bottom:20px}.eyebrow{font-weight:800;color:#0f5bd7;margin:0 0 8px}.hero h1{font-size:clamp(1.8rem,4vw,2.7rem);margin:0 0 12px}.hero p{line-height:1.75;color:#4e5c70}.grid{display:grid;gap:18px}.card{padding:24px}.card h2{margin:0 0 12px}.card p,.card li{line-height:1.75}.script{padding:18px;border-radius:14px;background:#eef6ff;border-left:4px solid #0f5bd7}.tasks{counter-reset:task;list-style:none;padding:0;display:grid;gap:10px}.tasks li{counter-increment:task;padding:14px 16px;background:#f6f9fd;border-radius:12px}.tasks li:before{content:"任務 " counter(task) "：";font-weight:800}.meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.meta div{padding:14px;border-radius:12px;background:#f6f9fd}.meta strong{display:block;margin-bottom:4px}.note{padding:16px;border-radius:12px;background:#fff8e8}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}@media(max-width:650px){main{width:min(100% - 20px,900px);padding-top:18px}.top{align-items:flex-start;flex-direction:column}.hero,.card{padding:20px}.meta{grid-template-columns:1fr}}
+:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;color:#172033;background:#f5f8fc}*{box-sizing:border-box}body{margin:0}main{width:min(960px,calc(100% - 32px));margin:0 auto;padding:36px 0 64px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}.top-actions{display:flex;gap:10px;flex-wrap:wrap}.top a,.button{min-height:44px;display:inline-flex;align-items:center;padding:10px 16px;border-radius:12px;text-decoration:none;font-weight:750}.top a{color:#0f5bd7;background:#fff;border:1px solid #d7e1ef}.button{color:#fff;background:#0f5bd7}.hero,.card{background:#fff;border:1px solid #dce5f1;border-radius:20px;box-shadow:0 12px 30px rgba(23,32,51,.06)}.hero{padding:28px;margin-bottom:20px}.eyebrow{font-weight:800;color:#0f5bd7;margin:0 0 8px}.hero h1{font-size:clamp(1.8rem,4vw,2.7rem);margin:0 0 12px}.hero p,.card p,.card li{line-height:1.75}.hero p,.muted{color:#4e5c70}.grid{display:grid;gap:18px}.card{padding:24px}.card h2{margin:0 0 12px}.scenario{padding:20px;border-radius:16px;background:#eef6ff;border-left:4px solid #0f5bd7}.scenario strong{display:block;color:#0f5bd7;margin-bottom:8px}.quote{padding:14px 16px;border-radius:12px;background:#fff;border:1px solid #d9e6f6;margin:12px 0}.task-list{display:grid;gap:12px;margin-top:16px}.task{padding:16px;border-radius:14px;background:#f6f9fd;border:1px solid #e2eaf4}.task h3{margin:0 0 7px;color:#0f5bd7}.task p{margin:0}.task small{display:block;margin-top:8px;color:#66758a}.independent{padding:16px;border-radius:14px;background:#fff8e8;border:1px solid #f1deb2}.meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.meta div{padding:14px;border-radius:12px;background:#f6f9fd}.meta strong{display:block;margin-bottom:4px}.status{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.status div{padding:14px;border-radius:12px;background:#f6f9fd;text-align:center}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.note{padding:16px;border-radius:12px;background:#eef6ff}.danger-note{padding:16px;border-radius:12px;background:#fff1f3;color:#7d1f2b}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0d2541;color:#e9f1fb;padding:13px 15px;border-radius:12px;overflow:auto}@media(max-width:700px){main{width:min(100% - 20px,960px);padding-top:18px}.top{align-items:flex-start;flex-direction:column}.hero,.card{padding:20px}.meta,.status{grid-template-columns:1fr}.top-actions{width:100%}.top a,.button{justify-content:center;flex:1}}
 </style>
 </head>
 <body>
 <main>
-  <div class="top"><strong>SignalSafe · Pilot Protocol</strong><a href="/">回首頁</a></div>
+  <div class="top">
+    <strong>SignalSafe · Usability Protocol</strong>
+    <div class="top-actions"><a href="/prototype/research-control.html">主持人控制台</a><a href="/prototype/">開啟 SignalSafe</a></div>
+  </div>
+
   <section class="hero">
-    <p class="eyebrow">原型測試說明文件 · signalsafe-pilot-2026-08-13-v1</p>
-    <h1>SignalSafe Pilot 原型測試說明</h1>
-    <p>本頁把目前 Pilot 的測試情境、四項任務、測試場域、招募條件與主持人提示規則固定下來。Pilot 建議先收 5–8 名受測者，驗證流程、題目理解與資料匯出可靠性；不把這一輪直接宣稱為正式教育成效研究。</p>
+    <p class="eyebrow">原型測試說明文件 · signalsafe-v2-usability-2026-08-16</p>
+    <h1>SignalSafe 雙情境獨立任務測試</h1>
+    <p>這一版不再要求受試者「進 Research Mode」。受試者看到的是正常 SignalSafe；主持人先提供一個合理的真實世界情境，再逐一給任務，觀察受試者是否能自己找到合適入口與完成目標。</p>
   </section>
+
   <div class="grid">
-    <section class="card"><h2>A. 設定測試情境</h2><p>主持人以高中生日常數位使用情境帶入，不先把受測者推進「每一題都一定是詐騙」的警戒模式。</p><div class="script"><strong>主持人口語稿：</strong><br>想像你平常會使用 LINE、Instagram、遊戲、購物平台和其他網路服務，也可能收到活動通知、帳號提醒、付款要求或陌生訊息。今天我們想了解高中生面對這些數位訊息時，會如何判斷情況並選擇下一步。請依照你當下最真實的直覺操作，不需要猜研究者想要的答案；這不是學校考試。</div></section>
-    <section class="card"><h2>B. 設定測試任務</h2><ol class="tasks"><li>從 SignalSafe 首頁找到適合參與正式研究測試的入口，並開始測試。</li><li>閱讀研究參與說明，依照自己的理解完成必要確認並進入正式測試。</li><li>依照當下真實判斷，完成系統提供的 Pre-test、Training 與 Post-test 情境流程。</li><li>完成後查看結果頁，指出自己最需要加強的地方，並向主持人說明這套系統是否有幫助、哪裡需要修改。</li></ol></section>
-    <section class="card"><h2>C. 設定測試場域</h2><div class="meta"><div><strong>場域</strong>學校圖書館、自習空間或等價的安靜校內空間</div><div><strong>形式</strong>一次一名受測者、個別進行</div><div><strong>設備</strong>統一使用 iPad Air 與 Safari；橫向或直向由受測者自然選擇</div><div><strong>網路</strong>使用穩定 Wi-Fi，開始前先確認正式網站可正常載入</div><div><strong>主持人位置</strong>坐在側後方觀察，不主動提示答案或操作路徑</div><div><strong>干擾控制</strong>避免同學在旁提供答案；非必要通知與其他 App 先關閉</div></div></section>
-    <section class="card"><h2>D. 招募受測者需符合的關鍵屬性</h2><ol><li>16–18 歲、高中階段學生。</li><li>日常有使用智慧型手機，以及 LINE、Instagram、遊戲、購物平台或其他數位服務的經驗。</li><li>能自行閱讀繁體中文並完成一般網頁操作。</li><li>Pilot 可曾使用 SignalSafe 一般模式，但未曾完成同版本的正式 Research Mode，以降低重複作答造成的學習效應。</li></ol><div class="note"><strong>正式成效研究：</strong>未來若進入正式 effectiveness study，應再採更嚴格的既往暴露排除規則，不與本次 Pilot 樣本定義混用。</div></section>
-    <section class="card"><h2>主持人提示規則</h2><ol><li><strong>Level 0：</strong>不提示，讓受測者自行完成。</li><li><strong>Level 1：</strong>只說「請再看看畫面上還有哪些選項」，不指出位置。</li><li><strong>Level 2：</strong>只提示功能所在區域，不告訴受測者應選哪一個答案。</li><li><strong>Level 3：</strong>為避免流程完全中斷，直接說明操作方式；必須記錄使用了 Level 3。</li></ol><p>每一項任務記錄受測者最高需要到哪一級提示。這樣後續可以比較「能否獨立完成」，而不是只記最後有沒有做完。</p></section>
-    <section class="card"><h2>Pilot 建議執行順序</h2><p>報到 → 外部研究說明／必要同意程序 → 匿名 Participant ID → 從首頁自行找到 Research Mode → 網站研究參與說明與確認 → Pre 8 → Training 8 → Post 8 → 匯出研究 JSON → 3–5 分鐘簡短訪談。</p><div class="actions"><a class="cta" href="/prototype/?mode=research">進入 Research Mode</a><a class="top" href="/">回 SignalSafe 首頁</a></div></section>
+    <section class="card">
+      <h2>A. 測試方法</h2>
+      <p>每組任務都先建立「為什麼受試者此刻會打開 SignalSafe」的情境。情境只建立使用意圖，不直接透露應點哪一個功能。</p>
+      <div class="independent"><strong>任務獨立原則</strong><br>T01–T08 可獨立完成。前一任務 FAIL 不代表下一任務不能測；需要特定資料狀態時，由主持人 reset、seed 或使用 deep link 建立起始狀態。</div>
+    </section>
+
+    <section class="card">
+      <h2>B. 情境一：老師要求進行防詐訓練</h2>
+      <div class="scenario">
+        <strong>主持人念給受試者：</strong>
+        你是一名高中生。今天班導師告訴全班，最近很多學生收到假帳號通知、假購物訊息與假客服訊息，因此希望每個人使用 SignalSafe 練習自己的防詐判斷能力。老師只把 SignalSafe 網站交給你，沒有告訴你要按哪個功能。請依照你自己的理解使用這個網站。
+      </div>
+      <div class="task-list">
+        <article class="task"><h3>T01｜找到訓練入口</h3><p>請開始一次你認為適合這個情況的防詐訓練。</p><small>起始：Home / fresh-home</small></article>
+        <article class="task"><h3>T02｜完成一次情境練習</h3><p>請完成一次防詐情境練習。</p><small>起始：Home / fresh-home；不依賴 T01 成功。</small></article>
+        <article class="task"><h3>T03｜找到自己的弱項</h3><p>假設你已經使用 SignalSafe 練習一段時間，現在請找出自己目前最容易忽略哪一類風險。</p><small>起始：Dashboard / seeded-learning-history；不依賴 T02。</small></article>
+        <article class="task"><h3>T04｜針對弱項繼續練習</h3><p>請找出一個可以針對這個弱項繼續練習的方法。</p><small>起始：Dashboard / seeded-weakness-state；不依賴 T03。</small></article>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>C. 情境二：收到疑似帳號異常通知</h2>
+      <div class="scenario">
+        <strong>主持人念給受試者：</strong>
+        你正在使用手機，突然收到一則看起來像是你常用服務官方帳號傳來的訊息：
+        <div class="quote">「系統偵測到您的帳號有異常登入。為避免帳號停權，請於今天 18:00 前完成身分驗證。」<br><br>訊息下方附有一個「立即驗證帳號」連結。</div>
+        你不確定這到底是真的通知，還是有人想騙你。這時你想到可以打開 SignalSafe。
+      </div>
+      <p class="danger-note"><strong>安全邊界：</strong>這是合成訊息，不提供真實網址，也不要求受試者真的點擊、登入、輸入 OTP、密碼或金融資料。</p>
+      <div class="task-list">
+        <article class="task"><h3>T05｜開始處理現在的情況</h3><p>請使用 SignalSafe 處理你現在遇到的情況。</p><small>起始：Home / fresh-home</small></article>
+        <article class="task"><h3>T06｜找出第一件不應做的事</h3><p>請找出你現在第一件應該避免做的事情。</p><small>起始：Emergency / fresh-emergency；可獨立測。</small></article>
+        <article class="task"><h3>T07｜找到安全下一步</h3><p>請找出目前比較安全的下一步。</p><small>起始：Emergency / fresh-emergency；可獨立測。</small></article>
+        <article class="task"><h3>T08｜找到可信任的查證方式</h3><p>請找出你可以怎麼確認這則通知是不是真的。</p><small>起始：Emergency / fresh-emergency；可獨立測。</small></article>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>D. 任務結果判定</h2>
+      <div class="status"><div><strong>PASS</strong><br>獨立完成</div><div><strong>PARTIAL</strong><br>繞路／輕微提示後完成</div><div><strong>FAIL</strong><br>需直接操作提示或放棄</div><div><strong>NOT ATTEMPTED</strong><br>未執行</div></div>
+      <p>主持人一次只讀目前任務，不要說「點紅色按鈕」「去我的能力頁」「按我現在遇到可疑情況」等會透露 UI 解法的指令。</p>
+    </section>
+
+    <section class="card">
+      <h2>E. 測試場域</h2>
+      <div class="meta">
+        <div><strong>場域</strong>學校圖書館、自習室或其他安靜、不會被打擾的校內空間</div>
+        <div><strong>形式</strong>一對一測試，每次一名受測者</div>
+        <div><strong>設備</strong>統一使用 iPad Air，建議 iPadOS 16 以上，Safari 最新版本</div>
+        <div><strong>網路</strong>穩定 Wi‑Fi；開始前確認正式網站可正常載入</div>
+        <div><strong>時間</strong>每位約 30–45 分鐘，依個人操作速度而定</div>
+        <div><strong>主持人</strong>坐在側後方觀察，不主動提示操作路徑</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>F. 招募受測者條件</h2>
+      <ol>
+        <li>16–18 歲，高中階段學生。</li>
+        <li>日常使用智慧型手機，並使用過 LINE、Instagram、遊戲、網路購物或其他數位服務。</li>
+        <li>能自行閱讀繁體中文，並能獨立操作網頁與填答題目。</li>
+        <li>未曾參與同版本 SignalSafe 正式研究測試；可曾使用一般模式或快速練習。</li>
+        <li>若本輪採 think-aloud，願意在主持人要求時說出自己的理解、判斷與操作想法。</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>G. Deep Link 與研究資料邊界</h2>
+      <p>Usability task 可用匿名 participant context 開啟，但受試者看到的仍是正常 SignalSafe：</p>
+      <div class="code">/prototype/?study=SST-V2&amp;participant=U001&amp;task=T05&amp;route=home</div>
+      <p>Usability task 結果不得和正式 Pre-test / Training / Post-test 分數混成同一研究指標。正式 effectiveness research 仍走既有 Consent 與正式研究 pipeline。</p>
+      <div class="actions"><a class="button" href="/prototype/research-control.html">開啟主持人控制台</a><a class="button" href="/prototype/">開啟一般 SignalSafe</a></div>
+    </section>
   </div>
 </main>
 </body>
