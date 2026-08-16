@@ -1,108 +1,57 @@
 # SignalSafe 專案狀態
 
-更新日期：2026-08-09
+更新日期：2026-08-16
 
 ## Executive status
 
-> **TECHNICAL BROWSER FREEZE COMPLETE**
+> **SIGNALSAFE V2.1 PRODUCTION-INTEGRITY CANDIDATE — NOT YET ACCEPTED**
 
-> **HUMAN QUESTION-BANK REVIEW REQUIRED BEFORE SCORED HUMAN TESTING**
+2026-08-16 baseline re-audit 發現 current production 與 GitHub `main` 不一致：GitHub `main` 為 `cd4b67b2a23a4606824464762ccf63aa5ddeed20`，production 首頁仍透過 jsDelivr 載入舊 commit `b2753323f0119a66cbfd309ba1119c5f4a306ec6`；`/VERSION.json` 與 `/manifest.webmanifest` 亦為 404。舊文件中「first-party deployment / production current / offline verified」不得視為 current truth。
 
-`0.2.4-usability-r1-hotfix4` 已完成 main CI、static Accessibility QA、fresh Production Chromium Desktop/Mobile L4、download/import/clear、keyboard/focus，以及 Service Worker offline 驗收。Round 1 scored testing 仍未開始，因題庫需人工領域審查。
+V2.1 candidate 針對此 P0 與相關 integrity defects 建立修正：
 
-剩餘 blocker 只屬人類／領域審查：`train-04`、`train-08`、`post-08` 的 `risk`／`insufficient` 邊界需人工反詐／教育審查者定案。這不是 engineering P0/P1。
+- production root 以 first-party Vercel rewrites 直接服務 `prototype/` 靜態資產，不再使用 jsDelivr runtime bridge；
+- product/PWA version 與 formal research version 分離；
+- T03/T04 使用 deterministic synthetic study fixtures；
+- usability study context 改為 session-scoped，並在建立 context 後移除 URL 中 participant/task/setup；
+- Study Event Store 與 Product Learning Store 邏輯分離；
+- Quick Training 改為 primary-signal measurement，與 Full multi-signal recall 分開呈現；
+- weakness/status minimum observation 統一為 5（product heuristic）；
+- Emergency Flow 新增「已經做過高風險操作」的 recovery path；
+- 加入 `tel:165` 與 165 官方入口；
+- consumer full training 隱藏 pre/training/post 研究術語；
+- 加入 History API、skip link、route title/focus 與 sticky focus guardrails；
+- Research Control 新增 Start/Reset/Apply Fixture/Open/End 與匿名 task/event export。
 
-先前 Production `text/plain`/raw-HTML P0 和 external jsDelivr architecture 已由 first-party Vercel static deployment `dpl_ioSgKN2uAvTEujYujsCi959FXRwd` 修正；完整 audit trail 保留於 `docs/research/usability/PRODUCTION_BROWSER_ACCEPTANCE_2026-08-09.md`。
-
-## 現行候選
+## Frozen formal research boundary
 
 | 項目 | 值 |
 |---|---|
-| App | `0.2.4-usability-r1-hotfix4` |
-| Question Bank | `2026-08-01-r1` |
-| Runtime source SHA | `3cecb0d3b0eea53ff65839e4241cd5043e1aee7a` |
-| Production | https://signalsafe-v02-usability-r1.vercel.app |
-| Deployment | `dpl_F7Euc7qTtUvqKKPaM6f5iwq6m5mP` |
-| Main technical CI | run #26 — success |
-| Runtime tests | 33/33 PASS |
-| Latest static artifact | `9024665427`, SHA-256 `895ae43f8aa3e55bb32e4dd6efc334725eba3d94bf1110cb235c9b15f52b009e` |
-| Round 1 | `UT001–UT004` 尚未開始 |
+| Formal research appVersion | `0.3.4-research-export-fix` |
+| Question Bank | `2026-08-10-v2-candidate` |
+| V2 usability protocol | `signalsafe-v2-usability-2026-08-16` |
+| Product version candidate | `2.1.0` |
+| PWA cache version | `signalsafe-product-2.1.0` |
 
-## 已完成
+不得因 V2.1 product iteration 改動 question IDs、correct answers、pre/post pairing、confidence scale、formal scoring、Consent 或 formal export schema。
 
-- 16–18 歲新版核心流程與 24 題三分類題庫
-- 90 秒快練、完整 assessment、急救、dashboard、data management 程式實作
-- App version 升至 hotfix4；Question Bank 未變更
-- 33 項 runtime/static tests 全數通過
-- anti-gaming 自動測試
-- JSON required export fields / CSV direct-PII header QA
-- localStorage memory fallback 不再偽裝成持久保存
-- Service Worker cache rotation 與 asset integrity test
-- static Accessibility：44px、focus、keyboard-focusable import、ARIA states/progress/status、reduced motion、contrast guardrails
-- 24 題 AI-assisted semantic review與 Pre/Post pairing review
-- Production deployment READY
-- Production HTML／JS／CSS／VERSION／SW HTTP 取得成功
-- Production HTML MIME-type P0 (`text/plain`) 已修正為 `text/html; charset=utf-8`
-- Production runtime pin 為 immutable Git SHA `3cecb0d...`
-- UT001–UT004 匿名空白模板、schema、test-day checklist
-- 2026-08-01 啟動事故證據修正與保留
+## Acceptance gate
 
-## 題庫目前狀態
+V2.1 只有在以下全部完成後才能標為 `SIGNALSAFE V2.1 ACCEPTED`：
 
-修正後 item-level review 統計：
+1. branch / PR implementation 完成；
+2. `npm run check` 與完整 `npm test` 全綠；
+3. CI all green；
+4. merged `main` SHA 與 production deployment source 一致；
+5. production `/`, `/manifest.webmanifest`, `/icon.svg`, `/sw.js`, `/VERSION.json`, `/test-guide.html`, `/research-control.html` 與主要 JS/CSS 全部 200；
+6. production HTML 無 `cdn.jsdelivr.net/gh/` runtime；
+7. T03/T04 fixture 可在 fresh task deep link 獨立執行；
+8. study end 後 normal use 不再產生前一 Participant ID events；
+9. Quick / Dashboard measurement semantics 與 Emergency pre/post-action flow 驗證；
+10. production browser smoke 與 Service Worker online→reload→offline 驗證。
 
-- 11 PASS
-- 10 WARN
-- 3 FAIL
+在 real browser / PWA runtime gate 尚未完成前，只能宣稱 `implemented`、`technically verified`、`ready for human validation`，不得宣稱 usability validated 或教育成效成立。
 
-P1 FAIL：
+## Historical evidence
 
-- `train-04`：寄件網域異常＋同日 NT$3,000 保證金，但 key 為 `insufficient`。
-- `train-08`：短網址＋重填地址＋付款，但 key 為 `insufficient`。
-- `post-08`：未核對 recruiter＋不明安裝檔，但 key 為 `insufficient`。
-
-這三題沒有自動改 key，因為改動會影響 scoring／construct validity，並可能要求 Question Bank 升版。
-
-## 尚未完成的 Freeze Gate
-
-### Human domain review
-
-- 定義 `risk` 與 `insufficient` 的 operational boundary
-- 定案 `train-04`／`train-08`／`post-08`
-- 同步 review 邊界 WARN `pre-04`／`pre-08`
-- 補 per-item source/rewrite basis 與人工 reviewer/status
-
-### Real Production browser
-
-- Desktop 1440×900 navigation
-- Mobile 390×844 navigation
-- 90 秒快練完整 3 題
-- Pre → Training → Post 24 題
-- pause / resume
-- emergency / dashboard / export / import / clear
-- refresh / persistence
-- console 無 P0/P1 runtime exception
-- Service Worker install → reload → offline
-- keyboard / focus / actual hitbox / overflow
-
-## Deployment limitation
-
-Production HTML 與資產在瀏覽器端使用同源相對路徑，但 Vercel rewrite 的上游仍是固定 Git SHA 的 jsDelivr。首次載入仍需要網路與外部 CDN，因此不能宣稱 fully self-contained 或 offline PASS。
-
-## 證據邊界
-
-目前可以說：
-
-- 工程與靜態 QA 已收斂到 L1/L2；
-- Production HTTP/MIME 與 immutable runtime pin 已驗證；
-- 已找到並記錄 3 個題庫 P1，而不是把 AI review 冒充人工專家核可。
-
-目前不能說：
-
-- Round 1 已凍結；
-- Production 真實瀏覽器驗收完成；
-- 題庫已完成人工專家核可；
-- 可用性成立；
-- 已提升防詐能力或降低受騙率。
-
-只有在 semantic P1 與 real-browser Gate 全部解決後，才能開始 UT001–UT004。
+過去 browser acceptance、deployment IDs 與舊 runtime pins 保留在 `docs/research/usability/` 作歷史 audit trail；它們不代表 2026-08-16 current production state。
