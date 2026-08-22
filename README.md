@@ -1,84 +1,106 @@
 # SignalSafe
 
-SignalSafe 是一套面向 **16–18 歲高中階段學生**的防詐決策訓練系統。
+SignalSafe 是一套面向 **16–18 歲高中階段學生**的防詐安全決策訓練系統。
 
 > **不是替你猜真假，而是訓練你在關鍵時刻做對下一步。**
 
-本 Repository 是產品原型、題庫、研究、部署、證據、競賽文件與匿名可用性測試模板的單一事實來源。
+本 Repository 是產品原型、題庫、研究、部署、證據、競賽文件與匿名研究模板的公開單一事實來源。公開宣稱以「目前版本 + 明確證據邊界」為準；歷史版本的技術證據會保留，但不會拿來冒充目前研究成效。
 
 ## 現行產品規格
 
 | 項目 | 現行決策 |
 |---|---|
 | 目標族群 | 16–18 歲高中階段學生 |
-| 產品核心 | 防詐決策訓練，不做訊息真假裁判 |
-| 90 秒快練 | 每題只選最安全行動＋一個最重要風險訊號 |
-| 研究模式 | 安全行動＋三分類＋證據＋自信；Pre 8／Training 8／Post 8 |
-| 題庫平衡 | 每階段 Risk 3／Insufficient 2／Trusted 3 |
-| 急救模式 | 先停止高風險操作，再改走獨立官方查證 |
+| 產品核心 | 防詐安全決策訓練／決策診斷，不做訊息真假裁判 |
+| Training | 情境 → judgment → safe action → signal → feedback；核心口訣為「停、找、換」 |
+| 3 題快練 | 每題練習最安全行動＋一個最重要風險訊號 |
+| 正式研究題庫 | Pre 8／Training 8／Post 8，共 24 題；版本化管理 |
+| 急救 / Rescue | 先停止新增高風險操作，再依已發生階段分流，回到獨立官方管道查證 |
+| 診斷 | 分開看 judgment、action、signal，可區分安全行動不足與關鍵訊號辨識不足等錯因 |
+| 資料 | Dashboard、本機匿名紀錄、JSON／CSV export、JSON import、clear local data |
 | 資料原則 | 不登入、不收姓名／學校／聯絡方式；本機匿名優先 |
-| 教育成效 | 尚未證明；可用性測試不能等同教育成效 |
+| 教育成效 | **尚未證明**；exploratory usability 或 task completion 不能等同 learning effect |
 
-## Technical browser freeze
+## 2026-08-17 Exploratory Usability Observation
+
+2026-08-17 已完成一輪**探索性真人可用性操作（exploratory usability observation）**：
+
+- 參與者：3 位，皆為 18 歲，位於 SignalSafe 16–18 歲目標使用者範圍內。
+- 任務：每人 5 個核心任務——開始快練、完成 3 題、查看結果、找到急救功能、回到首頁。
+- 結果：**15/15 核心任務完成**。
+- 主持人介入：**0/15**。
+
+這輪觀察支持的證據範圍只有：
+
+- usability；
+- task completion；
+- navigation / interaction feasibility；
+- design iteration。
+
+它**不建立** learning effectiveness、scam-prevention effectiveness、unseen-scenario transfer、Day-7 retention、reduction in victimization、statistical significance 或任何正式教育成效結論。
+
+本次真人操作直接造成三項產品修改：
+
+1. 產品定位改為「安全決策訓練」。
+2. 快練入口前移。
+3. 英文介面改成白話。
+
+完整 evidence boundary：[`docs/research/usability/EXPLORATORY_USABILITY_2026-08-17.md`](docs/research/usability/EXPLORATORY_USABILITY_2026-08-17.md)。
+
+> **Formal scored Round 1 remains NOT STARTED.** `UT001–UT004` 仍是正式研究模板／正式 Round 1 資料位置，狀態維持 `not_started`；2026-08-17 exploratory observation 不會填入這些檔案，也不會混入 formal scored study。
+
+## Current V2.1 engineering / runtime status
+
+目前 V2.1 的 engineering acceptance 狀態仍是 **PARTIALLY ACCEPTED**；詳見 [`PROJECT_STATUS.md`](PROJECT_STATUS.md)。這個狀態和 2026-08-17 exploratory usability observation 是兩種不同證據：前者是技術／部署／runtime acceptance，後者是小樣本可用性觀察。
+
+目前公開 source 的 QA：
+
+- `npm run check`：PASS（2026-08-22 重新執行）。
+- `npm test`：**112/112 PASS**（2026-08-22 重新執行；Node 22）。
+- 24 題正式研究題庫結構可由 `prototype/questions.mjs` 與 `prototype/question-data/` 追溯。
+- JSON／CSV、Dashboard、Emergency / Rescue、research control 與版本化研究資料流程皆有 repository source / tests。
+
+目前仍有 technical acceptance 邊界：V2.1 的真實 production browser / PWA runtime smoke、部分 accessibility runtime acceptance、Vercel automatic deployment recovery 與正式 performance measurement 尚未完全閉環。不要把 static checks、HTTP 200 或舊版 browser acceptance 改寫成目前 V2.1 全面 runtime acceptance。
+
+## Historical 0.2.4 technical browser freeze — preserved evidence
+
+以下是 **2026-08-09、0.2.4-usability-r1-hotfix4 的歷史技術證據**，保留供追溯；它不是目前 V2.1 的 acceptance 狀態，也不是真人研究成效：
 
 - App：`0.2.4-usability-r1-hotfix4`
 - Question Bank：`2026-08-01-r1`
 - Main source SHA：`c5e72268e2e0aee28b1d343588ef333101c14dbb`
-- Production：https://signalsafe-v02-usability-r1.vercel.app
+- Production：`https://signalsafe-v02-usability-r1.vercel.app`
 - Production deployment：`dpl_ioSgKN2uAvTEujYujsCi959FXRwd` (`READY`)
 - Main technical CI：Actions run #26 — `success`
-- Runtime test artifact：33/33 PASS
-- 狀態：**TECHNICAL BROWSER FREEZE COMPLETE**
+- Runtime test artifact：**33/33 PASS**（historical 0.2.4 suite）
 
-Round 1 scored testing 仍是 **NOT STARTED**。唯一剩餘前置是 `train-04`、`train-08`、`post-08` 的人工題庫 domain review；這不屬 engineering blocker。
+該版曾以 fresh Playwright Chromium 驗證 Desktop/Mobile、Quick、Assessment smoke、Emergency、Dashboard/Data、normal persistence、keyboard/focus、JSON/CSV downloads、Export→Clear→Import、Service Worker 與 offline reload。完整歷史 evidence 見 [`PRODUCTION_BROWSER_ACCEPTANCE_2026-08-09.md`](docs/research/usability/PRODUCTION_BROWSER_ACCEPTANCE_2026-08-09.md)。
 
-Production 現由 Vercel first-party static files 提供。2026-08-09 fresh Playwright Chromium 已驗證 Desktop/Mobile、Quick、Assessment smoke、Emergency、Dashboard/Data、normal persistence、keyboard/focus、JSON/CSV downloads、exact Export→Clear→Import、Service Worker 和 offline reload。完整歷史與 evidence 見 [`PRODUCTION_BROWSER_ACCEPTANCE_2026-08-09.md`](docs/research/usability/PRODUCTION_BROWSER_ACCEPTANCE_2026-08-09.md)。
-
-HTTP 200、Vercel `READY`、CI 或 source inspection 都不能替代真實瀏覽器 Gate。
-
-## 已完成的工程／靜態 QA
-
-- `npm run check` PASS
-- runtime `npm test`：33/33 PASS
-- 24 題結構、3/2/3 分布、unique IDs PASS
-- Anti-gaming PASS
-- JSON export required fields PASS
-- CSV direct-PII header audit PASS
-- Service Worker asset/reference audit PASS
-- static Accessibility guardrails：focus、44px、keyboard-focusable import、ARIA states/progress/status、reduced motion、contrast PASS
-- memory fallback 不再偽裝成持久儲存
-- Production `VERSION.json`／`bootstrap.mjs`／`sw.js` HTTP 200
-- Production entry HTML 已確認為 `text/html; charset=utf-8`
-- module JavaScript 與 CSS MIME type 正確
-- Production runtime 由 immutable Git SHA `3cecb0d...` 固定
+這段只代表當時指定版本的技術驗收；**不得外推成目前 V2.1 已全面完成 production browser / PWA acceptance。**
 
 ## 題庫語意 QA
 
-AI-assisted 24 題逐題 review 的**修正後** item-level 統計：
+AI-assisted 24 題逐題 review 的修正後 item-level 統計：
 
 - 11 PASS
 - 10 WARN
 - 3 FAIL
 
-3 個 P1 FAIL：`train-04`、`train-08`、`post-08`。沒有為了讓結果變綠而靜默修改答案；若人工審查決定修改 classification 或 construct，需評估 Question Bank 升版。
+3 個 P1 FAIL：`train-04`、`train-08`、`post-08`。沒有為了讓結果變綠而靜默修改答案；正式反詐／領域專家 review **尚未完成**。若人工審查決定修改 classification 或 construct，需評估 Question Bank 升版。
 
 詳見 [`docs/research/usability/QUESTION_BANK_SEMANTIC_REVIEW_2026-08-08.md`](docs/research/usability/QUESTION_BANK_SEMANTIC_REVIEW_2026-08-08.md)。
 
-## 已知部署限制
+## 核心功能與公開證據
 
-Production 由 Vercel 同源路徑 rewrite 到固定 Git SHA 的 jsDelivr 靜態檔。瀏覽器看到的資產 URL 是 Production origin 相對路徑，但**首次載入仍依賴外部 CDN**，所以不能宣稱 fully self-contained 或 offline 已通過。
-
-本輪曾發現 external rewrite 首頁回 `Content-Type: text/plain`；已透過 Production header 修正並重新驗證為 `text/html; charset=utf-8`。這仍只是 HTTP 層證據，不等於 JavaScript 已在真實瀏覽器成功執行。
-
-## 核心功能
-
-- 90 秒快練：3 題，安全行動＋單一關鍵訊號
-- 完整能力測驗：Pre 8／Training 8／Post 8
-- 急救模式：只做停手與獨立查證
-- 儀表板：安全行動、macro recall、Trusted false-positive、高自信錯誤、signal F1、blind spots
-- JSON／CSV export、JSON import、clear local data
-- 匿名本機儲存；localStorage 被阻擋時只用暫時記憶體並明確提示
-- PWA / Service Worker source 已具備，但 Production offline 尚未真實驗收
+- 3 題快練：安全行動＋單一關鍵訊號。
+- 完整能力練習：Pre 8／Training 8／Post 8。
+- Training Mode：以「停、找、換」將停手、找訊號、換官方管道轉成可操作決策。
+- 急救 / Rescue：先停止高風險操作，再依 before-action / post-action 狀態分流並導向官方查證。
+- 三層作答：judgment、action、signal；正式研究另記 confidence。
+- Dashboard：安全行動、judgment calibration、signal evidence、blind spots 等分開呈現，不用單一總分宣稱「會不會防詐」。
+- JSON／CSV export、JSON import、clear local data。
+- 匿名本機儲存；localStorage 被阻擋時只用暫時記憶體並明確提示。
+- PWA / Service Worker source 已具備；目前 V2.1 production runtime acceptance 邊界以 `PROJECT_STATUS.md` 為準。
 
 ## 本機執行
 
@@ -95,41 +117,52 @@ npm run check
 npm test
 ```
 
-GitHub Actions 會驗證 syntax、版本一致性、Service Worker assets、anti-gaming、export schema、PII header、static accessibility 與題庫 semantic-integrity guardrails，並產出靜態 prototype artifact。
+GitHub Actions 會驗證 syntax、版本一致性、Service Worker assets、anti-gaming、export schema、PII header、static accessibility、V2.1 integrity contracts 與題庫 semantic-integrity guardrails，並產出靜態 prototype artifact。
 
-## Round 1 執行資料
+## Formal Round 1 資料
 
-- [`data/usability/round-1/`](data/usability/round-1/)：UT001–UT004 匿名空白模板與 schema
-- [`docs/research/usability/TEST_DAY_CHECKLIST_v0.2-r1.md`](docs/research/usability/TEST_DAY_CHECKLIST_v0.2-r1.md)：測試日清單
+- [`data/usability/round-1/`](data/usability/round-1/)：UT001–UT004 正式 Round 1 匿名模板與 schema。
+- [`docs/research/usability/TEST_DAY_CHECKLIST_v0.2-r1.md`](docs/research/usability/TEST_DAY_CHECKLIST_v0.2-r1.md)：正式測試日清單。
 
-四個 UT 檔目前均為 `not_started`，不是正式受測資料。
+四個 UT 檔目前均為 `not_started`，不是 2026-08-17 exploratory observation 的資料，也不是已完成的正式受測資料。
 
 ## Repository 導覽
 
-- [`PROJECT_STATUS.md`](PROJECT_STATUS.md)：目前狀態與 blocker
-- [`ROADMAP.md`](ROADMAP.md)：交付順序
-- [`docs/research/usability/PRE_USABILITY_FREEZE_AUDIT_2026-08-08.md`](docs/research/usability/PRE_USABILITY_FREEZE_AUDIT_2026-08-08.md)：權威 pre-freeze audit
-- [`docs/research/usability/STATIC_UI_ACCESSIBILITY_AUDIT_2026-08-08.md`](docs/research/usability/STATIC_UI_ACCESSIBILITY_AUDIT_2026-08-08.md)：靜態 UI / Accessibility audit
-- [`docs/research/usability/QUESTION_BANK_SEMANTIC_REVIEW_2026-08-08.md`](docs/research/usability/QUESTION_BANK_SEMANTIC_REVIEW_2026-08-08.md)：24 題語意 review
-- [`docs/research/usability/QUESTION_BANK_AUDIT_2026-08-08.json`](docs/research/usability/QUESTION_BANK_AUDIT_2026-08-08.json)：machine-readable 題庫結構稽核
-- [`docs/competition/SEMIFINAL_DECK_DRAFT_ANSVA.md`](docs/competition/SEMIFINAL_DECK_DRAFT_ANSVA.md)：複賽簡報初稿
-- [`privacy/data-handling-policy.md`](privacy/data-handling-policy.md)：公開資料與隱私政策
+- [`PROJECT_STATUS.md`](PROJECT_STATUS.md)：目前狀態與 blocker。
+- [`docs/research/usability/EXPLORATORY_USABILITY_2026-08-17.md`](docs/research/usability/EXPLORATORY_USABILITY_2026-08-17.md)：2026-08-17 探索性真人可用性證據與邊界。
+- [`data/usability/round-1/README.md`](data/usability/round-1/README.md)：formal Round 1 資料邊界。
+- [`ROADMAP.md`](ROADMAP.md)：交付順序。
+- [`docs/research/usability/PRE_USABILITY_FREEZE_AUDIT_2026-08-08.md`](docs/research/usability/PRE_USABILITY_FREEZE_AUDIT_2026-08-08.md)：pre-freeze audit。
+- [`docs/research/usability/QUESTION_BANK_SEMANTIC_REVIEW_2026-08-08.md`](docs/research/usability/QUESTION_BANK_SEMANTIC_REVIEW_2026-08-08.md)：24 題語意 review。
+- [`docs/research/usability/QUESTION_BANK_AUDIT_2026-08-08.json`](docs/research/usability/QUESTION_BANK_AUDIT_2026-08-08.json)：machine-readable 題庫結構稽核。
+- [`privacy/data-handling-policy.md`](privacy/data-handling-policy.md)：公開資料與隱私政策。
 
 ## 歷史證據邊界
 
-`0.2.0-usability-r1` 曾在真實 Chrome 顯示「SignalSafe 無法啟動」。先前的 `71 PASS / 0 FAIL` 只能代表 core/browser-engine QA，不能再寫成 Production navigation PASS。歷史事故不得刪除或改寫成沒有發生。
+`0.2.0-usability-r1` 曾在真實 Chrome 顯示「SignalSafe 無法啟動」。先前的 `71 PASS / 0 FAIL` 只能代表 core/browser-engine QA，不能改寫成當時 Production navigation PASS。歷史事故保留，不因後續修復而刪除。
 
-## 目前尚未完成
+## Future validation / 尚未完成
 
-- 題庫 `risk`／`insufficient` taxonomy 的人工領域審查與 3 個 P1 resolution
-- 正式 Production 的真實 Chrome／Chromium Desktop＋Mobile Gate
-- Service Worker install → reload → offline real-browser Gate
-- UT001–UT004 Round 1
-- Round 1 fixes → UT005–UT012 Round 2
-- 真實 before/after evidence 與使用者原話
-- 20–40 人初步成效驗證
-- 第 7 天 retention test
+- Formal scored Round 1（UT001–UT004）。
+- Round 1 fixes → UT005–UT012 Round 2。
+- 正式 learning-effect before/after evidence。
+- 20–40 人初步成效驗證。
+- unseen-scenario transfer validation。
+- Day-7 retention test。
+- 題庫 `risk`／`insufficient` taxonomy 的正式人工領域／專家 review 與既有 P1 resolution。
+- V2.1 production browser / PWA runtime acceptance、部分 accessibility runtime acceptance、deployment automation 與 performance measurement。
 
 ## 不可宣稱
 
-目前不能聲稱 Round 1 已凍結、正式瀏覽器驗收已完成、題庫已經人工專家核可、已提升防詐能力、降低受騙率、90 秒是最佳訓練長度、適合所有高中生、第 7 天仍保留效果，或優於 165、Whoscall、Google Messages 等成熟工具。
+目前不能聲稱：
+
+- 2026-08-17 exploratory usability 就是 Formal Round 1；
+- 已證明提升防詐能力或降低受騙率；
+- 已證明 learning effect、unseen-scenario transfer 或 Day-7 retention；
+- 有統計顯著改善；
+- 正式題庫已完成人工專家核可；
+- planned adaptive question selection 已完成；
+- 90 秒／3 題是最佳訓練長度；
+- 適合所有高中生；
+- 優於 165、Whoscall、Google Messages 等成熟工具；
+- 舊版 0.2.4 browser acceptance 等同目前 V2.1 全面 runtime acceptance。
